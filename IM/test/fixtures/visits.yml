@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  visitor_id: 
+  beacon_id: 
+
+two:
+  visitor_id: 
+  beacon_id: 
