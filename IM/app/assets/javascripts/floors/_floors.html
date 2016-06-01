@@ -1,0 +1,30 @@
+<div>
+<br>
+
+        <span>FloorNum: {{floorCtrl.floor.floo}}</span><br>
+        <!-- foo will be edit -->
+        <span>Width: {{floorCtrl.floor.width}}</span><br>           
+        <span>Height: {{floorCtrl.floor.height}}</span><br>           
+        <span>Blocks: </span><br> 
+        <table class="table">
+          <thead>
+            <td>Name</td>
+            <td>Width</td>
+            <td>Height</td>
+            <td>Action</td>
+          </thead>
+          <tbody>
+            <tr ng-repeat="block in floorCtrl.floor.blocks">
+                    <td>{{block.name}}</td> 
+                    <td>{{block.width}}</td> 
+                    <td>{{block.height}}</td> 
+                    <td><span><a class='btn btn-info'>edit name</a></span> 
+                        <span><a class='btn btn-danger'>details</a></span>
+
+                    </td> 
+            </tr>
+          </tbody>
+        </table>          
+       
+
+</div>

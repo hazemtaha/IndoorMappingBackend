@@ -14,13 +14,6 @@ angular.module('IM_module', ['ui.router','templates','Devise'])
 			    .state('home', {
 			      url: '/home',
 			      templateUrl: 'home/_home.html',
-			  //     resolve: {
-					//   buildingPromise: ['buildings', function(buildings){
-					//   	console.log('hi') ;
-					//     return buildings.getAll();
-					//   }]
-					// },
-
 			      controller: 'MainCtrl',
 			      controllerAs: "homeCtrl"
 			      
@@ -31,7 +24,16 @@ angular.module('IM_module', ['ui.router','templates','Devise'])
 				  controller: 'buildingsCtrl' ,
 				  controllerAs: "buildCtrl"
 				})
+<<<<<<< HEAD
 
+=======
+			   .state('floors', {
+				  url: '/buildings/{building_id}/floors/{id}',
+				  templateUrl: 'floors/_floors.html',
+				  controller: 'floorsCtrl' ,
+				  controllerAs: "floorCtrl"
+				});
+>>>>>>> 8a93634b0dba365d8f71aa6df56420fae201edb3
 
 			   .state('login', {
 			      url: '/login',
