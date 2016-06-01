@@ -34,7 +34,8 @@
         <span>address: {{buildCtrl.build.address}}</span><br>   
         <span>Floors:</span><br>         
         <div ng-repeat="floor in buildCtrl.build.floors">
-          {{floor}}
+          <span> Floor Num: {{floor.floo}} </span> 
+          <!-- still Hazem will edit floo  -->
           <span><a href="#/buildings/{{build.id}}" class='btn btn-danger'>Map</a></span>
           <span><a href="#/buildings/{{build.id}}" class='btn btn-primary'>Details</a></span>
           <span><a href="#/buildings/{{build.id}}" class='btn btn-warning'>Delete</a></span>
