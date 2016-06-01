@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :buildings  do
     resources :floors  do
+      resources :blocks do
+      end 
     end
   end
 
