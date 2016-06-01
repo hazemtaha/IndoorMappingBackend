@@ -1,0 +1,45 @@
+
+  <div class="page-header">
+      <h1>{{user.name(option)}} Buildings</h1>
+  </div>
+  <!-- 000000000000000000 start add  modal 00000000000000000000 -->
+  <div>
+      <span><a href="" class='btn btn-success'>Add Building</a></span>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Building</button>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+            </div>
+        </div>
+  </div>
+
+  <!-- 000000000000000000 end add modal 00000000000000000000 -->
+
+  <div ng-repeat="build in homeCtrl.buildings">
+      <div>
+            <div style="float:left ; margin: 5px 30px">
+                 <img ng-src="images/{{build.thumbnail}}" width="100px" height="100px" /><br>
+            </div>
+            <div style="float:left"><br>
+                <span>Name: {{build.name}}</span><br>
+                <span>address: {{build.address}}</span><br>
+                <span><a href="#/buildings/{{build.id}}" class='btn btn-primary'>Details</a></span>
+            </div>
+            <div style="clear: both ; height: 1px;"></div>
+            <br><br>
+      </div>
+  </div>

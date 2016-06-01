@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20160529162156) do
   add_index "floors", ["building_id"], name: "index_floors_on_building_id", using: :btree
 
   create_table "owners", force: :cascade do |t|
+<<<<<<< HEAD
     t.string   "username",               limit: 255, default: "", null: false
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -82,6 +83,16 @@ ActiveRecord::Schema.define(version: 20160529162156) do
   add_index "owners", ["email"], name: "index_owners_on_email", unique: true, using: :btree
   add_index "owners", ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true, using: :btree
 
+=======
+    t.string   "username",   limit: 255
+    t.string   "email",      limit: 255
+    t.string   "password",   limit: 255
+    t.string   "picture",    limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+>>>>>>> e17c2574718dbb439d9ff04c93e3e0d38314ae0e
   create_table "visitors", force: :cascade do |t|
     t.string   "username",   limit: 255
     t.string   "email",      limit: 255
