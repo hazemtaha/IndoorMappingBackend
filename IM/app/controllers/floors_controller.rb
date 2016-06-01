@@ -3,7 +3,7 @@ class FloorsController < ApplicationController
 	end
 
 	def show
-    	respond_with Block.find(params[:id])
+    	respond_with Floor.find(params[:id])
     end
 
 	def destroy

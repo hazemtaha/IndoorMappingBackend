@@ -17,6 +17,12 @@ angular.module('IM_module', ['ui.router','templates'])
 				  templateUrl: 'buildings/_buildings.html',
 				  controller: 'buildingsCtrl' ,
 				  controllerAs: "buildCtrl"
+				})
+			   .state('floors', {
+				  url: '/buildings/{building_id}/floors/{id}',
+				  templateUrl: 'floors/_floors.html',
+				  controller: 'floorsCtrl' ,
+				  controllerAs: "floorCtrl"
 				});
 
 		    $urlRouterProvider.otherwise('home');
