@@ -1,4 +1,4 @@
-angular.module('IM_module', ['ui.router','templates'])
+angular.module('IM_module', ['ui.router','templates','Devise'])
 	.config([
 		'$stateProvider',
 		'$urlRouterProvider',
