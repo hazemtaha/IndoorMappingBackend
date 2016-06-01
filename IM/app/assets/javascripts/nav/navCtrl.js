@@ -1,4 +1,4 @@
-angular.module('IM_Module')
+angular.module('IM_module')
 .controller('NavCtrl', [
 'Auth',
 function(Auth){

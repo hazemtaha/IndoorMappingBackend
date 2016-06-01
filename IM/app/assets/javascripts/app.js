@@ -2,7 +2,13 @@ angular.module('IM_module', ['ui.router','templates','Devise'])
 	.config([
 		'$stateProvider',
 		'$urlRouterProvider',
-		function($stateProvider, $urlRouterProvider) {
+		'AuthProvider',
+		function($stateProvider, $urlRouterProvider,AuthProvider) {
+			AuthProvider.registerPath('/owners.json');
+            AuthProvider.registerMethod('POST');
+
+            AuthProvider.loginPath('/owners/sign_in.json');
+            AuthProvider.loginMethod('POST');
 
 		    $stateProvider
 			    .state('home', {
@@ -16,7 +22,7 @@ angular.module('IM_module', ['ui.router','templates','Devise'])
 					// },
 
 			      controller: 'MainCtrl',
-			      controllerAs: "homeCtrl" ,
+			      controllerAs: "homeCtrl"
 			      
 			    })
 			   .state('buildings', {
@@ -24,13 +30,14 @@ angular.module('IM_module', ['ui.router','templates','Devise'])
 				  templateUrl: 'buildings/_buildings.html',
 				  controller: 'buildingsCtrl' ,
 				  controllerAs: "buildCtrl"
-				});
+				})
 
 
 			   .state('login', {
 			      url: '/login',
 			      templateUrl: 'auth/_login.html',
 			      controller: 'AuthCtrl',
+			      controllerAs: "authCtrl",
 			      onEnter: ['$state', 'Auth', function($state, Auth) {
         				Auth.currentUser().then(function (){
           				$state.go('home');
@@ -40,7 +47,8 @@ angular.module('IM_module', ['ui.router','templates','Devise'])
 			    .state('register', {
 			      url: '/register',
 			      templateUrl: 'auth/_register.html',
-			      controller: 'AuthCtrl'
+			      controller: 'AuthCtrl',
+			      controllerAs: "authCtrl",
 			      onEnter: ['$state', 'Auth', function($state, Auth) {
         				Auth.currentUser().then(function (){
           				$state.go('home');
