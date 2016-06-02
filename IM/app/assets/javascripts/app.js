@@ -30,12 +30,16 @@ angular.module('IM_module', ['ui.router','templates','Devise'])
 				  controller: 'floorsCtrl' ,
 				  controllerAs: "floorCtrl"
 				})
-			   .state('blocks', {
-				  url: '/buildings/{building_id}/floors/{floor_id}/blocks/{id}',
-				  templateUrl: 'blocks/_blocks.html',
-				  controller: 'blocksCtrl' ,
-				  controllerAs: "blockCtrl"
-				})
+
+			 //    .state('blocks', {
+				//   url: '/buildings/{building_id}/floors/{floor_id}/blocks/{id}',
+				//   templateUrl: 'blocks/_blocks.html',
+				//   controller: 'blocksCtrl' ,
+				//   controllerAs: "blockCtrl"
+				// })
+
+			   // =---------------------------------------------------
+
 			   .state('login', {
 			      url: '/login',
 			      templateUrl: 'auth/_login.html',

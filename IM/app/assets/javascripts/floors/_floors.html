@@ -4,8 +4,8 @@
         <span>FloorNum: {{floorCtrl.floor.floo}}</span><br>
         <!-- foo will be edit -->
         <span>Width: {{floorCtrl.floor.width}}</span><br>           
-        <span>Height: {{floorCtrl.floor.height}}</span><br>           
-        <span>Blocks: </span><br> 
+        <span>Height: {{floorCtrl.floor.height}}</span><br><br>            
+        <span>Blocks: </span><br>
         <table class="table">
           <thead>
             <td>Name</td>
@@ -19,12 +19,34 @@
                     <td>{{block.width}}</td> 
                     <td>{{block.height}}</td> 
                     <td><span><a class='btn btn-info'>edit name</a></span> 
-                        <span><a action="#/buildings/{{floorCtrl.floor.building_id}}/floors/{{floorCtrl.floor.id}}/blocks/{{block.id}}" class='btn btn-danger'>details</a></span>
-
+                        <!-- href="#/buildings/{{floorCtrl.floor.building_id}}/floors/{{floorCtrl.floor.id}}/blocks/{{block.id}}" -->
+                        <span><a href=""  class='btn btn-danger' ng-click="floorCtrl.getBlockDetails(floorCtrl.floor.building_id,floorCtrl.floor.id,block.id)" >
+                        details</a></span>
                     </td> 
             </tr>
           </tbody>
         </table>          
-       
+          <div ng-show="floorCtrl.blockDetails.beacons" width="80%">
+                <span>Block Name: {{floorCtrl.blockDetails.name}}</span><br>
+                <span>Beacons: </span><br>
+                <table class="table">
+                      <thead>
+                        <td>Name</td>
+                        <td>UUID</td>
+                        <td>Major</td>
+                        <td>Minor</td>
+                        <td>Action</td>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="beacon in floorCtrl.blockDetails.beacons">
+                                <td>{{beacon.name}}</td> 
+                                <td>{{beacon.uuid}}</td> 
+                                <td>{{beacon.major}}</td> 
+                                <td>{{beacon.minor}}</td> 
+                                <td><span><a class='btn btn-info'>edit name</a></span></td> 
+                        </tr>
+                      </tbody>
+                </table>          
+          </div>
 
 </div>
