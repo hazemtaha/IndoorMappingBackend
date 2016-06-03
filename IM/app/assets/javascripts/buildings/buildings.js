@@ -15,6 +15,13 @@ angular.module('IM_module')
 			console.log('inside') ;
 		    return $http.put('/buildings/'+id+'.json' , editBuild );
 		};
+
+		obj.addOne = function(addBuild) {
+			console.log('inside add') ;
+			console.log(addBuild) ;
+		    return $http.post('/buildings.json', addBuild);
+		};
+
 		return obj ; 
 	}])
 
