@@ -6,7 +6,6 @@ angular.module('IM_module')
 				self.buildings = data ;
 		    })
 		    self.delBuilding = function(id){
-		    	console.log('id = '+id) ;
 		    	buildings.delOne(id).success(function(data){
 		    		self.buildings = data ;
 	    		})

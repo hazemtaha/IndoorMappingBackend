@@ -13,12 +13,6 @@ class BuildingsController < ApplicationController
     end
 
     def update
-        puts "--------------------------tyb------------------------------------"
-            puts params[:id]
-        puts "--------------------------tyb------------------------------------"
-        # Building.destroy(params[:id])
-        # render json: Building.all
-
         @building = Building.find(params[:id])
         if @building.update(building_params) 
             render json: Building.find(params[:id])
