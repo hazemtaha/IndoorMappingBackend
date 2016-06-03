@@ -25,9 +25,23 @@ class BuildingsController < ApplicationController
         end
     end
 
+    def create 
+        @build = Building.create(build_params)
+        if @build.save  
+             render json: Building.all
+        else 
+             render json: {:errorMsg => @build.errors[:name][0]}
+        end     
+    end
+
+
     private
         def building_params
             params.require(:building).permit(:name, :address)
+        end
+
+        def build_params
+            params.require(:building).permit(:address, :name , :thumbnail , 1)
         end
 
 end
