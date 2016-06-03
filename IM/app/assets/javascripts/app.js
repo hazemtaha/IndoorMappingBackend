@@ -22,7 +22,12 @@ angular.module('IM_module', ['ui.router','templates','Devise'])
 				  url: '/buildings/{id}',
 				  templateUrl: 'buildings/_buildings.html',
 				  controller: 'buildingsCtrl' ,
-				  controllerAs: "buildCtrl"
+				  controllerAs: "buildCtrl" ,
+				  // onEnter: ['$state', 'Auth', function($state, Auth) {
+      //   				//Auth.currentUser().then(function (){
+      //     				$state.go('home');
+      //   				//})
+      // 				}]
 				})
 			   .state('floors', {
 				  url: '/buildings/{building_id}/floors/{id}',

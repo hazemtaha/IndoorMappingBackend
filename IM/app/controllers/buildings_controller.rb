@@ -6,4 +6,9 @@ class BuildingsController < ApplicationController
     def show
 	    respond_with Building.find(params[:id])
     end
+
+    def destroy
+    	Building.destroy(params[:id])
+    	render json: Building.all
+    end
 end

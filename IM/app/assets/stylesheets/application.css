@@ -13,5 +13,16 @@
  
   *= require bootstrap/dist/css/bootstrap
  *= require_tree .
+ *= require bootstrap-modal-bs3patch
+ *= require bootstrap-modal
+
  *= require_self
  */
+ .modal{
+ 	width: 660px ;
+ 	background-color: rgba(0, 0, 0, 0.24);
+ }
+ .ng-invalid.ng-dirty span ,.errorMsg{
+	color: red ;
+	font-size: 10px ;
+}
