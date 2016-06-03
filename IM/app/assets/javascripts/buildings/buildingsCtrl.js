@@ -6,6 +6,7 @@ angular.module('IM_module')
 			console.log(this.build);
 			var self = this;
 			self.addFloor = {} ;
+			self.editBuild = {} ;
 
 			buildings.getOne($stateParams.id).success(function(data){
 		    	console.log(data);
@@ -36,13 +37,24 @@ angular.module('IM_module')
 					    $('.modal').modal('hide');
 		    		}
 		    	});
-
 		    	self.addFloor = {} ;
-		    	self.addFloorForm.$pristine = true;
-		    	self.addFloorForm.$dirty = false;
 		    	self.addFloorForm.$setPristine();
-		    	self.addFloorForm.$setUntouched();
-		    	console.log(self.addFloorForm);
-		    	// self.addFloorForm.$setDirty();
-		    }			
+		    }
+
+		    self.editFunc = function(){
+		    	self.isEdit = true ;
+		    	self.editBuild.name = self.build.name ;
+				self.editBuild.address = self.build.address ;		
+		    }
+		    self.submiteditbuildForm = function(){
+		    	console.log("submit") ;
+		    	console.log(self.editBuild) ;
+		    	buildings.editOne(self.build.id ,self.editBuild).success(function(data){
+			    	console.log(data);
+					self.build = data ;
+		    	});
+		    	self.isEdit = false ;
+			   	
+		    }
+
 	}]);

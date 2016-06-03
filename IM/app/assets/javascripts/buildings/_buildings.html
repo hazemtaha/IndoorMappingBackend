@@ -58,21 +58,45 @@
             </div>
         </div>
   </div>
- <!--  <script type="text/javascript">
-      $('.btn-ok').click(function() {
-         $('.modal').modal('hide');
-      });
-  </script> -->
-
   <!-- 000000000000000000 end add modal 00000000000000000000 -->
 
-   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">edit building</button>
   <div>
 
         <img ng-src="images/{{buildCtrl.build.thumbnail}}" width="300px" height="300px" /><br>
-        <span>Name: {{buildCtrl.build.name}}</span><br>
-        <span>address: {{buildCtrl.build.address}}</span><br>   
-        <span>Floors:</span><br>     
+        <div ng-init="buildCtrl.isEdit = false">
+            <a href="" class="btn btn-link" ng-click="buildCtrl.editFunc()" >Edit building</a><br>
+            <div ng-show="buildCtrl.isEdit == true" >
+
+                <form method="post" name="buildCtrl.editbuildForm" ng-submit="buildCtrl.submiteditbuildForm()" >
+
+                  <div class="row">
+                    <label for="name" class="col-sm-3">Building Name : </label>
+                    <div class="col-sm-5">
+                        <input type="text" name="name" class="form-control" ng-model="buildCtrl.editBuild.name" required />
+                    </div>
+                    <span ng-show="buildCtrl.editbuildForm.name.$invalid && buildCtrl.editbuildForm.name.$dirty">Builing name is invalid*</span>
+                  </div><br> 
+
+                  <div class="row">
+                    <label for="address" class="col-sm-3">Building Address : </label>
+                    <div class="col-sm-5">
+                        <input type="text" name="address" class="form-control" ng-model="buildCtrl.editBuild.address"  required />
+                    </div>
+                    <span ng-show="buildCtrl.editbuildForm.address.$invalid && buildCtrl.editbuildForm.address.$dirty">Builing address is invalid*</span>
+                  </div><br> 
+
+                  <button type="submit" class="btn btn-success col-sm-offset-4" ng-disabled="buildCtrl.editbuildForm.$invalid"  >Save</button>
+                  <button type="button" class="btn btn-danger" ng-click="buildCtrl.isEdit = false" >Cancel</button>
+
+                </form>
+            </div>
+            <div ng-hide="buildCtrl.isEdit == true" >        
+                <span>Name: {{buildCtrl.build.name}}</span><br>
+                <span>address: {{buildCtrl.build.address}}</span><br> 
+            </div>
+        </div>
+        <br><br>
+        <span>Floors:</span><br>    
 
         <div ng-repeat="floor in buildCtrl.build.floors | orderBy:'floo' ">
           <span> Floor Num: {{floor.floo}} </span> 

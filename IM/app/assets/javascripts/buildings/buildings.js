@@ -9,10 +9,12 @@ angular.module('IM_module')
 		    return $http.get('/buildings/'+id+'.json');
 		};
 		obj.delOne = function(id) {
-			console.log('inside') ;
 		    return $http.delete('/buildings/'+id+'.json');
 		};
+		obj.editOne = function(id , editBuild ) {
+			console.log('inside') ;
+		    return $http.put('/buildings/'+id+'.json' , editBuild );
+		};
 		return obj ; 
-
 	}])
 
