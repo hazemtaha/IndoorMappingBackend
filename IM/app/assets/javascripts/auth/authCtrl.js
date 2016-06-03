@@ -14,4 +14,11 @@ function($state, Auth){
       $state.go('home');
     });
   };
+
+  this.reset = function(){
+    Auth.sendResetPasswordInstructions(this.user).then(function(){
+      $state.go('home');
+    });
+  }
+
 }]);

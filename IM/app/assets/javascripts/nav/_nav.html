@@ -1,9 +1,11 @@
 <div class="collapse navbar-collapse pull-right" ng-controller="NavCtrl as nav">
-  <ul class="nav navbar-nav">
-    <li><a href="#/home">Home</a></li>
-    <li ng-hide="nav.signedIn()"><a href="#/login">Log In</a></li>
-    <li ng-hide="nav.signedIn()"><a href="#/register">Register</a></li>
-    <li ng-show="nav.signedIn()"><a href="#/">{{ nav.user.username }}</a></li>
-    <li ng-show="nav.signedIn()"><a ng-click="nav.logout()">Log Out</a></li>
+  <ul class="nav navbar-nav" style="background-color: #e3f2fd;">
+    <li ng-show="nav.signedIn()" class="nav-item"><a href="#/home" class="btn btn-default">Home</a></li>
+    <li ng-hide="nav.signedIn()" class="nav-item"><a href="#/login" class="nav-link btn btn-default">Login</a></li>
+    <li ng-hide="nav.signedIn()" class="nav-item"><a href="#/register" class="nav-link btn btn-default" id="signup-box-link">Register</a></li>
+    <!--<li ng-show="nav.signedIn()" class="nav-item"><a href="#/" class="nav-link">{{ nav.user.username }}</a></li>-->
+    <li ng-show="nav.signedIn()" class="nav-item"><a href="#" ng-click="nav.logout()" class="nav-link btn btn-default">Logout</a></li>
   </ul>
+  <br/>
 </div>
+

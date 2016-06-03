@@ -6,9 +6,12 @@ angular.module('IM_module', ['ui.router','templates','Devise'])
 		function($stateProvider, $urlRouterProvider,AuthProvider) {
 			AuthProvider.registerPath('/owners.json');
             AuthProvider.registerMethod('POST');
-
             AuthProvider.loginPath('/owners/sign_in.json');
             AuthProvider.loginMethod('POST');
+            console.log(AuthProvider);
+            AuthProvider.sendResetPasswordInstructionsPath('/owners/password.json');
+            AuthProvider.sendResetPasswordInstructionsMethod('POST');
+
 
 		    $stateProvider
 			    .state('home', {
@@ -49,6 +52,18 @@ angular.module('IM_module', ['ui.router','templates','Devise'])
         				})
       				}]
 			    })
+			   .state('reset', {
+			      url: '/reset',
+			      templateUrl: 'auth/_reset.html',
+			      controller: 'AuthCtrl',
+			      controllerAs: "authCtrl",
+			      onEnter: ['$state', 'Auth', function($state, Auth) {
+        				Auth.currentUser().then(function (){
+          					$state.go('home');
+        				})
+      				}]
+			    })
+
 			    .state('register', {
 			      url: '/register',
 			      templateUrl: 'auth/_register.html',
