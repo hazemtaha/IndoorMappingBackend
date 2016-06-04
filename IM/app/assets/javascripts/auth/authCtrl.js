@@ -6,6 +6,7 @@ angular.module('IM_module')
 function($state, Auth,FileUploader){
 	 this.login = function() {
     Auth.login(this.user).then(function(){
+      //console.log(data);
       $state.go('home');
     });
   };

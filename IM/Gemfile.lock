@@ -178,11 +178,8 @@ PLATFORMS
 DEPENDENCIES
   angular-rails-templates
   angular_rails_csrf
-<<<<<<< HEAD
   angularjs-file-upload-rails (~> 2.2.0)
-=======
   bootstrap-modal-rails
->>>>>>> 774c3a025891445b464b59fe5c6fc5af54a588be
   byebug
   carrierwave
   coffee-rails (~> 4.1.0)

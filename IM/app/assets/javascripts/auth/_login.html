@@ -4,13 +4,15 @@
   <h3>Login to join indoor mapping</h3>
   </div>
   <div class="col-sm-10">
-<form ng-submit="authCtrl.login()">
+<form ng-submit="authCtrl.login()" name="loginForm">
   <div class="field u-form-group col-sm-offset-1 col-sm-12">
-    <input type="email" class="form-control" id="user_email" placeholder="Email" ng-model="authCtrl.user.email">
+    <input type="email" name="email" class="form-control" id="user_email" placeholder="Email" ng-model="authCtrl.user.email" required>
+    <span ng-show="loginForm.email.$invalid && loginForm.email.$dirty">Email is required *</span>
   <br>
   </div>
   <div class="field u-form-group col-sm-offset-1 col-sm-12">
-    <input type="password" class="form-control" placeholder="Password" ng-model="authCtrl.user.password">
+    <input type="password" name="password" class="form-control" placeholder="Password" ng-model="authCtrl.user.password" required>
+    <span ng-show="loginForm.password.$invalid && loginForm.password.$dirty">Password is required *</span>
   <br>
   </div>
   <div class="field col-sm-offset-1 col-sm-12">
@@ -18,7 +20,7 @@
   	<label for="user_remember_me">Remember me</label>
   <br>
   </div>
-  <input type="submit" class="btn btn-primary col-sm-offset-3 col-sm-8" value="Login">
+  <input type="submit" class="btn btn-primary col-sm-offset-3 col-sm-8" ng-disabled="loginForm.$invalid" value="Login">
 </form>
 <div class="u-form-group col-sm-offset-4 col-sm-12">
   <a class="forgot-password" href="#/reset">Forgot your password?</a><br>
