@@ -27,7 +27,12 @@ angular.module('IM_module', ['ui.router','templates','Devise','flow','angularFil
 				  url: '/buildings/{id}',
 				  templateUrl: 'buildings/_buildings.html',
 				  controller: 'buildingsCtrl' ,
-				  controllerAs: "buildCtrl"
+				  controllerAs: "buildCtrl" ,
+				  // onEnter: ['$state', 'Auth', function($state, Auth) {
+      //   				//Auth.currentUser().then(function (){
+      //     				$state.go('home');
+      //   				//})
+      // 				}]
 				})
 
 			   .state('floors', {
@@ -43,6 +48,7 @@ angular.module('IM_module', ['ui.router','templates','Devise','flow','angularFil
 				  controller: 'blocksCtrl' ,
 				  controllerAs: "blockCtrl"
 				})
+
 			   .state('login', {
 			      url: '/login',
 			      templateUrl: 'auth/_login.html',

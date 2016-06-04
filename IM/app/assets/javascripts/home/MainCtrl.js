@@ -3,9 +3,14 @@ angular.module('IM_module')
 		function(buildings){
 			var self = this;
 			buildings.getAll().success(function(data){
-		    	console.log(data);
 				self.buildings = data ;
-		    });
+		    })
+		    self.delBuilding = function(id){
+		    	console.log('id = '+id) ;
+		    	buildings.delOne(id).success(function(data){
+		    		self.buildings = data ;
+	    		})
+		    }
 	}])
 
 	

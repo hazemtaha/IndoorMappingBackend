@@ -7,9 +7,25 @@ class FloorsController < ApplicationController
 		respond_with Floor.find(params[:id])
 	end
 
-	def destroy
-		puts "ay haga"
-		respond_with Floor.all
-		# respond_with Floor.find_by(id:params[:id]).destroy
+	def create 
+		@floor = Floor.create(floor_params)
+		if @floor.save	
+			render json: Floor.where(:building_id => params[:floor][:building_id])
+		else 
+	  		render json: {:errorMsg => @floor.errors[:floo][0]}
+		end 	
 	end 
+
+	def destroy
+		Floor.destroy(params[:id])
+		render json: Floor.where(:building_id => params[:building_id])
+	end 
+
+
+	private
+	  def floor_params
+	    params.require(:floor).permit(:floo, :width , :height , :building_id)
+	  end
+
+
 end

@@ -21,3 +21,6 @@
 //= require ng-flow
 // require flow.js
 //= require_tree .
+
+//= require bootstrap-modal
+//= require bootstrap-modalmanager

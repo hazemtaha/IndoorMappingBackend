@@ -2,51 +2,111 @@
     <div>
 
   <!-- 000000000000000000 start add  modal 00000000000000000000 -->
-   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">edit building</button>
-  <div>
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Floor</button>
+
+        <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Add Floor</button>
 
         <!-- Modal -->
-        <div id="myModal" class="modal fade" role="dialog">
+        <div id="myModal" class="modal fade" role="dialog" >
             <div class="modal-dialog">
               <!-- Modal content-->
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">Add Floor</h4>
                   </div>
+                  <form method="post" name="buildCtrl.addFloorForm" ng-submit="buildCtrl.submitaddFloorForm()" >
                   <div class="modal-body">
-                    <p>Some text in the modal.</p>
+                    <p>
+                        <div class="row">
+                            <label for="floo" class="col-sm-3">Floor Number : </label>
+                            <div class="col-sm-6">
+                                <input type="number" name="floo" min="1" class="form-control" ng-model="buildCtrl.addFloor.floo" required />
+                            </div>
+                            <span ng-show="buildCtrl.addFloorForm.floo.$invalid && buildCtrl.addFloorForm.floo.$dirty">Floor Number is invalid *</span>
+                            <span ng-show="buildCtrl.floorExist" class="errorMsg">{{buildCtrl.floorExist}}</span>
+
+                        </div>
+                        <br/>
+                        <!-- floo will  -->
+                        <div class="row">
+                            <label for="width" class="col-sm-3">Floor Width : </label>
+                            <div class="col-sm-6">
+                                <input type="number" name="width" min="1" class="form-control" ng-model="buildCtrl.addFloor.width"   required />
+                            </div>
+                            <span ng-show="buildCtrl.addFloorForm.width.$invalid && buildCtrl.addFloorForm.width.$dirty">Floor Width is invalid *</span>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <label for="height" class="col-sm-3">Floor Height : </label>
+                            <div class="col-sm-6">
+                                <input type="number" name="height" min="1" class="form-control" ng-model="buildCtrl.addFloor.height" required />
+                            </div>
+                            <span ng-show="buildCtrl.addFloorForm.height.$invalid && buildCtrl.addFloorForm.height.$dirty">Floor Height is invalid*</span>
+                        </div>
+                        <br/>
+                         <!-- <input type="hidden" name="building_id" ng-value="buildCtrl.build.id"
+                         ng-model="buildCtrl.addFloor.building_id"  ng-init="buildCtrl.addFloor.building_id= buildCtrl.build.id " /> -->
+                    </p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success btn-ok" ng-disabled="buildCtrl.addFloorForm.$invalid" >Add</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                   </div>
+              </form>
                 </div>
             </div>
         </div>
   </div>
-
-
-
   <!-- 000000000000000000 end add modal 00000000000000000000 -->
 
-
+  <div>
 
         <img ng-src="images/{{buildCtrl.build.thumbnail}}" width="300px" height="300px" /><br>
-        <span>Name: {{buildCtrl.build.name}}</span><br>
-        <span>address: {{buildCtrl.build.address}}</span><br>   
-        <span>Floors:</span><br>         
-        <div ng-repeat="floor in buildCtrl.build.floors">
-          <span> Floor Num: {{floor.floo}} </span> 
+        <div ng-init="buildCtrl.isEdit = false">
+            <a href="" class="btn btn-link" ng-click="buildCtrl.editFunc()" >Edit building</a><br>
+            <div ng-show="buildCtrl.isEdit == true" >
+
+                <form method="post" name="buildCtrl.editbuildForm" ng-submit="buildCtrl.submiteditbuildForm()" >
+
+                  <div class="row">
+                    <label for="name" class="col-sm-3">Building Name : </label>
+                    <div class="col-sm-5">
+                        <input type="text" name="name" class="form-control" ng-model="buildCtrl.editBuild.name" required />
+                    </div>
+                    <span ng-show="buildCtrl.editbuildForm.name.$invalid && buildCtrl.editbuildForm.name.$dirty">Builing name is invalid*</span>
+                  </div><br>
+
+                  <div class="row">
+                    <label for="address" class="col-sm-3">Building Address : </label>
+                    <div class="col-sm-5">
+                        <input type="text" name="address" class="form-control" ng-model="buildCtrl.editBuild.address"  required />
+                    </div>
+                    <span ng-show="buildCtrl.editbuildForm.address.$invalid && buildCtrl.editbuildForm.address.$dirty">Builing address is invalid*</span>
+                  </div><br>
+
+                  <button type="submit" class="btn btn-success col-sm-offset-4" ng-disabled="buildCtrl.editbuildForm.$invalid"  >Save</button>
+                  <button type="button" class="btn btn-danger" ng-click="buildCtrl.isEdit = false" >Cancel</button>
+
+                </form>
+            </div>
+            <div ng-hide="buildCtrl.isEdit == true" >
+                <span>Name: {{buildCtrl.build.name}}</span><br>
+                <span>address: {{buildCtrl.build.address}}</span><br>
+            </div>
+        </div>
+        <br><br>
+        <span>Floors:</span><br>
+
+        <div ng-repeat="floor in buildCtrl.build.floors | orderBy:'floo' ">
+          <span> Floor Num: {{floor.floo}} </span>
           <!-- still Hazem will edit floo  -->
-          {{buildCtrl.build.id}}
           <span><a href="#/buildings/{{buildCtrl.build.id}}" class='btn btn-danger'>Map</a></span>
           <span><a href="#/buildings/{{buildCtrl.build.id}}/floors/{{floor.id}}" class='btn btn-primary'>Details</a></span>
-          <!-- <span><a href="#/buildings/{{buildCtrl.build.id}}/floors/{{floor.id}}" data-method="delete" class='btn btn-warning'>Delete</a></span>  -->
-
-          <span><a  ng-click="buildCtrl.delFloorFunc(buildCtrl.build.id,floor.id)" class='btn btn-warning'>Delete</a></span> 
+          <span><a  ng-click="buildCtrl.delFloorFunc(buildCtrl.build.id,floor.id)" class='btn btn-warning'>Delete</a></span>
           <br><br>
         </div>
+
     </div>
     <br><br>
-</div> 
+</div>

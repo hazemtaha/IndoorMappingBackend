@@ -7,7 +7,7 @@ class CreateBeacons < ActiveRecord::Migration
       t.integer :minor
       t.integer :x_axis
       t.integer :y_axis
-      t.references :block, index: true, foreign_key: true
+      # t.references :block, index: true, foreign_key: true
 
       t.timestamps null: false
     end

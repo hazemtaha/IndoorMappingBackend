@@ -2,32 +2,75 @@
   <div class="page-header">
       <h1>{{user.name(option)}} Buildings</h1>
   </div>
-  <!-- 000000000000000000 start add  modal 00000000000000000000 -->
-  <div>
-      <span><a href="" class='btn btn-success'>Add Building</a></span>
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Building</button>
-
-        <!-- Modal -->
-        <div id="myModal" class="modal fade" role="dialog">
+  
+  <div ng-controller="buildingsCtrl as buildCtrl"> 
+    <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Add Buliding</button>
+<div id="myModal" class="modal fade" role="dialog" >
             <div class="modal-dialog">
               <!-- Modal content-->
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">Add Buliding</h4>
                   </div>
+                  <form method="post" name="buildCtrl.addBuildForm" ng-submit="buildCtrl.submitaddBuildForm()" >
                   <div class="modal-body">
-                    <p>Some text in the modal.</p>
+
+                    <p>     
+                        <div class="row">
+                            <label for="name" class="col-sm-3">Name : </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="name" min="1" class="form-control" ng-model="buildCtrl.addBuild.name" required />
+                            </div>
+                            <span ng-show="buildCtrl.addBuildForm.name.$invalid && buildCtrl.addBuildForm.name.$dirty">Build name is invalid *</span>
+                            <span ng-show="buildCtrl.buildExist" class="errorMsg">{{buildCtrl.floorExist}}</span>
+                      
+                        </div>
+                        <br/>
+                        <!-- floo will  -->
+                        <div class="row">
+                            <label for="address" class="col-sm-3">Address :</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="address" min="1" class="form-control" ng-model="buildCtrl.addBuild.address"   required />
+                            </div>
+                            <span ng-show="buildCtrl.addBuildForm.address.$invalid && buildCtrl.addBuildForm.address.$dirty">Build Address is invalid *</span>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <label for="thumbnail" class="col-sm-3">Thumbnail : </label>
+                            <div class="col-sm-6">
+                                <input type="file" name="thumbnail" min="1" class="form-control" ng-model="buildCtrl.addBuild.thumbnail"  />
+                            </div>
+                            <!-- <span ng-show="buildCtrl.addBuildForm.thumbnail.$invalid && buildCtrl.addBuildForm.thumbnail.$dirty">Floor Height is invalid*</span> -->
+                        </div>
+                        <br/>
+                         <!-- <input type="hidden" name="building_id" ng-value="buildCtrl.build.id" 
+                         ng-model="buildCtrl.addFloor.building_id"  ng-init="buildCtrl.addFloor.building_id= buildCtrl.build.id " /> -->
+                    </p>
+
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success btn-ok" ng-disabled="buildCtrl.addBuildForm.$invalid" >Add</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                   </div>
+              </form>
                 </div>
             </div>
         </div>
-  </div>
+          
 
-  <!-- 000000000000000000 end add modal 00000000000000000000 -->
+
+
+  </div>
+  
+
+
+
+
+
+
+
 
   <div ng-repeat="build in homeCtrl.buildings">
       <div>
@@ -38,6 +81,7 @@
                 <span>Name: {{build.name}}</span><br>
                 <span>address: {{build.address}}</span><br>
                 <span><a href="#/buildings/{{build.id}}" class='btn btn-primary'>Details</a></span>
+                <span><a href="" ng-click="homeCtrl.delBuilding(build.id)" class='btn btn-danger'>Delete</a></span>
             </div>
             <div style="clear: both ; height: 1px;"></div>
             <br><br>
