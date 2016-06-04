@@ -70,7 +70,7 @@ angular.module('IM_module')
 		    		}else{
 		    			console.log('no errrrrrrrrrrrr');
 		    			console.log(data);
-		    			self.build = data ;	
+		    			self.buildings = data ;	
 					    $('.modal').modal('hide');
 		    		}
 		    	});
