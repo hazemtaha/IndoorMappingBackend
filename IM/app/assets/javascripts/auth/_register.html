@@ -3,15 +3,18 @@
 <div class="lb-header">
   <h1>Register</h1>
 </div>
-<form class="new_user" ng-submit="authCtrl.register()" enctype="multipart/form-data">
+<form class="new_user" name="ownerForm" ng-submit="authCtrl.register()" enctype="multipart/form-data">
   <div class="field u-form-group  col-sm-12">
-    <input type="email" class="form-control" placeholder="Email" ng-model="authCtrl.user.email">
+    <input type="email" name="email" class="form-control" placeholder="Email" ng-model="authCtrl.user.email" required>
+    <span ng-show="ownerForm.email.$invalid && ownerForm.email.$dirty">Email is required *</span>
   </div>
   <div class="field u-form-group  col-sm-12">
-    <input type="text" class="form-control" placeholder="Username" ng-model="authCtrl.user.username">
+    <input type="text" name="username" class="form-control" placeholder="Username" ng-model="authCtrl.user.username" required>
+    <span ng-show="ownerForm.username.$invalid && ownerForm.username.$dirty">Username is required *</span>
   </div>
   <div class="field u-form-group  col-sm-12">
-    <input type="password" class="form-control" placeholder="Password" ng-model="authCtrl.user.password">
+    <input type="password" name="password" class="form-control" placeholder="Password" ng-model="authCtrl.user.password" required>
+    <span ng-show="ownerForm.password.$invalid && ownerForm.password.$dirty">Password is required *</span>
     <br>
   </div>
 
@@ -22,6 +25,6 @@
 
   <input type="file" nv-file-select uploader="authCtrl.uploader"/>
 <!--</div>-->
-  <input type="submit" class="btn btn-success col-sm-offset-3 col-sm-6" value="Register">
+  <input type="submit" class="btn btn-success col-sm-offset-3 col-sm-6" ng-disabled="ownerForm.$invalid" value="Register">
 </form>
 </div>
