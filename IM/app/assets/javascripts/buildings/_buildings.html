@@ -2,7 +2,7 @@
     <div>
 
   <!-- 000000000000000000 start add  modal 00000000000000000000 -->
-  
+
         <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Add Floor</button>
 
         <!-- Modal -->
@@ -16,7 +16,7 @@
                   </div>
                   <form method="post" name="buildCtrl.addFloorForm" ng-submit="buildCtrl.submitaddFloorForm()" >
                   <div class="modal-body">
-                    <p>     
+                    <p>
                         <div class="row">
                             <label for="floo" class="col-sm-3">Floor Number : </label>
                             <div class="col-sm-6">
@@ -24,7 +24,7 @@
                             </div>
                             <span ng-show="buildCtrl.addFloorForm.floo.$invalid && buildCtrl.addFloorForm.floo.$dirty">Floor Number is invalid *</span>
                             <span ng-show="buildCtrl.floorExist" class="errorMsg">{{buildCtrl.floorExist}}</span>
-                      
+
                         </div>
                         <br/>
                         <!-- floo will  -->
@@ -45,7 +45,7 @@
                             <span ng-show="buildCtrl.addFloorForm.height.$invalid && buildCtrl.addFloorForm.height.$dirty">Floor Height is invalid*</span>
                         </div>
                         <br/>
-                         <!-- <input type="hidden" name="building_id" ng-value="buildCtrl.build.id" 
+                         <!-- <input type="hidden" name="building_id" ng-value="buildCtrl.build.id"
                          ng-model="buildCtrl.addFloor.building_id"  ng-init="buildCtrl.addFloor.building_id= buildCtrl.build.id " /> -->
                     </p>
                   </div>
@@ -75,7 +75,7 @@
                         <input type="text" name="name" class="form-control" ng-model="buildCtrl.editBuild.name" required />
                     </div>
                     <span ng-show="buildCtrl.editbuildForm.name.$invalid && buildCtrl.editbuildForm.name.$dirty">Builing name is invalid*</span>
-                  </div><br> 
+                  </div><br>
 
                   <div class="row">
                     <label for="address" class="col-sm-3">Building Address : </label>
@@ -83,30 +83,30 @@
                         <input type="text" name="address" class="form-control" ng-model="buildCtrl.editBuild.address"  required />
                     </div>
                     <span ng-show="buildCtrl.editbuildForm.address.$invalid && buildCtrl.editbuildForm.address.$dirty">Builing address is invalid*</span>
-                  </div><br> 
+                  </div><br>
 
                   <button type="submit" class="btn btn-success col-sm-offset-4" ng-disabled="buildCtrl.editbuildForm.$invalid"  >Save</button>
                   <button type="button" class="btn btn-danger" ng-click="buildCtrl.isEdit = false" >Cancel</button>
 
                 </form>
             </div>
-            <div ng-hide="buildCtrl.isEdit == true" >        
+            <div ng-hide="buildCtrl.isEdit == true" >
                 <span>Name: {{buildCtrl.build.name}}</span><br>
-                <span>address: {{buildCtrl.build.address}}</span><br> 
+                <span>address: {{buildCtrl.build.address}}</span><br>
             </div>
         </div>
         <br><br>
-        <span>Floors:</span><br>    
+        <span>Floors:</span><br>
 
         <div ng-repeat="floor in buildCtrl.build.floors | orderBy:'floo' ">
-          <span> Floor Num: {{floor.floo}} </span> 
+          <span> Floor Num: {{floor.floo}} </span>
           <!-- still Hazem will edit floo  -->
           <span><a href="#/buildings/{{buildCtrl.build.id}}" class='btn btn-danger'>Map</a></span>
           <span><a href="#/buildings/{{buildCtrl.build.id}}/floors/{{floor.id}}" class='btn btn-primary'>Details</a></span>
-          <span><a  ng-click="buildCtrl.delFloorFunc(buildCtrl.build.id,floor.id)" class='btn btn-warning'>Delete</a></span> 
+          <span><a  ng-click="buildCtrl.delFloorFunc(buildCtrl.build.id,floor.id)" class='btn btn-warning'>Delete</a></span>
           <br><br>
         </div>
 
     </div>
     <br><br>
-</div> 
+</div>
