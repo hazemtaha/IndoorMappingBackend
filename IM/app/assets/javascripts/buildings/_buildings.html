@@ -1,9 +1,9 @@
 <div>
-    <div>
+  <div>
 
   <!-- 000000000000000000 start add  modal 00000000000000000000 -->
   
-        <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Add Floor</button>
+        <button type="button" class="btn btn-info addbtn" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span> Add Floor</button>
 
         <!-- Modal -->
         <div id="myModal" class="modal fade" role="dialog" >
@@ -45,8 +45,6 @@
                             <span ng-show="buildCtrl.addFloorForm.height.$invalid && buildCtrl.addFloorForm.height.$dirty">Floor Height is invalid*</span>
                         </div>
                         <br/>
-                         <!-- <input type="hidden" name="building_id" ng-value="buildCtrl.build.id" 
-                         ng-model="buildCtrl.addFloor.building_id"  ng-init="buildCtrl.addFloor.building_id= buildCtrl.build.id " /> -->
                     </p>
                   </div>
                   <div class="modal-footer">
@@ -59,12 +57,12 @@
         </div>
   </div>
   <!-- 000000000000000000 end add modal 00000000000000000000 -->
-
-  <div>
-
-        <img ng-src="images/{{buildCtrl.build.thumbnail}}" width="300px" height="300px" /><br>
+<br>
+<div>
+    <div  class="oneDetails" >
+        <img ng-src="images/{{buildCtrl.build.thumbnail}}" /><br><br>
         <div ng-init="buildCtrl.isEdit = false">
-            <a href="" class="btn btn-link" ng-click="buildCtrl.editFunc()" >Edit building</a><br>
+            <a href="" class="btn btn-link" ng-click="buildCtrl.editFunc()" ><span class="glyphicon glyphicon-pencil"></span> Edit building</a><br>
             <div ng-show="buildCtrl.isEdit == true" >
 
                 <form method="post" name="buildCtrl.editbuildForm" ng-submit="buildCtrl.submiteditbuildForm()" >
@@ -91,22 +89,30 @@
                 </form>
             </div>
             <div ng-hide="buildCtrl.isEdit == true" >        
-                <span>Name: {{buildCtrl.build.name}}</span><br>
-                <span>address: {{buildCtrl.build.address}}</span><br> 
+                <span><b>Name : </b>{{buildCtrl.build.name}}</span><br>
+                <span><b>Address : </b>{{buildCtrl.build.address}}</span><br> 
             </div>
         </div>
-        <br><br>
-        <span>Floors:</span><br>    
-
-        <div ng-repeat="floor in buildCtrl.build.floors | orderBy:'floo' ">
-          <span> Floor Num: {{floor.floo}} </span> 
-          <!-- still Hazem will edit floo  -->
-          <span><a href="#/buildings/{{buildCtrl.build.id}}" class='btn btn-danger'>Map</a></span>
-          <span><a href="#/buildings/{{buildCtrl.build.id}}/floors/{{floor.id}}" class='btn btn-primary'>Details</a></span>
-          <span><a  ng-click="buildCtrl.delFloorFunc(buildCtrl.build.id,floor.id)" class='btn btn-warning'>Delete</a></span> 
-          <br><br>
-        </div>
-
     </div>
+
+        <h3> Floors : </h3><br>  
+        <table class="table table-hover table-striped "> 
+          <tr ng-repeat="floor in buildCtrl.build.floors | orderBy:'floo' ">
+            <td><b>  Floor Num : </b>{{floor.floo}}  &nbsp; &nbsp; </td> 
+            <!-- still Hazem will edit floo  -->
+            <td>
+           
+            
+       <!--      <span class="glyphicon glyphicon-zoom-in"></span>
+            <span class="glyphicon glyphicon-map-marker"></span> -->
+
+            <a href="#/buildings/{{buildCtrl.build.id}}" class='btn btn-danger'><span class="glyphicon glyphicon-globe"></span> Map</a>
+            <a href="#/buildings/{{buildCtrl.build.id}}/floors/{{floor.id}}" class='btn btn-primary'><span class="glyphicon glyphicon-plus-sign"></span> Details</a>
+            <a  ng-click="buildCtrl.delFloorFunc(buildCtrl.build.id,floor.id)" class='btn btn-warning'><span class="glyphicon glyphicon-trash"></span> Delete</a>
+            </td>
+          </tr>
+        </table> 
+
+  </div>
     <br><br>
 </div> 
