@@ -8,8 +8,10 @@ angular.module('IM_module')
 		   return $http.delete('/buildings/'+bid+'/floors/'+fid+'.json'); 
 		};
 		obj.editOne = function(buildId , fId , bId , editBlock){
+			console.log("before send to ws");
 			return $http.put('/buildings/'+buildId+'/floors/'+fId+'/blocks/'+bId+'.json' , editBlock)
 		}
+
 		return obj ; 
 
 	}])

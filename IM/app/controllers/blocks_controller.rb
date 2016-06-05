@@ -12,7 +12,7 @@ class BlocksController < ApplicationController
 		puts 'inside web servie####################### \n #############\n ########'
 		@block = Block.find(params[:id])
         if @block.update(block_params) 
-            render json: Block.find(params[:id])
+            render json: Block.where(floor_id: @block.floor_id)
         end
 
 	end
