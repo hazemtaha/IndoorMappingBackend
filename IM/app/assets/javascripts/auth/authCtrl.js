@@ -11,7 +11,9 @@ function($state, Auth,FileUploader){
     });
   };
 
-
+  this.isAuthenticated = function(){
+    return Auth.isAuthenticated();
+  }
 
     //this.$on('flow::fileAdded', function(event, $flow, flowFile) {
      //this.user.picture = $flow.files.flowRelativePath;
