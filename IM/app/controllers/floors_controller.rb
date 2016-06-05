@@ -9,9 +9,6 @@ class FloorsController < ApplicationController
 
 	def create 
 		@floor = Floor.create(floor_params)
-		puts '--------------------------------------------------------------------'
-		puts 'params.inspect'
-		puts '--------------------------------------------------------------------'
 		if @floor.save	
 			render json: Floor.where(:building_id => params[:floor][:building_id])
 		else 

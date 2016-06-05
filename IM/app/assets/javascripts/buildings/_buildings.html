@@ -64,7 +64,7 @@
             <a href="" class="btn btn-link" ng-click="buildCtrl.editFunc()" ><span class="glyphicon glyphicon-pencil"></span> Edit building</a><br>
             <div ng-show="buildCtrl.isEdit == true" >
 
-                <form method="post" name="buildCtrl.editbuildForm" ng-submit="buildCtrl.submiteditbuildForm()" >
+                <form method="post" name="buildCtrl.editbuildForm" ng-submit="buildCtrl.submiteditbuildForm()">
 
                   <div class="row">
                     <label for="name" class="col-sm-3">Building Name : </label>
@@ -82,7 +82,7 @@
                     <span ng-show="buildCtrl.editbuildForm.address.$invalid && buildCtrl.editbuildForm.address.$dirty">Builing address is invalid*</span>
                   </div><br> 
 
-                  <button type="submit" class="btn btn-success col-sm-offset-4" ng-disabled="buildCtrl.editbuildForm.$invalid"  >Save</button>
+                  <button type="submit" class="btn btn-success col-sm-offset-4" ng-disabled="buildCtrl.editbuildForm.$invalid">Save</button>
                   <button type="button" class="btn btn-danger" ng-click="buildCtrl.isEdit = false" >Cancel</button>
 
                 </form>
@@ -93,8 +93,10 @@
             </div>
         </div>
     </div>
-
-        <h3> Floors : </h3><br>  
+        <div class="oneHas_head">
+            <h4>Building Floors : </h4><br> 
+        </div>
+        <br><br> 
         <table class="table table-hover table-striped "> 
           <tr ng-repeat="floor in buildCtrl.build.floors | orderBy:'floor_num' ">
             <td><b>  Floor Num : </b>{{floor.floor_num}}  &nbsp; &nbsp; </td><td>
@@ -104,8 +106,10 @@
             <span class="glyphicon glyphicon-map-marker"></span> -->
 
             <a href="#/buildings/{{buildCtrl.build.id}}" class='btn btn-danger'><span class="glyphicon glyphicon-globe"></span> Map</a>
-            <a href="#/buildings/{{buildCtrl.build.id}}/floors/{{floor.id}}" class='btn btn-primary'><span class="glyphicon glyphicon-plus-sign"></span> Details</a>
-            <a  ng-click="buildCtrl.delFloorFunc(buildCtrl.build.id,floor.id)" class='btn btn-warning'><span class="glyphicon glyphicon-trash"></span> Delete</a>
+            <a href="#/buildings/{{buildCtrl.build.id}}/floors/{{floor.id}}" class='btn btn-primary'>
+            <span class="glyphicon glyphicon-plus-sign"></span> Details</a>
+            <a  ng-click="buildCtrl.delFloorFunc(buildCtrl.build.id,floor.id)" class='btn btn-warning'>
+            <span class="glyphicon glyphicon-trash"></span> Delete</a>
             </td>
           </tr>
         </table> 
