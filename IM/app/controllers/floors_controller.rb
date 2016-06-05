@@ -9,10 +9,13 @@ class FloorsController < ApplicationController
 
 	def create 
 		@floor = Floor.create(floor_params)
+		puts '--------------------------------------------------------------------'
+		puts 'params.inspect'
+		puts '--------------------------------------------------------------------'
 		if @floor.save	
 			render json: Floor.where(:building_id => params[:floor][:building_id])
 		else 
-	  		render json: {:errorMsg => @floor.errors[:floo][0]}
+	  		render json: {:errorMsg => @floor.errors[:floor_num][0]}
 		end 	
 	end 
 
@@ -24,7 +27,7 @@ class FloorsController < ApplicationController
 
 	private
 	  def floor_params
-	    params.require(:floor).permit(:floo, :width , :height , :building_id)
+	    params.require(:floor).permit(:floor_num, :width , :height , :building_id)
 	  end
 
 

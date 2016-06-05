@@ -76,11 +76,7 @@ angular.module('IM_module')
 		    	});
 
 		    	self.addBuild = {} ;
-		    	self.addBuildForm.$pristine = true;
-		    	self.addBuildForm.$dirty = false;
 		    	self.addBuildForm.$setPristine();
-		    	self.addBuildForm.$setUntouched();
-		    	////console.log(self.addBuildForm);
 		    }
 
 	}]);

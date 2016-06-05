@@ -1,12 +1,12 @@
 <div>
 <br>
 
-        <span>FloorNum: {{floorCtrl.floor.floo}}</span><br>
+        <span>FloorNum: {{floorCtrl.floor.floor_num}}</span><br>
         <!-- foo will be edit -->
         <span>Width: {{floorCtrl.floor.width}}</span><br>           
         <span>Height: {{floorCtrl.floor.height}}</span><br><br>            
         <span>Blocks: </span><br>
-        <table class="table">
+        <table class="table" ng-show="floorCtrl.floor.blocks[0]">
           <thead>
             <td>Name</td>
             <td>Width</td>
@@ -34,7 +34,7 @@
             </tr>
           </tbody>
         </table>          
-          <div ng-show="floorCtrl.blockDetails.beacons" width="80%">
+          <div ng-show="floorCtrl.blockDetails.beacons[0]" width="80%">
                 <span>Block Name: {{floorCtrl.blockDetails.name}}</span><br>
                 <span>Beacons: </span><br>
                 <table class="table">
@@ -49,8 +49,7 @@
                                 <td>{{beacon.name}}</td> 
                                 <td>{{beacon.uuid}}</td> 
                                 <td>{{beacon.major}}</td> 
-                                <td>{{beacon.minor}}</td> 
-                                 
+                                <td>{{beacon.minor}}</td>                              
                         </tr>
                       </tbody>
                 </table>          
