@@ -18,18 +18,17 @@
                   <div class="modal-body">
                     <p>     
                         <div class="row">
-                            <label for="floo" class="col-sm-3">Floor Number : </label>
+                            <label for="floo" class="col-sm-3">Floor Number: </label>
                             <div class="col-sm-6">
-                                <input type="number" name="floo" min="1" class="form-control" ng-model="buildCtrl.addFloor.floo" required />
+                                <input type="number" name="floor_num" min="1" class="form-control" ng-model="buildCtrl.addFloor.floor_num" required />
                             </div>
-                            <span ng-show="buildCtrl.addFloorForm.floo.$invalid && buildCtrl.addFloorForm.floo.$dirty">Floor Number is invalid *</span>
+                            <span ng-show="buildCtrl.addFloorForm.floor_num.$invalid && buildCtrl.addFloorForm.floor_num.$dirty">Floor Number is invalid *</span>
                             <span ng-show="buildCtrl.floorExist" class="errorMsg">{{buildCtrl.floorExist}}</span>
                       
                         </div>
                         <br/>
-                        <!-- floo will  -->
                         <div class="row">
-                            <label for="width" class="col-sm-3">Floor Width : </label>
+                            <label for="width" class="col-sm-3">Floor Width: </label>
                             <div class="col-sm-6">
                                 <input type="number" name="width" min="1" class="form-control" ng-model="buildCtrl.addFloor.width"   required />
                             </div>
@@ -38,7 +37,7 @@
                         <br/>
 
                         <div class="row">
-                            <label for="height" class="col-sm-3">Floor Height : </label>
+                            <label for="height" class="col-sm-3">Floor Height: </label>
                             <div class="col-sm-6">
                                 <input type="number" name="height" min="1" class="form-control" ng-model="buildCtrl.addFloor.height" required />
                             </div>
@@ -97,10 +96,8 @@
 
         <h3> Floors : </h3><br>  
         <table class="table table-hover table-striped "> 
-          <tr ng-repeat="floor in buildCtrl.build.floors | orderBy:'floo' ">
-            <td><b>  Floor Num : </b>{{floor.floo}}  &nbsp; &nbsp; </td> 
-            <!-- still Hazem will edit floo  -->
-            <td>
+          <tr ng-repeat="floor in buildCtrl.build.floors | orderBy:'floor_num' ">
+            <td><b>  Floor Num : </b>{{floor.floor_num}}  &nbsp; &nbsp; </td><td>
            
             
        <!--      <span class="glyphicon glyphicon-zoom-in"></span>

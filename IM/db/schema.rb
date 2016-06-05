@@ -20,19 +20,13 @@ ActiveRecord::Schema.define(version: 20160529162156) do
     t.integer  "minor",      limit: 4
     t.integer  "x_axis",     limit: 4
     t.integer  "y_axis",     limit: 4
-    t.integer  "block_id",   limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
-  add_index "beacons", ["block_id"], name: "index_beacons_on_block_id", using: :btree
-
   create_table "blocks", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.integer  "width",      limit: 4
-    t.integer  "height",     limit: 4
-    t.integer  "x_axis",     limit: 4
-    t.integer  "y_axis",     limit: 4
+    t.string   "path",       limit: 255
     t.integer  "floor_id",   limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -52,7 +46,7 @@ ActiveRecord::Schema.define(version: 20160529162156) do
   add_index "buildings", ["owner_id"], name: "index_buildings_on_owner_id", using: :btree
 
   create_table "floors", force: :cascade do |t|
-    t.integer  "floo",        limit: 4
+    t.integer  "floor_num",   limit: 4
     t.integer  "width",       limit: 4
     t.integer  "height",      limit: 4
     t.integer  "building_id", limit: 4
@@ -63,7 +57,6 @@ ActiveRecord::Schema.define(version: 20160529162156) do
   add_index "floors", ["building_id"], name: "index_floors_on_building_id", using: :btree
 
   create_table "owners", force: :cascade do |t|
-<<<<<<< HEAD
     t.string   "username",               limit: 255, default: "", null: false
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -83,16 +76,6 @@ ActiveRecord::Schema.define(version: 20160529162156) do
   add_index "owners", ["email"], name: "index_owners_on_email", unique: true, using: :btree
   add_index "owners", ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true, using: :btree
 
-=======
-    t.string   "username",   limit: 255
-    t.string   "email",      limit: 255
-    t.string   "password",   limit: 255
-    t.string   "picture",    limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
->>>>>>> e17c2574718dbb439d9ff04c93e3e0d38314ae0e
   create_table "visitors", force: :cascade do |t|
     t.string   "username",   limit: 255
     t.string   "email",      limit: 255
@@ -113,7 +96,6 @@ ActiveRecord::Schema.define(version: 20160529162156) do
   add_index "visits", ["beacon_id"], name: "index_visits_on_beacon_id", using: :btree
   add_index "visits", ["visitor_id"], name: "index_visits_on_visitor_id", using: :btree
 
-  add_foreign_key "beacons", "blocks"
   add_foreign_key "blocks", "floors"
   add_foreign_key "buildings", "owners"
   add_foreign_key "floors", "buildings"
