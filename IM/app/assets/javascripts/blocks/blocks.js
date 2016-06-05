@@ -7,6 +7,9 @@ angular.module('IM_module')
 		obj.delOne = function(bid,fid) {
 		   return $http.delete('/buildings/'+bid+'/floors/'+fid+'.json'); 
 		};
+		obj.editOne = function(buildId , fId , bId , editBlock){
+			return $http.put('/buildings/'+buildId+'/floors/'+fId+'/blocks/'+bId+'.json' , editBlock)
+		}
 		return obj ; 
 
 	}])

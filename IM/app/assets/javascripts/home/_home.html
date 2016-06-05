@@ -1,87 +1,80 @@
 
   <div class="page-header">
-      <h1>{{user.name(option)}} Buildings</h1>
+      <h2>{{user.name(option)}} Buildings</h2>
+       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" 
+       style="float:right">
+       <span class="glyphicon glyphicon-plus"></span> Add Buliding</button><br><br>
   </div>
   
-  <div ng-controller="buildingsCtrl as buildCtrl"> 
-    <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Add Buliding</button>
-<div id="myModal" class="modal fade" role="dialog" >
-            <div class="modal-dialog">
-              <!-- Modal content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add Buliding</h4>
-                  </div>
-                  <form method="post" name="buildCtrl.addBuildForm" ng-submit="buildCtrl.submitaddBuildForm()" >
-                  <div class="modal-body">
+<div ng-controller="buildingsCtrl as buildCtrl"> 
+    
+  <div id="myModal" class="modal fade" role="dialog" >
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Add Buliding</h4>
+                    </div>
 
-                    <p>     
-                        <div class="row">
-                            <label for="name" class="col-sm-3">Name : </label>
-                            <div class="col-sm-6">
-                                <input type="text" name="name" min="1" class="form-control" ng-model="buildCtrl.addBuild.name" required />
-                            </div>
-                            <span ng-show="buildCtrl.addBuildForm.name.$invalid && buildCtrl.addBuildForm.name.$dirty">Build name is invalid *</span>
-                            <span ng-show="buildCtrl.buildExist" class="errorMsg">{{buildCtrl.floorExist}}</span>
-                      
-                        </div>
-                        <br/>
-                        <!-- floo will  -->
-                        <div class="row">
-                            <label for="address" class="col-sm-3">Address :</label>
-                            <div class="col-sm-6">
-                                <input type="text" name="address" min="1" class="form-control" ng-model="buildCtrl.addBuild.address"   required />
-                            </div>
-                            <span ng-show="buildCtrl.addBuildForm.address.$invalid && buildCtrl.addBuildForm.address.$dirty">Build Address is invalid *</span>
-                        </div>
-                        <br/>
+                    <form method="poshomeCtrl.addBuildForm" ng-submit="homeCtrl.submitaddBuildForm()" >
+                    <div class="modal-body">
 
-                        <div class="row">
-                            <label for="thumbnail" class="col-sm-3">Thumbnail : </label>
-                            <div class="col-sm-6">
-                                <input type="file" name="thumbnail" min="1" class="form-control" ng-model="buildCtrl.addBuild.thumbnail"  />
-                            </div>
-                            <!-- <span ng-show="buildCtrl.addBuildForm.thumbnail.$invalid && buildCtrl.addBuildForm.thumbnail.$dirty">Floor Height is invalid*</span> -->
-                        </div>
-                        <br/>
-                         <!-- <input type="hidden" name="building_id" ng-value="buildCtrl.build.id" 
-                         ng-model="buildCtrl.addFloor.building_id"  ng-init="buildCtrl.addFloor.building_id= buildCtrl.build.id " /> -->
-                    </p>
+                      <p>     
+                          <div class="row">
+                              <label for="name" class="col-sm-3">Name : </label>
+                              <div class="col-sm-6">
+                                  <input type="text" name="name" min="1" class="form-control" ng-model="homeCtrl.addBuild.name" required />
+                              </div>
+                              <span ng-show="homeCtrl.addBuildForm.name.$invalid && homeCtrl.addBuildForm.name.$dirty">Build name is invalid *</span>
+                              <span ng-show="homeCtrl.buildExist" class="errorMsg">{{homeCtrl.floorExist}}</span>
+                        
+                          </div>
+                          <br/>
+                          <!-- floo will  -->
+                          <div class="row">
+                              <label for="address" class="col-sm-3">Address :</label>
+                              <div class="col-sm-6">
+                                  <input type="text" name="address" min="1" class="form-control" ng-model="homeCtrl.addBuild.address"   required />
+                              </div>
+                              <span ng-show="homeCtrl.addBuildForm.address.$invalid && homeCtrl.addBuildForm.address.$dirty">Build Address is invalid *</span>
+                          </div>
+                          <br/>
 
+                          <div class="row">
+                              <label for="thumbnail" class="col-sm-3">Thumbnail : </label>
+                              <div class="col-sm-6">
+                                  <input type="file" name="thumbnail" min="1" class="form-control" ng-model="homeCtrl.addBuild.thumbnail"  />
+                              </div>
+                              <!-- <span ng-show="buildCtrl.addBuildForm.thumbnail.$invalid && buildCtrl.addBuildForm.thumbnail.$dirty">Floor Height is invalid*</span> -->
+                          </div>
+                          <br/>
+                           <!-- <input type="hidden" name="building_id" ng-value="buildCtrl.build.id" 
+                           ng-model="buildCtrl.addFloor.building_id"  ng-init="buildCtrl.addFloor.building_id= buildCtrl.build.id " /> -->
+                      </p>
+
+                    </div>
+                    <div class="modal-footer">
+                          <button type="submit" class="btn btn-success btn-ok" ng-disabled="homeCtrl.addBuildForm.$invalid" >Add</button>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
                   </div>
-                  <div class="modal-footer">
-                        <button type="submit" class="btn btn-success btn-ok" ng-disabled="buildCtrl.addBuildForm.$invalid" >Add</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                  </div>
-              </form>
-                </div>
-            </div>
-        </div>
+              </div>
+  </div>
           
-
-
-
-  </div>
-  
-
-
-
-
-
-
-
-
+</div>
   <div ng-repeat="build in homeCtrl.buildings">
-      <div>
+      <div class="buildBlock">
             <div style="float:left ; margin: 5px 30px">
-                 <img ng-src="images/{{build.thumbnail}}" width="100px" height="100px" /><br>
+                 <img ng-src="images/{{build.thumbnail}}"  /><br>
             </div>
             <div style="float:left"><br>
-                <span>Name: {{build.name}}</span><br>
-                <span>address: {{build.address}}</span><br>
-                <span><a href="#/buildings/{{build.id}}" class='btn btn-primary'>Details</a></span>
-                <span><a href="" ng-click="homeCtrl.delBuilding(build.id)" class='btn btn-danger'>Delete</a></span>
+                <span><b>Name : </b> {{build.name}}</span><br>
+                <span><b>Address : </b>{{build.address}}</span><br><br>
+                <span><a href="#/buildings/{{build.id}}" class='btn btn-primary'><span class="glyphicon glyphicon-plus-sign"></span> Details</a></span>
+                <span><a href="" ng-click="homeCtrl.delBuilding(build.id)" class='btn btn-danger'><span class="glyphicon glyphicon-trash"></span> Delete</a></span>
+                <hr>
             </div>
             <div style="clear: both ; height: 1px;"></div>
             <br><br>

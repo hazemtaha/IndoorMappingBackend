@@ -1,12 +1,12 @@
 <div>
 <br>
 
-        <span>FloorNum: {{floorCtrl.floor.floo}}</span><br>
+        <span>FloorNum: {{floorCtrl.floor.floor_num}}</span><br>
         <!-- foo will be edit -->
         <span>Width: {{floorCtrl.floor.width}}</span><br>           
         <span>Height: {{floorCtrl.floor.height}}</span><br><br>            
         <span>Blocks: </span><br>
-        <table class="table">
+        <table class="table" ng-show="floorCtrl.floor.blocks[0]">
           <thead>
             <td>Name</td>
             <td>Width</td>
@@ -15,18 +15,26 @@
           </thead>
           <tbody>
             <tr ng-repeat="block in floorCtrl.floor.blocks">
-                    <td>{{block.name}}</td> 
+                    <td ng-hide="floorCtrl.isEdit == true && floorCtrl.editId == block.id ">{{block.name}}</td> 
+                    <td>
+                      <form  ng-show= "floorCtrl.isEdit == true && floorCtrl.editId == block.id" name="floorCtrl.editBlockForm" ng-submit="floorCtrl.submiteditBlockForm(floorCtrl.floor.id , floorCtrl.floor.building_id)">
+                          <input class="form-control" type="text" placeholder="New name"  ng-model="floorCtrl.editBlock.name" required>
+                          <!-- <input type="hidden" name="1" value="1" ng-model="blockCtrl.editBlock.id" > -->
+  
+                          <input class="btn btn-success" type="submit" name="submit" value="Edit">
+                          <button class="btn btn-danger" ng-click="floorCtrl.isEdit = false">cancel</button>
+                      </form> 
+                    </td>
                     <td>{{block.width}}</td> 
                     <td>{{block.height}}</td> 
-                    <td><span><a class='btn btn-info'>edit name</a></span> 
-                        <!-- href="#/buildings/{{floorCtrl.floor.building_id}}/floors/{{floorCtrl.floor.id}}/blocks/{{block.id}}" -->
+                    <td><span><a ng-click="floorCtrl.editFunc(block)" class='btn btn-info'>Edit name</a></span>
                         <span><a href=""  class='btn btn-danger' ng-click="floorCtrl.getBlockDetails(floorCtrl.floor.building_id,floorCtrl.floor.id,block.id)" >
                         details</a></span>
                     </td> 
             </tr>
           </tbody>
         </table>          
-          <div ng-show="floorCtrl.blockDetails.beacons" width="80%">
+          <div ng-show="floorCtrl.blockDetails.beacons[0]" width="80%">
                 <span>Block Name: {{floorCtrl.blockDetails.name}}</span><br>
                 <span>Beacons: </span><br>
                 <table class="table">
@@ -34,16 +42,14 @@
                         <td>Name</td>
                         <td>UUID</td>
                         <td>Major</td>
-                        <td>Minor</td>
-                        <td>Action</td>
+                        <td>Minor</td> 
                       </thead>
                       <tbody>
                         <tr ng-repeat="beacon in floorCtrl.blockDetails.beacons">
                                 <td>{{beacon.name}}</td> 
                                 <td>{{beacon.uuid}}</td> 
                                 <td>{{beacon.major}}</td> 
-                                <td>{{beacon.minor}}</td> 
-                                <td><span><a class='btn btn-info'>edit name</a></span></td> 
+                                <td>{{beacon.minor}}</td>                              
                         </tr>
                       </tbody>
                 </table>          
