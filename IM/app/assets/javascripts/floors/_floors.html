@@ -1,4 +1,4 @@
-<div ng-controller="blocksCtrl as blockCtrl">
+<div>
 <br>
 
         <span>FloorNum: {{floorCtrl.floor.floor_num}}</span><br>
@@ -15,19 +15,19 @@
           </thead>
           <tbody>
             <tr ng-repeat="block in floorCtrl.floor.blocks">
-                    <td ng-hide="blockCtrl.isEdit == true && blockCtrl.editId == block.id ">{{block.name}}</td> 
+                    <td ng-hide="floorCtrl.isEdit == true && floorCtrl.editId == block.id ">{{block.name}}</td> 
                     <td>
-                      <form  ng-show= "blockCtrl.isEdit == true && blockCtrl.editId == block.id" name="blockCtrl.editBlockForm" ng-submit="blockCtrl.submiteditBlockForm(floorCtrl.floor.id , floorCtrl.floor.building_id)">
-                          <input class="form-control" type="text" placeholder="New name"  ng-model="blockCtrl.editBlock.name" required>
+                      <form  ng-show= "floorCtrl.isEdit == true && floorCtrl.editId == block.id" name="floorCtrl.editBlockForm" ng-submit="floorCtrl.submiteditBlockForm(floorCtrl.floor.id , floorCtrl.floor.building_id)">
+                          <input class="form-control" type="text" placeholder="New name"  ng-model="floorCtrl.editBlock.name" required>
                           <!-- <input type="hidden" name="1" value="1" ng-model="blockCtrl.editBlock.id" > -->
   
                           <input class="btn btn-success" type="submit" name="submit" value="Edit">
-                          <button class="btn btn-danger" ng-click="blockCtrl.isEdit = false">cancel</button>
+                          <button class="btn btn-danger" ng-click="floorCtrl.isEdit = false">cancel</button>
                       </form> 
                     </td>
                     <td>{{block.width}}</td> 
                     <td>{{block.height}}</td> 
-                    <td><span><a ng-click="blockCtrl.editFunc(block)" class='btn btn-info'>Edit name</a></span>
+                    <td><span><a ng-click="floorCtrl.editFunc(block)" class='btn btn-info'>Edit name</a></span>
                         <span><a href=""  class='btn btn-danger' ng-click="floorCtrl.getBlockDetails(floorCtrl.floor.building_id,floorCtrl.floor.id,block.id)" >
                         details</a></span>
                     </td> 
