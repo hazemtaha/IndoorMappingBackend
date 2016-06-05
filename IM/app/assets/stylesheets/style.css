@@ -81,6 +81,18 @@ body {
 	margin:0 50px ;
 	width: 200px ;
 }
+*/
 .table td{
-	width: 150px ;
-}*/
+	width: 38% ;
+}
+.oneHas_head h4{
+	background: rgba(240, 173, 78, 0.46); ;
+	width: 180px ;
+	height: 30px ;
+	line-height: 30px ;
+	padding-left: 10px; 
+}
+.oneHas_head{
+	background: rgba(203, 223, 170, 0.54) ;
+	height: 30px ;
+}
