@@ -17,6 +17,9 @@
 //= require AngularDevise
 //= require angular-rails-templates
 //= require angular-ui-router
+//= require angularjs-file-upload
+//= require ng-flow
+// require flow.js
 //= require_tree .
 
 //= require bootstrap-modal

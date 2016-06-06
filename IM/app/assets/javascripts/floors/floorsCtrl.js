@@ -6,7 +6,7 @@ angular.module('IM_module')
 			var self = this;
 			self.editBlock = {};
 			self.isEdit = false;
-
+			
 			floors.getOne($stateParams.building_id,$stateParams.id).success(function(data){
 		    	console.log(data);
 		    	self.floor = data ; 
@@ -32,8 +32,8 @@ angular.module('IM_module')
 		    	// console.log(floorId);
 		    	blocks.editOne(buildId , floorId, self.editId , self.editBlock).success(function(data){
 			    	console.log(data);
-			    	self.block = data;
-			    	console.log(self.block);
+			    	self.floor.blocks = data;
+			    	console.log(self.floor);
 			    	console.log("final");
 		    	});
 		    	self.isEdit = false ;

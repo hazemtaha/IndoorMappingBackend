@@ -2,7 +2,9 @@
 
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
-
+Rails.application.config.assets.precompile += %w( form.css )
+Rails.application.config.assets.precompile += %w( ng-flow/dist/ng-flow.min.js )
+Rails.application.config.assets.precompile += %w( flow.js/dist/flow.min.js )
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 

@@ -4,4 +4,6 @@ class Owner < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :buildings, :dependent => :delete_all
+
+mount_uploader :picture, ImageUploader
 end
