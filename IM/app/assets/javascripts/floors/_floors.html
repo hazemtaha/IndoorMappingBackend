@@ -32,7 +32,7 @@
                     <td><span ng-hide="floorCtrl.isEdit == true && floorCtrl.editId == block.id ">{{block.name}}</span>
                         <form  ng-show= "floorCtrl.isEdit == true && floorCtrl.editId == block.id" name="floorCtrl.editBlockForm" ng-submit="floorCtrl.submiteditBlockForm(floorCtrl.floor.id,floorCtrl.floor.building_id)" class="form-inline" >
                             <input class="form-control"  width="250px" type="text" placeholder="New name"  ng-model="floorCtrl.editBlock.name" required>
-                            <input class="btn btn-success" type="submit" name="submit" value="Edit">
+                            <input class="btn btn-success" type="submit" name="submit" value="Save">
                             <button class="btn btn-danger" ng-click="floorCtrl.isEdit = false">cancel</button>
                         </form> 
                     </td>

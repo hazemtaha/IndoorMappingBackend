@@ -9,7 +9,7 @@ class BuildingsController < ApplicationController
 
     def destroy
     	Building.destroy(params[:id])
-    	render json: Building.all
+    	render json: Building.where(:owner_id => current_owner.id)
     end
 
     def update
@@ -20,9 +20,18 @@ class BuildingsController < ApplicationController
     end
 
     def create 
+
         @build = Building.create(build_params)
+        @build.owner_id = current_owner.id 
+        # current_owner.id
+        puts "----------------------------------------------------------"
+        puts current_owner
+        puts "----------------------------------------------------------"
+        puts @build 
+        puts "----------------------------------------------------------"
+
         if @build.save  
-             render json: Building.all
+             render json: Building.where(:owner_id => current_owner.id)
         else 
              render json: {:errorMsg => @build.errors[:name][0]}
         end     
@@ -35,7 +44,7 @@ class BuildingsController < ApplicationController
         end
 
         def build_params
-            params.require(:building).permit(:address, :name , :thumbnail , current_owner.id )
+            params.require(:building).permit(:address, :name , :thumbnail , :owner_id  )
         end
 
 end
