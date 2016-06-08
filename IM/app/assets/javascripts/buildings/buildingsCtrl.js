@@ -70,17 +70,13 @@ angular.module('IM_module')
 		    		}else{
 		    			console.log('no errrrrrrrrrrrr');
 		    			console.log(data);
-		    			self.build = data ;	
+		    			self.buildings = data ;	
 					    $('.modal').modal('hide');
 		    		}
 		    	});
 
 		    	self.addBuild = {} ;
-		    	self.addBuildForm.$pristine = true;
-		    	self.addBuildForm.$dirty = false;
 		    	self.addBuildForm.$setPristine();
-		    	self.addBuildForm.$setUntouched();
-		    	////console.log(self.addBuildForm);
 		    }
 
 	}]);

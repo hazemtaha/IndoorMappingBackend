@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>IndoorMapping</title>
+  <title> IndoorMapping</title>
+  <%= favicon_link_tag 'favicon.ico' %> 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'form' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'ng-flow/dist/ng-flow.min' %>
+  <%= javascript_include_tag 'flow.js/dist/flow.min' %>
   <%= csrf_meta_tags %>
 </head>
-<body ng-app="IM_module">
-	<div class="col-md-6 col-md-offset-3">
+<body ng-app="IM_module" style="background: url('images/bg.jpg');">
+	<div class="container">
       <div ng-include="'nav/_nav.html'"></div>
-         </div>
+  </div>
 
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-10 col-md-offset-1 content" >
       <ui-view></ui-view>
     </div>
   </div>

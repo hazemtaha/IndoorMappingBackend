@@ -12,7 +12,7 @@
         this.init = init;
 
         function init(blockName) {
-            var x1, y1, x2, y2, radius, text;
+            var x1, y1, x2, y2, radius, text, index;
             var circle = mapStorage.svg.circle().draw({
                 snapToGrid: 10
             }).attr({
@@ -40,7 +40,7 @@
                 text.text(blockName + "\n" + "R= " + Math.round(circle.bbox().w / (mapStorage.scale(mapStorage.width, mapStorage.height) * 2))).move(circle.bbox().cx, circle.bbox().cy);
             });
             circle.on('drawstop', function(e) {
-                mapStorage.index = mapStorage.blocks.push({
+                index = mapStorage.blocks.push({
                     shape: circle,
                     name: blockName,
                     type: 'circle'
@@ -51,9 +51,9 @@
                 });
                 circle.on('dblclick', function(ev) {
                     circle.selectize().resize();
+                    mapStorage.blocks[index-1].isSelected = true;
                     circle.on('resizedone', function(e) {
                         text.text(blockName + "\n" + "R= " + Math.round(circle.bbox().w / (mapStorage.scale(mapStorage.width, mapStorage.height) * 2))).move(circle.bbox().cx, circle.bbox().cy);
-                        circle.selectize(false);
                     });
                     $(document).on('keydown', function(e) {
                         if (e.keyCode == 46 && circle._memory._selectHandler.rectSelection.isSelected) {
@@ -61,10 +61,12 @@
                             ev.target.remove();
                             text.clear();
                             $(document).off('keydown');
+                            mapStorage.blocks[index-1].isSelected = false;
                         }
                         if (e.keyCode == 13) {
                             circle.selectize(false);
                             $(document).off('keydown');
+                            mapStorage.blocks[index-1].isSelected = false;
                         }
                     });
                 });

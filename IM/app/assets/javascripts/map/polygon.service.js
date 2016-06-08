@@ -22,7 +22,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
     var pointOfLine, newPoint, dimText, textArr = [],
         // tmp variables and some utils variables
         tmpPoly, isInBlock = false,
-        blockNameText;
+        blockNameText, index;
     // free draw
     // var polygon = mapStorage.svg.polygon().draw().attr('stroke-width', 1).attr('fill', 'none');
     var polygon = mapStorage.svg.polygon();
@@ -113,6 +113,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
         polygon.on('dblclick', function(ev) {
             // enable resizeing
             polygon.selectize().resize();
+            mapStorage.blocks[index-1].isSelected = true;
             polygon.on('resizedone', function(ev) {
                 // move text to their new position after resize is ended
                 Calculations.moveText(e, textArr, Calculations.calcLineLengths(e.path[0].points));
@@ -126,6 +127,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
                     // deselect
                     polygon.selectize(false);
                     $(document).off('keydown');
+                    mapStorage.blocks[index-1].isSelected = false;
                 }
                 // listen for 'delete' key for removing the element
                 if (e.keyCode == 46) {
@@ -139,6 +141,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
                     }
                     blockNameText.clear();
                     $(document).off('keydown');
+                    mapStorage.blocks[index-1].isSelected = false;
                 }
             });
         });
@@ -146,7 +149,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
     polygon.on('drawdone', function(e) {
         polygon.addClass('')
             // add the drawn shape into the block array
-        mapStorage.blocks.push({
+        index = mapStorage.blocks.push({
             shape: polygon,
             name: blockName,
             type: 'polygon'

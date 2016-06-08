@@ -3,7 +3,7 @@
     <div id="toolbox" ng-init="mapCtrl.init()">
         <!--  leftside toolbox -->
         <div class="col-sm-2">
-            <div class="panel panel-default">
+            <div class="panel panel-default" ng-class="{ 'hidden': mapCtrl.isInRoomTypes }">
                 <div class="panel-heading">
                     <h3 class="panel-title">Toolbox</h3>
                 </div>
@@ -28,25 +28,25 @@
                     <h3 class="panel-title">Room Type</h3>
                 </div>
                 <div class="panel-body">
-                    <button type="button" id='living' style="background-color:#FFA07A; width:100px; height:50px;" class="center-block" name="living_room">LIVING ROOM</button>
+                    <button type="button" id='living' style="background-color:#FFA07A; width:100px; height:50px;" class="center-block" name="living_room" ng-click="mapCtrl.colorize('living')">LIVING ROOM</button>
                     <hr>
-                    <button type="button" id='kitchen' style="background-color:#C8F0C8; width:100px; height:50px; " class="center-block" name="kitchen">KITCHEN</button>
+                    <button type="button" id='kitchen' style="background-color:#C8F0C8; width:100px; height:50px; " class="center-block" name="kitchen" ng-click="mapCtrl.colorize('kitchen')">KITCHEN</button>
                     <hr>
-                    <button type="button" id='hallway' style="background-color:#FF5733; width:100px; height:50px;" class="center-block" name="hallway">HALLWAY</button>
+                    <button type="button" id='hallway' style="background-color:#FF5733; width:100px; height:50px;" class="center-block" name="hallway" ng-click="mapCtrl.colorize('hallway')">HALLWAY</button>
                     <hr>
-                    <button type="button" id="bed_room" style="background-color:#FFC0CB; width:100px; height:50px;" class="center-block" name="bed_room">BED ROOM</button>
+                    <button type="button" id="bed_room" style="background-color:#FFC0CB; width:100px; height:50px;" class="center-block" name="bed_room" ng-click="mapCtrl.colorize('bed_room')">BED ROOM</button>
                     <hr>
-                    <button type="button" id="bathroom" style="background-color:#B0C4DE; width:100px; height:50px;" class="center-block" name="bathroom">BATHROOM</button>
+                    <button type="button" id="bathroom" style="background-color:#B0C4DE; width:100px; height:50px;" class="center-block" name="bathroom" ng-click="mapCtrl.colorize('bathroom')">BATHROOM</button>
                     <hr>
-                    <button type="button" id="balcony" style="background-color:#9ACD32; width:100px; height:50px;" class="center-block" name="balcony">BALCONY</button>
+                    <button type="button" id="balcony" style="background-color:#9ACD32; width:100px; height:50px;" class="center-block" name="balcony" ng-click="mapCtrl.colorize('balcony')">BALCONY</button>
                     <hr>
-                    <button type="button" id="cloest" style="background-color:#7B68EE; width:100px; height:50px;" class="center-block" name="cloest">CLOEST</button>
+                    <button type="button" id="cloest" style="background-color:#7B68EE; width:100px; height:50px;" class="center-block" name="cloest" ng-click="mapCtrl.colorize('closet')">CLOEST</button>
                     <hr>
-                    <button type="button" id="reception" style="background-color:#778899; width:100px; height:50px;" class="center-block" name="reception">RECEPTION</button>
+                    <button type="button" id="reception" style="background-color:#778899; width:100px; height:50px;" class="center-block" name="reception" ng-click="mapCtrl.colorize('reception')">RECEPTION</button>
                     <hr>
-                    <button type="button" id="other" style="background-color:#BA55D3; width:100px; height:50px;" class="center-block" name="other">OTHER</button>
+                    <button type="button" id="other" style="background-color:#BA55D3; width:100px; height:50px;" class="center-block" name="other" ng-click="mapCtrl.colorize('other')">OTHER</button>
                     <hr>
-                    <button type="button" id="back" style="background-color:#20B2AA; width:100px; height:50px;" class="center-block" name="back">BACK</button>
+                    <button type="button" id="back" style="background-color:#20B2AA; width:100px; height:50px;" class="center-block" name="back" ng-click="mapCtrl.closeRoomTypes()">BACK</button>
                 </div>
                 <div class="panel-footer"></div>
             </div>
