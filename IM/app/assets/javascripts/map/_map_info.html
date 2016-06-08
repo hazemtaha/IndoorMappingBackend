@@ -1,0 +1,30 @@
+<div class="container" id="data">
+  <!--  errors displaying div -->
+  <div class="alert alert-danger" ng-show="mapCtrl.floor.isWidthInvalid || mapCtrl.floor.isHeightInvalid">
+    <ul>
+      <li ng-show="mapCtrl.floor.isWidthInvalid">Invalid Width</li>
+      <li ng-show="mapCtrl.floor.isHeightInvalid">Invalid Height</li>
+    </ul>
+  </div>
+    <h4 style="text-align: center;">Floor info</h4>
+    <hr  width="700px ">
+    <br><br>
+    <div class="row">
+      <label for="width" class="control-label col-sm-1">Width</label>
+      <div class="col-sm-9">   
+        <input type="text" name="width" id="width" class="form-control" ng-model="mapCtrl.floor.width" value="">
+      </div>
+    </div>
+
+    <br><br>
+    <div class="row">
+      <label for="height" class="control-label col-sm-1">Height</label>
+      <div class="col-sm-9">
+        <input type="text" name="height" id="height" class="form-control" ng-model="mapCtrl.floor.height" value="">  
+      </div>
+    </div>
+ 
+    <br><br>
+    <input id="confirm" type="button" class="btn btn-primary" ng-click="mapCtrl.confirm()" value="Confirm">
+    <hr>
+</div>

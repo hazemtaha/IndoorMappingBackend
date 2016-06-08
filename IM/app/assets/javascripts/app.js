@@ -1,11 +1,11 @@
-angular.module('IM_module', ['ui.router','templates','Devise','flow','angularFileUpload'])
+angular.module('IM_module', ['ui.router','templates','Devise','flow','angularFileUpload','ui.bootstrap'])
 	.config([
 		'$stateProvider',
 		'$urlRouterProvider',
 		'AuthProvider',
 		'flowFactoryProvider',
 		function($stateProvider, $urlRouterProvider,AuthProvider,flowFactoryProvider) {
-					
+
 			AuthProvider.registerPath('/owners.json');
             AuthProvider.registerMethod('POST');
             AuthProvider.loginPath('/owners/sign_in.json');
@@ -14,14 +14,13 @@ angular.module('IM_module', ['ui.router','templates','Devise','flow','angularFil
             AuthProvider.sendResetPasswordInstructionsPath('/owners/password.json');
             AuthProvider.sendResetPasswordInstructionsMethod('POST');
 
-    
 		    $stateProvider
 			    .state('home', {
 			      url: '/home',
 			      templateUrl: 'home/_home.html',
 			      controller: 'MainCtrl',
 			      controllerAs: "homeCtrl"
-			      
+
 			    })
 			   .state('buildings', {
 				  url: '/buildings/{id}',
@@ -41,6 +40,18 @@ angular.module('IM_module', ['ui.router','templates','Devise','flow','angularFil
 				  controller: 'floorsCtrl' ,
 				  controllerAs: "floorCtrl"
 				})
+        .state('map_info', {
+            url: '/buildings/{building_id}/floors/{floor_id}/map_info',
+            templateUrl: 'map/_map_info.html',
+            controller: 'MapInfoController',
+            controllerAs: 'mapCtrl'
+        })
+        .state('map_editor', {
+            url: '/buildings/{building_id}/floors/{floor_id}/map_editor',
+            templateUrl: 'map/_map_editor.html',
+            controller: 'MapEditorController',
+            controllerAs: 'mapCtrl'
+        })
 
 			   .state('blocks', {
 				  url: '/buildings/{building_id}/floors/{floor_id}/blocks/{id}',
@@ -86,5 +97,3 @@ angular.module('IM_module', ['ui.router','templates','Devise','flow','angularFil
 			    });
 		    $urlRouterProvider.otherwise('home');
 	}])
-
-

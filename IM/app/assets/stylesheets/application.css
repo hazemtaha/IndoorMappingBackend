@@ -10,7 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- 
+
   *= require bootstrap/dist/css/bootstrap
  *= require_tree .
  *= require bootstrap-modal-bs3patch
@@ -20,7 +20,8 @@
  */
  .modal{
  	width: 660px ;
- 	background-color: rgba(0, 0, 0, 0.24);
+ 	background-color: rgba(0, 0, 0, 0.3);
+ 	margin-top: -150px ;
  }
  .ng-invalid.ng-dirty span ,.errorMsg{
 	color: red ;

@@ -2,7 +2,7 @@
   <div>
 
   <!-- 000000000000000000 start add  modal 00000000000000000000 -->
-  
+
         <button type="button" class="btn btn-info addbtn" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span> Add Floor</button>
 
         <!-- Modal -->
@@ -16,7 +16,7 @@
                   </div>
                   <form method="post" name="buildCtrl.addFloorForm" ng-submit="buildCtrl.submitaddFloorForm()" >
                   <div class="modal-body">
-                    <p>     
+                    <p>
                         <div class="row">
                             <label for="floo" class="col-sm-3">Floor Number: </label>
                             <div class="col-sm-6">
@@ -24,7 +24,7 @@
                             </div>
                             <span ng-show="buildCtrl.addFloorForm.floor_num.$invalid && buildCtrl.addFloorForm.floor_num.$dirty">Floor Number is invalid *</span>
                             <span ng-show="buildCtrl.floorExist" class="errorMsg">{{buildCtrl.floorExist}}</span>
-                      
+
                         </div>
                         <br/>
                         <div class="row">
@@ -72,7 +72,7 @@
                         <input type="text" name="name" class="form-control" ng-model="buildCtrl.editBuild.name" required />
                     </div>
                     <span ng-show="buildCtrl.editbuildForm.name.$invalid && buildCtrl.editbuildForm.name.$dirty">Builing name is invalid*</span>
-                  </div><br> 
+                  </div><br>
 
                   <div class="row">
                     <label for="address" class="col-sm-3">Building Address : </label>
@@ -80,40 +80,40 @@
                         <input type="text" name="address" class="form-control" ng-model="buildCtrl.editBuild.address"  required />
                     </div>
                     <span ng-show="buildCtrl.editbuildForm.address.$invalid && buildCtrl.editbuildForm.address.$dirty">Builing address is invalid*</span>
-                  </div><br> 
+                  </div><br>
 
                   <button type="submit" class="btn btn-success col-sm-offset-4" ng-disabled="buildCtrl.editbuildForm.$invalid">Save</button>
                   <button type="button" class="btn btn-danger" ng-click="buildCtrl.isEdit = false" >Cancel</button>
 
                 </form>
             </div>
-            <div ng-hide="buildCtrl.isEdit == true" >        
+            <div ng-hide="buildCtrl.isEdit == true" >
                 <span><b>Name : </b>{{buildCtrl.build.name}}</span><br>
-                <span><b>Address : </b>{{buildCtrl.build.address}}</span><br> 
+                <span><b>Address : </b>{{buildCtrl.build.address}}</span><br>
             </div>
         </div>
     </div>
         <div class="oneHas_head">
-            <h4>Building Floors : </h4><br> 
+            <h4>Building Floors : </h4><br>
         </div>
-        <br><br> 
-        <table class="table table-hover table-striped "> 
+        <br><br>
+        <table class="table table-hover table-striped ">
           <tr ng-repeat="floor in buildCtrl.build.floors | orderBy:'floor_num' ">
             <td><b>  Floor Num : </b>{{floor.floor_num}}  &nbsp; &nbsp; </td><td>
-           
-            
+
+
        <!--      <span class="glyphicon glyphicon-zoom-in"></span>
             <span class="glyphicon glyphicon-map-marker"></span> -->
 
-            <a href="#/buildings/{{buildCtrl.build.id}}" class='btn btn-danger'><span class="glyphicon glyphicon-globe"></span> Map</a>
+            <a href="#/buildings/{{buildCtrl.build.id}}/floors/{{floor.id}}/map_info" class='btn btn-danger'><span class="glyphicon glyphicon-globe"></span> Map</a>
             <a href="#/buildings/{{buildCtrl.build.id}}/floors/{{floor.id}}" class='btn btn-primary'>
             <span class="glyphicon glyphicon-plus-sign"></span> Details</a>
             <a  ng-click="buildCtrl.delFloorFunc(buildCtrl.build.id,floor.id)" class='btn btn-warning'>
             <span class="glyphicon glyphicon-trash"></span> Delete</a>
             </td>
           </tr>
-        </table> 
+        </table>
 
   </div>
     <br><br>
-</div> 
+</div>
