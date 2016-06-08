@@ -40,11 +40,15 @@
                 text.text(blockName + "\n" + "R= " + Math.round(circle.bbox().w / (mapStorage.scale(mapStorage.width, mapStorage.height) * 2))).move(circle.bbox().cx, circle.bbox().cy);
             });
             circle.on('drawstop', function(e) {
+              var circlePath = circle.toPath();
                 index = mapStorage.blocks.push({
                     shape: circle,
                     name: blockName,
+                    pathArray: circlePath.array().value,
                     type: 'circle'
                 });
+                circle = circlePath.original;
+                circlePath.remove();
                 circle.draggable();
                 circle.on('dragend', function(e) {
                     text.move(circle.bbox().cx, circle.bbox().cy);

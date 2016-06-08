@@ -32,7 +32,10 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
         if (!isInBlock) {
             polygon.draw(ev, {
                 snapToGrid: 10
-            }).attr({'stroke-width': 4, stroke: 'black'}).attr('fill', 'none');
+            }).attr({
+                'stroke-width': 4,
+                stroke: 'black'
+            }).attr('fill', 'none');
         }
     });
 
@@ -82,6 +85,20 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
     }); // end of drawupdate
     // fired when the user stop drawing
     polygon.on('drawstop', function(e) {
+      var polyPath = polygon.toPath();
+        // add the drawn shape into the block array
+        index = mapStorage.blocks.push({
+            shape: polygon,
+            name: blockName,
+            pathArray: polyPath.array().value,
+            type: 'polygon'
+        });
+        polygon = polyPath.original;
+        polyPath.remove();
+        // delete the mouse down event
+        mapStorage.svg.off('mousedown');
+        // draw the block name inside the block
+        blockNameText = mapStorage.svg.text(blockName).move(polygon.bbox().cx - 20, polygon.bbox().cy - 20).style('fill', '#767676');
         // store the points to get the last connected line length that closes the shape
         pointOfLine = e.path[0].points[e.path[0].points.length - 1];
         newPoint = e.path[0].points[0];
@@ -98,7 +115,10 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
         polygon.attr('fill', '#1ABC9C').draggable();
         polygon.on('dragstart', function(e) {
             // clone a temp poly to fill the place until drag is ended
-            tmpPoly = polygon.clone().attr({'stroke-width': 4, stroke: "black"}).attr('fill', 'none')
+            tmpPoly = polygon.clone().attr({
+                'stroke-width': 4,
+                stroke: "black"
+            }).attr('fill', 'none');
         });
         // listen to the drag end event
         polygon.on('dragend', function(ev) {
@@ -113,7 +133,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
         polygon.on('dblclick', function(ev) {
             // enable resizeing
             polygon.selectize().resize();
-            mapStorage.blocks[index-1].isSelected = true;
+            mapStorage.blocks[index - 1].isSelected = true;
             polygon.on('resizedone', function(ev) {
                 // move text to their new position after resize is ended
                 Calculations.moveText(e, textArr, Calculations.calcLineLengths(e.path[0].points));
@@ -127,7 +147,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
                     // deselect
                     polygon.selectize(false);
                     $(document).off('keydown');
-                    mapStorage.blocks[index-1].isSelected = false;
+                    mapStorage.blocks[index - 1].isSelected = false;
                 }
                 // listen for 'delete' key for removing the element
                 if (e.keyCode == 46) {
@@ -141,22 +161,9 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
                     }
                     blockNameText.clear();
                     $(document).off('keydown');
-                    mapStorage.blocks[index-1].isSelected = false;
+                    mapStorage.blocks[index - 1].isSelected = false;
                 }
             });
         });
     }); // end of drawstop
-    polygon.on('drawdone', function(e) {
-        polygon.addClass('')
-            // add the drawn shape into the block array
-        index = mapStorage.blocks.push({
-            shape: polygon,
-            name: blockName,
-            type: 'polygon'
-        });
-        // delete the mouse down event
-        mapStorage.svg.off('mousedown');
-        // draw the block name inside the block
-        blockNameText = mapStorage.svg.text(blockName).move(polygon.bbox().cx - 20, polygon.bbox().cy - 20).style('fill', '#767676');
-    }); // end of drawdone
 }

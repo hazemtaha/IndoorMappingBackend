@@ -6,13 +6,14 @@
         .controller('MapEditorController', mapEditorController)
         .controller('BlockInfoModalInstance', blockInfoModalInstance);
 
-    mapEditorController.$inject = ['mapStorage', 'Rect', 'Circle', 'Oval', 'Polygon', 'Beacon', '$uibModal'];
+    mapEditorController.$inject = ['mapStorage', 'Rect', 'Circle', 'Oval', 'Polygon', 'Beacon', '$uibModal', '$stateParams', 'Db'];
     blockInfoModalInstance.$inject = ['$uibModalInstance', 'type'];
 
     /* @ngInject */
-    function mapEditorController(mapStorage, Rect, Circle, Oval, Polygon, Beacon, $uibModal) {
+    function mapEditorController(mapStorage, Rect, Circle, Oval, Polygon, Beacon, $uibModal, $stateParams, Db) {
         var self = this;
         self.isInRoomTypes = false;
+        self.isPending = true;
         var colors = {
             living: '#FFA07A',
             kitchen: '#C8F0C8',
@@ -66,6 +67,7 @@
                         Beacon.init(info)
                         break;
                 }
+                self.isPending = true
             }, function() {
                 // on modal dismissed
             });
@@ -82,6 +84,27 @@
                 block.shape.fill(colors[type]);
             });
         }
+        self.saveBlocks = function() {
+          console.log(mapStorage.blocks);
+            if (isPending(mapStorage.blocks)) {
+                Db.saveBlocks($stateParams.floor_id).then(function() {
+                    mapStorage.blocks.forEach(function(block) {
+                        block.isSaved = true;
+                    });
+                    self.isPending = false;
+                });
+            }
+        }
+    }
+
+    function isPending(mapObjects) {
+        var isObjPending = false;
+        mapObjects.forEach(function(mapObject) {
+            if (!mapObject.isSaved) {
+                isObjPending = true;
+            }
+        });
+        return isObjPending;
     }
 
     function getSelectedBlocks(mapStorage) {

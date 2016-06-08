@@ -11,10 +11,10 @@ Rails.application.routes.draw do
   resources :buildings  do
     resources :floors  do
       resources :blocks do
-      end 
+      end
     end
   end
-
+  post 'floors/:floor_id' => 'blocks#save_blocks'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

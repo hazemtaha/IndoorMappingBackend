@@ -38,11 +38,15 @@
                 text.text(blockName + "\n" + rect.bbox().w / mapStorage.scale(mapStorage.width, mapStorage.height) + "X" + rect.bbox().h / mapStorage.scale(mapStorage.width, mapStorage.height)).move(rect.bbox().cx, rect.bbox().cy);
             });
             rect.on('drawstop', function(e) {
+              var rectPath = rect.toPath();
                 index = mapStorage.blocks.push({
                     shape: rect,
                     name: blockName,
+                    pathArray: rectPath.array().value,
                     type: 'rect'
                 });
+                rect = rectPath.original;
+                rectPath.remove();
                 rect.draggable();
                 rect.on('dragend', function(e) {
                     text.move(rect.bbox().cx, rect.bbox().cy);
