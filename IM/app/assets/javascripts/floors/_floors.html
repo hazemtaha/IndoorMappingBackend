@@ -1,4 +1,12 @@
-<div>
+<div ng-controller="AuthCtrl as authCtrl">
+<div ng-hide="authCtrl.isAuthenticated()">
+<h3  align="center">You must login first or register if you are new user</h3>
+<div class="col-sm-offset-5" style="padding-top: 50px">
+<a class="btn btn-success" href="#/login" style="color: white">Login</a>
+<a href="#/register" class="btn btn-success" style="color: white">Register</a>
+</div>
+</div>
+<div ng-show="authCtrl.isAuthenticated()">
 <a href="#/buildings/{{floorCtrl.floor.building_id}}"  class='btn btn-success'><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
 <br><br><br>
         <div style="text-align: center;">
