@@ -1,0 +1,18 @@
+<div class="container" id="data">
+  <!--  errors displaying div -->
+  <div class="alert alert-danger" ng-show="mapCtrl.floor.isWidthInvalid || mapCtrl.floor.isHeightInvalid">
+    <ul>
+      <li ng-show="mapCtrl.floor.isWidthInvalid">Invalid Width</li>
+      <li ng-show="mapCtrl.floor.isHeightInvalid">Invalid Height</li>
+    </ul>
+  </div>
+    <hr>
+    <label for="width" class="control-label">Width</label>
+    <input type="text" name="width" id="width" class="form-control" ng-model="mapCtrl.floor.width" value="">
+    <br>
+    <label for="height" class="control-label">Height</label>
+    <input type="text" name="height" id="height" class="form-control" ng-model="mapCtrl.floor.height" value="">
+    <br><br>
+    <input id="confirm" type="button" class="btn btn-primary" ng-click="mapCtrl.confirm()" value="Confirm">
+    <hr>
+</div>

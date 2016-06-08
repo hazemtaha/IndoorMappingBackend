@@ -17,6 +17,8 @@
 //= require AngularDevise
 //= require angular-rails-templates
 //= require angular-ui-router
+//= require ./lib/ui-bootstrap-tpls-1.3.3.js
+//= require ./lib/svg.js
 //= require_tree .
 
 //= require bootstrap-modal

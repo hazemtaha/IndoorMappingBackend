@@ -101,7 +101,7 @@
         <div ng-repeat="floor in buildCtrl.build.floors | orderBy:'floo' ">
           <span> Floor Num: {{floor.floo}} </span>
           <!-- still Hazem will edit floo  -->
-          <span><a href="#/buildings/{{buildCtrl.build.id}}" class='btn btn-danger'>Map</a></span>
+          <span><a href="#/map_info" class='btn btn-danger'>Map</a></span>
           <span><a href="#/buildings/{{buildCtrl.build.id}}/floors/{{floor.id}}" class='btn btn-primary'>Details</a></span>
           <span><a  ng-click="buildCtrl.delFloorFunc(buildCtrl.build.id,floor.id)" class='btn btn-warning'>Delete</a></span>
           <br><br>
