@@ -21,7 +21,7 @@
  .modal{
  	width: 660px ;
  	background-color: rgba(0, 0, 0, 0.3);
- 	opacity: 0 ;
+ 	margin-top: -150px ;
  }
  .ng-invalid.ng-dirty span ,.errorMsg{
 	color: red ;
