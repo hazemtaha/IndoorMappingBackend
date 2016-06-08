@@ -1,6 +1,6 @@
 class BuildingsController < ApplicationController
 	def index
-    	respond_with Building.all
+        respond_with Building.where(:owner_id => current_owner.id)
     end
 
     def show
@@ -35,7 +35,7 @@ class BuildingsController < ApplicationController
         end
 
         def build_params
-            params.require(:building).permit(:address, :name , :thumbnail , 1)
+            params.require(:building).permit(:address, :name , :thumbnail , current_owner.id )
         end
 
 end
