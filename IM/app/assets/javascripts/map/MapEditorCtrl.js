@@ -91,7 +91,6 @@
                 selectedBlocks.push(block);
             }
         });
-        console.log(selectedBlocks);
         return selectedBlocks;
     }
 

@@ -16,7 +16,7 @@
           var oval = mapStorage.svg.ellipse().draw({snapToGrid:8}).attr({
             fill: '#1ABC9C',
             stroke: "black" ,
-            'stroke-width': 5
+            'stroke-width': 4
           });
           oval.on('drawstart', function(e){
             text =  mapStorage.svg.text('').font({

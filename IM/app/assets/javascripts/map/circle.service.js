@@ -17,7 +17,7 @@
                 snapToGrid: 10
             }).attr({
                 fill: '#1ABC9C',
-                stroke: "blue",
+                stroke: "black",
                 'stroke-width': 4
             });
             circle.on('drawstart', function(e) {

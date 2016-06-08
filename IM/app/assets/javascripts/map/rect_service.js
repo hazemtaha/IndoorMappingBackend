@@ -16,7 +16,7 @@
                 snapToGrid: 10
             }).attr({
                 fill: '#1ABC9C',
-                stroke: "green",
+                stroke: "black",
                 'stroke-width': 4
             });
             var x1, y1, x2, y2, width, height, path, text, drag_rect, index;

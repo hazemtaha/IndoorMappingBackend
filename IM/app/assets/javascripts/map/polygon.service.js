@@ -32,7 +32,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
         if (!isInBlock) {
             polygon.draw(ev, {
                 snapToGrid: 10
-            }).attr('stroke-width', 5).attr('fill', 'none');
+            }).attr({'stroke-width': 4, stroke: 'black'}).attr('fill', 'none');
         }
     });
 
@@ -98,7 +98,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
         polygon.attr('fill', '#1ABC9C').draggable();
         polygon.on('dragstart', function(e) {
             // clone a temp poly to fill the place until drag is ended
-            tmpPoly = polygon.clone().attr('stroke-width', 1).attr('fill', 'none')
+            tmpPoly = polygon.clone().attr({'stroke-width': 4, stroke: "black"}).attr('fill', 'none')
         });
         // listen to the drag end event
         polygon.on('dragend', function(ev) {
