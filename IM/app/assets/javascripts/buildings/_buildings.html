@@ -105,7 +105,7 @@
        <!--      <span class="glyphicon glyphicon-zoom-in"></span>
             <span class="glyphicon glyphicon-map-marker"></span> -->
 
-            <a href="#/buildings/{{buildCtrl.build.id}}/floors/{{floor.id}}/map_info" class='btn btn-danger'><span class="glyphicon glyphicon-globe"></span> Map</a>
+            <a ng-click="buildCtrl.openMap(floor.width, floor.height, floor.id)" class='btn btn-danger'><span class="glyphicon glyphicon-globe"></span> Map</a>
             <a href="#/buildings/{{buildCtrl.build.id}}/floors/{{floor.id}}" class='btn btn-primary'>
             <span class="glyphicon glyphicon-plus-sign"></span> Details</a>
             <a  ng-click="buildCtrl.delFloorFunc(buildCtrl.build.id,floor.id)" class='btn btn-warning'>

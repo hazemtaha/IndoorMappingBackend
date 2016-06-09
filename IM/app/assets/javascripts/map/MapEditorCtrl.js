@@ -85,12 +85,18 @@
             });
         }
         self.saveBlocks = function() {
-          console.log(mapStorage.blocks);
             if (isPending(mapStorage.blocks)) {
                 Db.saveBlocks($stateParams.floor_id).then(function() {
                     mapStorage.blocks.forEach(function(block) {
                         block.isSaved = true;
                     });
+                    if (isPending(mapStorage.beacons)) {
+                        Db.saveBeacons().then(function() {
+                            mapStorage.beacons.forEach(function(beacon) {
+                                beacon.isSaved = true;
+                            });
+                        });
+                    }
                     self.isPending = false;
                 });
             }

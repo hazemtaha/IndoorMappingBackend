@@ -5,10 +5,10 @@
         .module('IM_module')
         .service('Rect', rect);
 
-    rect.$inject = ['mapStorage'];
+    rect.$inject = ['mapStorage','Db'];
 
     /* @ngInject */
-    function rect(mapStorage) {
+    function rect(mapStorage, Db) {
         this.init = init;
 
         function init(blockName) {
@@ -48,6 +48,10 @@
                 rect = rectPath.original;
                 rectPath.remove();
                 rect.draggable();
+                Db.saveBlock(mapStorage.blocks[index-1]).then(function(block){
+                  mapStorage.blocks[index-1].id = block.data.block_id;
+                  mapStorage.blocks[index-1].isSaved = true;  
+                });
                 rect.on('dragend', function(e) {
                     text.move(rect.bbox().cx, rect.bbox().cy);
                 });

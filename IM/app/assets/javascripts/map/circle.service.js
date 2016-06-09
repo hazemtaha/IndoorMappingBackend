@@ -5,10 +5,10 @@
         .module('IM_module')
         .service('Circle', circle);
 
-    circle.$inject = ['mapStorage'];
+    circle.$inject = ['mapStorage', 'Db'];
 
     /* @ngInject */
-    function circle(mapStorage) {
+    function circle(mapStorage, Db) {
         this.init = init;
 
         function init(blockName) {
@@ -49,6 +49,10 @@
                 });
                 circle = circlePath.original;
                 circlePath.remove();
+                Db.saveBlock(mapStorage.blocks[index-1]).then(function(block){
+                  mapStorage.blocks[index-1].id = block.data.block_id;
+                  mapStorage.blocks[index-1].isSaved = true;
+                });
                 circle.draggable();
                 circle.on('dragend', function(e) {
                     text.move(circle.bbox().cx, circle.bbox().cy);

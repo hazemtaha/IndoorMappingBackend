@@ -5,10 +5,10 @@
         .module('IM_module')
         .service('Oval', oval);
 
-    oval.$inject = ['mapStorage'];
+    oval.$inject = ['mapStorage', 'Db'];
 
     /* @ngInject */
-    function oval(mapStorage) {
+    function oval(mapStorage, Db) {
         this.init = init;
 
         function init(blockName) {
@@ -41,6 +41,10 @@
                 });
                 oval = ovalPath.original;
                 ovalPath.remove();
+                Db.saveBlock(mapStorage.blocks[index-1]).then(function(block){
+                  mapStorage.blocks[index-1].id = block.data.block_id;
+                  mapStorage.blocks[index-1].isSaved = true;
+                });
                 oval.draggable();
                 oval.on('dragend', function(e) {
                     text.move(oval.bbox().cx, oval.bbox().cy);
