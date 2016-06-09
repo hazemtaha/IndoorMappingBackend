@@ -6,7 +6,7 @@
     <li><a href="#/home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
     <li ng-hide="nav.signedIn()"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Log In </a></li>
     <li ng-hide="nav.signedIn()"><a href="#/register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-    <li ng-show="nav.signedIn()"><a href="#/">{{ nav.user.username }}</a></li>
+    <li ng-show="nav.signedIn()"><a href="#/">{{ nav.user.username }} </a></li>
     <li ng-show="nav.signedIn()"><a ng-click="nav.logout()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
   </ul>
   <br/>
