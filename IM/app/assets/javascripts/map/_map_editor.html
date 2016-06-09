@@ -1,4 +1,8 @@
 <div class="container">
+
+    <div class="">
+      <button type="button" name="button" class="btn btn-primary btn-lg pull-right" ng-click="mapCtrl.saveBlocks()" ng-class="{ 'disabled': !mapCtrl.isPending}"> Save </button>
+    </div>
     <br><br><br>
     <div id="toolbox" ng-init="mapCtrl.init()">
         <!--  leftside toolbox -->

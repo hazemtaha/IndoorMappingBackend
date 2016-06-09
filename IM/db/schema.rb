@@ -18,11 +18,14 @@ ActiveRecord::Schema.define(version: 20160529162156) do
     t.integer  "uuid",       limit: 4
     t.integer  "major",      limit: 4
     t.integer  "minor",      limit: 4
-    t.integer  "x_axis",     limit: 4
-    t.integer  "y_axis",     limit: 4
+    t.integer  "x",          limit: 4
+    t.integer  "y",          limit: 4
+    t.integer  "block_id",   limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "beacons", ["block_id"], name: "index_beacons_on_block_id", using: :btree
 
   create_table "blocks", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -96,6 +99,7 @@ ActiveRecord::Schema.define(version: 20160529162156) do
   add_index "visits", ["beacon_id"], name: "index_visits_on_beacon_id", using: :btree
   add_index "visits", ["visitor_id"], name: "index_visits_on_visitor_id", using: :btree
 
+  add_foreign_key "beacons", "blocks"
   add_foreign_key "blocks", "floors"
   add_foreign_key "buildings", "owners"
   add_foreign_key "floors", "buildings"
