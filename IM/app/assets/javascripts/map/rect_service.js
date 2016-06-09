@@ -50,7 +50,7 @@
                 rect.draggable();
                 Db.saveBlock(mapStorage.blocks[index-1]).then(function(block){
                   mapStorage.blocks[index-1].id = block.data.block_id;
-                  mapStorage.blocks[index-1].isSaved = true;  
+                  mapStorage.blocks[index-1].isSaved = true;
                 });
                 rect.on('dragend', function(e) {
                     text.move(rect.bbox().cx, rect.bbox().cy);

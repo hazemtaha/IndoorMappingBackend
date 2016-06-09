@@ -14,7 +14,6 @@ Rails.application.routes.draw do
       end
     end
   end
-  post 'floors/:floor_id' => 'blocks#save_blocks'
   post 'block/:block_id/beacon' => 'beacon#create'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

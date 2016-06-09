@@ -84,34 +84,17 @@
                 block.shape.fill(colors[type]);
             });
         }
-        self.saveBlocks = function() {
-            if (isPending(mapStorage.blocks)) {
-                Db.saveBlocks($stateParams.floor_id).then(function() {
-                    mapStorage.blocks.forEach(function(block) {
-                        block.isSaved = true;
-                    });
-                    if (isPending(mapStorage.beacons)) {
-                        Db.saveBeacons().then(function() {
-                            mapStorage.beacons.forEach(function(beacon) {
-                                beacon.isSaved = true;
-                            });
-                        });
-                    }
-                    self.isPending = false;
-                });
-            }
-        }
     }
-
-    function isPending(mapObjects) {
-        var isObjPending = false;
-        mapObjects.forEach(function(mapObject) {
-            if (!mapObject.isSaved) {
-                isObjPending = true;
-            }
-        });
-        return isObjPending;
-    }
+    // mark for deletion if not needed
+    // function isPending(mapObjects) {
+    //     var isObjPending = false;
+    //     mapObjects.forEach(function(mapObject) {
+    //         if (!mapObject.isSaved) {
+    //             isObjPending = true;
+    //         }
+    //     });
+    //     return isObjPending;
+    // }
 
     function getSelectedBlocks(mapStorage) {
         var selectedBlocks = [];

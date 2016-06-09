@@ -19,12 +19,6 @@ class BlocksController < ApplicationController
         end
 
 	end
-	def save_blocks
-		params[:blocks].each { |block|
-			Block.create(name: block[:name], path: block[:path], floor_id: params[:floor_id])
-		}
-		render json: {success: 1}
-	end
 	private
         def block_params
             params.require(:block).permit(:name)

@@ -51,7 +51,7 @@ var drawBeacon = function(beaconInfo, mapStorage, Calculations, Db) {
             beaconInfo.block = block.id;
             index = mapStorage.beacons.push(beaconInfo);
             Db.saveBeacon(mapStorage.beacons[index-1]).then(function(beacon){
-              // mapStorage.beacons[index-1].id = block.data.block_id;
+              mapStorage.beacons[index-1].id = beacon.data.beacon_id;
               mapStorage.beacons[index-1].isSaved = true;
             });
             console.log(beaconInfo)
