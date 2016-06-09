@@ -14,8 +14,6 @@
         <table class="table">
           <thead>
             <th>Name</th>
-      <!--       <th>Width</th>
-            <th>Height</th> -->
             <th>Path</th> 
             <th>Action</th>
           </thead>
@@ -28,8 +26,6 @@
                             <button class="btn btn-danger" ng-click="floorCtrl.isEdit = false">cancel</button>
                         </form> 
                     </td>
-                    <!-- <td>{{block.width}}</td> 
-                    <td>{{block.height}}</td>  -->
                     <td>{{block.path}}</td> 
                     <td>
                     <span>
@@ -42,26 +38,29 @@
             </tr>
           </tbody>
         </table> 
-        </div>           
+        </div>   
+        <hr>        
           <div ng-show="floorCtrl.blockDetails.beacons[0]" width="80%">
-                <span>Block Name: {{floorCtrl.blockDetails.name}}</span><br>
-                <span>Beacons: </span><br>
-                <table class="table">
-                      <thead>
-                        <td>Name</td>
-                        <td>UUID</td>
-                        <td>Major</td>
-                        <td>Minor</td> 
-                      </thead>
-                      <tbody>
-                        <tr ng-repeat="beacon in floorCtrl.blockDetails.beacons">
-                              <td>{{beacon.name}}</td>
-                              <td>{{beacon.uuid}}</td>
-                              <td>{{beacon.major}}</td>
-                              <td>{{beacon.minor}}</td>
-                        </tr>
-                      </tbody>
-                </table>
+                <b>Block Name: </b>{{floorCtrl.blockDetails.name}}<br><br><br>
+                <div width="100px">               
+                    <b>Beacons: </b><br><br>
+                    <table class="table">
+                          <thead>
+                            <th>Name</th>
+                            <th>UUID</th>
+                            <th>Major</th>
+                            <th>Minor</th> 
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="beacon in floorCtrl.blockDetails.beacons">
+                                  <td>{{beacon.name}}</td>
+                                  <td>{{beacon.uuid}}</td>
+                                  <td>{{beacon.major}}</td>
+                                  <td>{{beacon.minor}}</td>
+                            </tr>
+                          </tbody>
+                    </table>
+                </div>
           </div>
 
 </div>
