@@ -11,8 +11,8 @@
   <br>
   </div>
   <div class="field u-form-group col-sm-offset-1 col-sm-12">
-    <input type="password" name="password" class="form-control" placeholder="Password" ng-model="authCtrl.user.password" required>
-    <span ng-show="loginForm.password.$invalid && loginForm.password.$dirty">Password is required *</span>
+    <input type="password" ng-minlength="8" name="password" class="form-control" placeholder="Password" ng-model="authCtrl.user.password" required>
+    <span ng-show="loginForm.password.$invalid && loginForm.password.$dirty">Password is required and more than 8 characters *</span>
   <br>
   </div>
   <div class="field col-sm-offset-1 col-sm-12">
