@@ -5,13 +5,13 @@
         .module('IM_module')
         .service('Oval', oval);
 
-    oval.$inject = ['mapStorage', 'Db'];
+    oval.$inject = ['mapStorage', 'Db', '$timeout'];
 
     /* @ngInject */
-    function oval(mapStorage, Db) {
+    function oval(mapStorage, Db, $timeout) {
         this.init = init;
 
-        function init(blockName) {
+        function init(blockName, mapCtrl) {
             var text, index;
             var oval = mapStorage.svg.ellipse().draw({
                 snapToGrid: 8
@@ -27,6 +27,8 @@
                     anchor: 'middle',
                     leading: '1.5em'
                 });
+                mapCtrl.isDrawing = true;
+                mapCtrl.saveStatus = "Save Pending . . . ";
             });
             oval.on('drawupdate', function(e) {
                 text.text(blockName + "\n" + oval.bbox().w / (2 * mapStorage.scale(mapStorage.width, mapStorage.height)) + "X" + oval.bbox().h / (2 * mapStorage.scale(mapStorage.width, mapStorage.height))).move(oval.bbox().cx, oval.bbox().cy);
@@ -44,6 +46,10 @@
                 Db.saveBlock(mapStorage.blocks[index-1]).then(function(block){
                   mapStorage.blocks[index-1].id = block.data.block_id;
                   mapStorage.blocks[index-1].isSaved = true;
+                  $timeout(function() {
+                    mapCtrl.isDrawing = false;
+                    mapCtrl.saveStatus = "Saved :)";
+                  },1000);
                 });
                 oval.draggable();
                 oval.on('dragend', function(e) {
