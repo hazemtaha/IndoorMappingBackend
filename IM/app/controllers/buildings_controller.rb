@@ -23,12 +23,6 @@ class BuildingsController < ApplicationController
 
         @build = Building.create(build_params)
         @build.owner_id = current_owner.id 
-        # current_owner.id
-        puts "----------------------------------------------------------"
-        puts current_owner
-        puts "----------------------------------------------------------"
-        puts @build 
-        puts "----------------------------------------------------------"
 
         if @build.save  
              render json: Building.where(:owner_id => current_owner.id)

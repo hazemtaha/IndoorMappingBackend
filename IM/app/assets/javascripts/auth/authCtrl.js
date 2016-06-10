@@ -2,8 +2,7 @@ angular.module('IM_module')
 .controller('AuthCtrl', [
 '$state',
 'Auth',
-'FileUploader',
-function($state, Auth,FileUploader){
+function($state, Auth){
 	 this.login = function() {
     Auth.login(this.user).then(function(){
       //console.log(data);
@@ -21,8 +20,6 @@ function($state, Auth,FileUploader){
 
 
   this.register = function() {
-    this.uploader = new FileUploader({url: '/owners'});
-    this.user.picture = this.uploader;
     Auth.register(this.user).then(function(){
       $state.go('home');
     });
