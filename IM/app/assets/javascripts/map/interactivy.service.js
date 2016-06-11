@@ -31,7 +31,7 @@
                 type: block.type,
                 color: block.attr('fill')
             };
-            var index = interactivy.updateObj(blockObj, mapCtrl);
+            var index = interactivy.updateObj(blockObj, mapCtrl, mapStorage.blocks);
             block = blockPath.original;
             blockPath.remove();
             block.draggable();
@@ -77,7 +77,7 @@
                 type: 'polygon',
                 color: polygon.attr('fill')
             }
-            var index = interactivy.updateObj(polyObj, mapCtrl);
+            var index = interactivy.updateObj(polyObj, mapCtrl, mapStorage.blocks);
             polygon = polyPath.original;
             polyPath.remove();
             // enable the shape to be draggable
@@ -153,7 +153,9 @@
             beaconInfo.block = block.id;
             beaconInfo.beacon = beacon;
             beaconInfo.id = beacon.id();
-            var index = mapStorage.beacons.push(beaconInfo);
+            var index = interactivy.updateObj(beaconInfo, mapCtrl, mapStorage.beacons);
+
+            // var index = mapStorage.beacons.push(beaconInfo);
             beacon.draggable();
             // double click to select an element
             beacon.on('dblclick', function(ev) {
@@ -183,21 +185,27 @@
             });
         }
 
-        function updateObj(obj, mapCtrl) {
-            for (var i = 0; i < mapStorage.blocks.length; i++) {
-                if (mapStorage.blocks[i].id == obj.id) {
-                    mapStorage.blocks[i] = obj;
+        function updateObj(obj, mapCtrl, objects) {
+            for (var i = 0; i < objects.length; i++) {
+                if (objects[i].id == obj.id) {
+                    objects[i] = obj;
                     return i + 1;
                 }
             }
-            return mapStorage.blocks.push(obj);
+            return objects.push(obj);
         }
 
 
-        function deleteShape(shapes,toDelBlock, mapCtrl) {
+        function deleteShape(shapes,toDelShape, mapCtrl) {
             for (var i = 0; i < shapes.length; i++) {
-                if (shapes[i].id == toDelBlock.id()) {
-                    Db.deleteBlock(shapes[i].id).then(function() {
+                if (shapes[i].id == toDelShape.id()) {
+                  var shapeFunction;
+                  if (toDelShape.attr('name') == 'beacon') {
+                    shapeFunction = 'deleteBeacon';
+                  } else {
+                    shapeFunction = 'deleteBlock';
+                  }
+                    Db[shapeFunction](shapes[i].id).then(function() {
                         mapCtrl.isDrawing = true;
                         mapCtrl.saveStatus = "Saving . . . . ";
                         $timeout(function() {

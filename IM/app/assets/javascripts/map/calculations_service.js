@@ -83,7 +83,6 @@
                     shape;
                 for (var i = 0; i < blocks.length; i++) {
                     shape = blocks[i];
-                    console.log(shape);
                     switch (blocks[i].type) {
                         case 'polygon':
                             shape = blocks[i].shape.array().value;

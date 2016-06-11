@@ -51,8 +51,6 @@ var drawBeacon = function(beaconInfo, mapStorage, Calculations, Db, mapCtrl, $ti
             // console.log(log);
             beaconInfo.x = beacon.cx();
             beaconInfo.y = beacon.cy();
-            console.log(mapStorage.blocks);
-            console.log(block);
             beaconInfo.block = block.id;
             beaconInfo.beacon = beacon;
             index = mapStorage.beacons.push(beaconInfo);
