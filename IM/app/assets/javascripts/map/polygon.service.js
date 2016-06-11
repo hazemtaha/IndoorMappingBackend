@@ -5,19 +5,19 @@
         .module('IM_module')
         .service('Polygon', polygon);
 
-    polygon.$inject = ['mapStorage', 'Calculations'];
+    polygon.$inject = ['mapStorage', 'Calculations', 'Db', '$timeout'];
 
     /* @ngInject */
-    function polygon(mapStorage, Calculations) {
+    function polygon(mapStorage, Calculations, Db, $timeout) {
         this.init = init;
 
-        function init(blockName) {
+        function init(blockName, mapCtrl) {
             // start drawing
-            drawPolygon(blockName, mapStorage, Calculations);
+            drawPolygon(blockName, mapStorage, Calculations, Db, mapCtrl, $timeout);
         }
     }
 })();
-var drawPolygon = function(blockName, mapStorage, Calculations) {
+var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $timeout) {
     // points we use to measure line length and contain it's text
     var pointOfLine, newPoint, dimText, textArr = [],
         // tmp variables and some utils variables
@@ -41,6 +41,8 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
 
     // when user initiate the first point
     polygon.on('drawstart', function(ev) {
+        mapCtrl.isDrawing = true;
+        mapCtrl.saveStatus = "Save Pending . . . ";
         // store the point to use it in measurement later
         pointOfLine = ev.path[0].points[0];
         // initiate an empty text on the svg
@@ -85,7 +87,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
     }); // end of drawupdate
     // fired when the user stop drawing
     polygon.on('drawstop', function(e) {
-      var polyPath = polygon.toPath();
+        var polyPath = polygon.toPath();
         // add the drawn shape into the block array
         index = mapStorage.blocks.push({
             shape: polygon,
@@ -95,6 +97,14 @@ var drawPolygon = function(blockName, mapStorage, Calculations) {
         });
         polygon = polyPath.original;
         polyPath.remove();
+        Db.saveBlock(mapStorage.blocks[index - 1]).then(function(block) {
+            mapStorage.blocks[index - 1].id = block.data.block_id;
+            mapStorage.blocks[index - 1].isSaved = true;
+            $timeout(function() {
+                mapCtrl.isDrawing = false;
+                mapCtrl.saveStatus = "Saved :)";
+            }, 1000);
+        });
         // delete the mouse down event
         mapStorage.svg.off('mousedown');
         // draw the block name inside the block

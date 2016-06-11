@@ -1,6 +1,6 @@
 angular.module('IM_module')
-	.controller('buildingsCtrl', ['$stateParams','buildings','floors',
-		function( $stateParams, buildings,floors){
+	.controller('buildingsCtrl', ['$stateParams','buildings','floors','$state','mapStorage',
+		function( $stateParams, buildings, floors, $state, mapStorage){
 			console.log($stateParams.id);
 			//this.build = buildings.buildings[$stateParams.id];
 			console.log(this.build);
@@ -30,11 +30,11 @@ angular.module('IM_module')
 		    			self.floorExist = data.errorMsg ;
 		    			// self.addFloorForm.$invalid = true ;
 		    			console.log(data.errorMsg);
-		    			console.log('errrrrrrrrrrrr');		
+		    			console.log('errrrrrrrrrrrr');
 		    		}else{
 		    			console.log('no errrrrrrrrrrrr');
 		    			console.log(data);
-		    			self.build.floors = data ;	
+		    			self.build.floors = data ;
 					    $('.modal').modal('hide');
 		    		}
 		    	});
@@ -45,7 +45,7 @@ angular.module('IM_module')
 		    self.editFunc = function(){
 		    	self.isEdit = true ;
 		    	self.editBuild.name = self.build.name ;
-				self.editBuild.address = self.build.address ;		
+				self.editBuild.address = self.build.address ;
 		    }
 		    self.submiteditbuildForm = function(){
 		    	console.log("submit") ;
@@ -55,7 +55,7 @@ angular.module('IM_module')
 					self.build = data ;
 		    	});
 		    	self.isEdit = false ;
-			   	
+
 		    }
 
 
@@ -66,11 +66,11 @@ angular.module('IM_module')
 		    		if (data.errorMsg !== undefined ){
 		    			self.buildExist = data.errorMsg ;
 		    			console.log(data.errorMsg);
-		    			console.log('errrrrrrrrrrrr');		
+		    			console.log('errrrrrrrrrrrr');
 		    		}else{
 		    			console.log('no errrrrrrrrrrrr');
 		    			console.log(data);
-		    			self.buildings = data ;	
+		    			self.buildings = data ;
 					    $('.modal').modal('hide');
 		    		}
 		    	});
@@ -79,4 +79,13 @@ angular.module('IM_module')
 		    	self.addBuildForm.$setPristine();
 		    }
 
+				self.openMap = function(floorWidth, floorHeight, floorId) {
+					console.log("");
+					mapStorage.width = floorWidth * mapStorage.scale(floorWidth, floorHeight);
+					mapStorage.height = floorHeight * mapStorage.scale(floorWidth, floorHeight);
+					$state.go('map_editor', {
+							building_id: $stateParams.id,
+							floor_id: floorId
+					});
+				}
 	}]);

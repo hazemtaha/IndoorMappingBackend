@@ -40,12 +40,12 @@ angular.module('IM_module', ['ui.router','templates','Devise','flow','angularFil
 				  controller: 'floorsCtrl' ,
 				  controllerAs: "floorCtrl"
 				})
-        .state('map_info', {
-            url: '/buildings/{building_id}/floors/{floor_id}/map_info',
-            templateUrl: 'map/_map_info.html',
-            controller: 'MapInfoController',
-            controllerAs: 'mapCtrl'
-        })
+        // .state('map_info', {
+        //     url: '/buildings/{building_id}/floors/{floor_id}/map_info',
+        //     templateUrl: 'map/_map_info.html',
+        //     controller: 'MapInfoController',
+        //     controllerAs: 'mapCtrl'
+        // })
         .state('map_editor', {
             url: '/buildings/{building_id}/floors/{floor_id}/map_editor',
             templateUrl: 'map/_map_editor.html',

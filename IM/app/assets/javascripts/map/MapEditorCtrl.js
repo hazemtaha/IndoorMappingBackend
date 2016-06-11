@@ -14,6 +14,8 @@
         var self = this;
         self.isInRoomTypes = false;
         self.isPending = true;
+        self.isDrawing = false;
+        self.saveStatus = "Nothing To Save Yet";
         var colors = {
             living: '#FFA07A',
             kitchen: '#C8F0C8',
@@ -52,19 +54,19 @@
             self.blockInfoModal.result.then(function(info) {
                 switch (type) {
                     case 'rect':
-                        Rect.init(info);
+                        Rect.init(info,self);
                         break;
                     case 'circle':
-                        Circle.init(info);
+                        Circle.init(info,self);
                         break;
                     case 'oval':
-                        Oval.init(info);
+                        Oval.init(info,self);
                         break;
                     case 'polygon':
-                        Polygon.init(info);
+                        Polygon.init(info,self);
                         break;
                     case 'beacon':
-                        Beacon.init(info)
+                        Beacon.init(info,self);
                         break;
                 }
                 self.isPending = true
@@ -84,28 +86,17 @@
                 block.shape.fill(colors[type]);
             });
         }
-        self.saveBlocks = function() {
-          console.log(mapStorage.blocks);
-            if (isPending(mapStorage.blocks)) {
-                Db.saveBlocks($stateParams.floor_id).then(function() {
-                    mapStorage.blocks.forEach(function(block) {
-                        block.isSaved = true;
-                    });
-                    self.isPending = false;
-                });
-            }
-        }
     }
-
-    function isPending(mapObjects) {
-        var isObjPending = false;
-        mapObjects.forEach(function(mapObject) {
-            if (!mapObject.isSaved) {
-                isObjPending = true;
-            }
-        });
-        return isObjPending;
-    }
+    // mark for deletion if not ne
+    // function isPending(mapObjects) {
+    //     var isObjPending = false;
+    //     mapObjects.forEach(function(mapObject) {
+    //         if (!mapObject.isSaved) {
+    //             isObjPending = true;
+    //         }
+    //     });
+    //     return isObjPending;
+    // }
 
     function getSelectedBlocks(mapStorage) {
         var selectedBlocks = [];

@@ -5,13 +5,13 @@
         .module('IM_module')
         .service('Circle', circle);
 
-    circle.$inject = ['mapStorage'];
+    circle.$inject = ['mapStorage', 'Db', '$timeout'];
 
     /* @ngInject */
-    function circle(mapStorage) {
+    function circle(mapStorage, Db, $timeout) {
         this.init = init;
 
-        function init(blockName) {
+        function init(blockName, mapCtrl) {
             var x1, y1, x2, y2, radius, text, index;
             var circle = mapStorage.svg.circle().draw({
                 snapToGrid: 10
@@ -29,7 +29,8 @@
                     anchor: 'middle',
                     leading: '1.5em'
                 });
-
+                mapCtrl.isDrawing = true;
+                mapCtrl.saveStatus = "Save Pending . . . ";
             });
             circle.on('drawupdate', function(e) {
                 x2 = e.detail.p.x;
@@ -49,6 +50,14 @@
                 });
                 circle = circlePath.original;
                 circlePath.remove();
+                Db.saveBlock(mapStorage.blocks[index-1]).then(function(block){
+                  mapStorage.blocks[index-1].id = block.data.block_id;
+                  mapStorage.blocks[index-1].isSaved = true;
+                  $timeout(function() {
+                    mapCtrl.isDrawing = false;
+                    mapCtrl.saveStatus = "Saved :)";
+                  },1000);
+                });
                 circle.draggable();
                 circle.on('dragend', function(e) {
                     text.move(circle.bbox().cx, circle.bbox().cy);

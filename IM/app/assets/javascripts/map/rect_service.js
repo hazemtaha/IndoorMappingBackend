@@ -5,13 +5,13 @@
         .module('IM_module')
         .service('Rect', rect);
 
-    rect.$inject = ['mapStorage'];
+    rect.$inject = ['mapStorage','Db', '$timeout'];
 
     /* @ngInject */
-    function rect(mapStorage) {
+    function rect(mapStorage, Db, $timeout) {
         this.init = init;
 
-        function init(blockName) {
+        function init(blockName,mapCtrl) {
             var rect = mapStorage.svg.rect().draw({
                 snapToGrid: 10
             }).attr({
@@ -21,6 +21,9 @@
             });
             var x1, y1, x2, y2, width, height, path, text, drag_rect, index;
             rect.on('drawstart', function(e) {
+              mapCtrl.isDrawing = true;
+              mapCtrl.saveStatus = "Save Pending . . . ";
+              console.log(mapCtrl.isDrawing);
                 x1 = e.detail.p.x;
                 y1 = e.detail.p.y;
                 text = mapStorage.svg.text('').font({
@@ -48,6 +51,14 @@
                 rect = rectPath.original;
                 rectPath.remove();
                 rect.draggable();
+                Db.saveBlock(mapStorage.blocks[index-1]).then(function(block){
+                  mapStorage.blocks[index-1].id = block.data.block_id;
+                  mapStorage.blocks[index-1].isSaved = true;
+                  $timeout(function() {
+                    mapCtrl.isDrawing = false;
+                    mapCtrl.saveStatus = "Saved :)";
+                  },1000);
+                });
                 rect.on('dragend', function(e) {
                     text.move(rect.bbox().cx, rect.bbox().cy);
                 });
