@@ -162,9 +162,9 @@
                 return lnLengths;
             }
             // moves the text passed to it's propper position
-        function moveText(e, textArr, lnLengths) {
+        function moveText(points, textArr, lnLengths) {
             // calculate the center of each line in the poly
-            var centerPoints = calcCntrPts(e.path[0].points);
+            var centerPoints = calcCntrPts(points);
             // move the line lengths to their new position
             for (var i = 0; i < centerPoints.length; i++) {
                 textArr[i].text(lnLengths[i]).move(centerPoints[i][0], centerPoints[i][1]);

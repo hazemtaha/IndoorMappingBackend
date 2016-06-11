@@ -34,7 +34,8 @@ var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $ti
                 snapToGrid: 10
             }).attr({
                 'stroke-width': 4,
-                stroke: 'black'
+                stroke: 'black',
+                name: blockName
             }).attr('fill', 'none').addClass('map-element');
         }
     });
@@ -101,6 +102,10 @@ var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $ti
         Db.saveBlock(mapStorage.blocks[index - 1]).then(function(block) {
             mapStorage.blocks[index - 1].id = block.data.block_id;
             mapStorage.blocks[index-1].shape.id(block.data.block_id);
+            textArr.forEach(function(text) {
+              text.attr('name','polyDim'+mapStorage.blocks[index-1].shape.id());
+            });
+            blockNameText.id('text' + mapStorage.blocks[index-1].shape.id());
             mapStorage.blocks[index - 1].isSaved = true;
             $timeout(function() {
                 mapCtrl.isDrawing = false;
@@ -137,7 +142,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $ti
             // remove the tmp poly
             tmpPoly.remove();
             // move the texts to the new positions
-            Calculations.moveText(e, textArr, Calculations.calcLineLengths(e.path[0].points));
+            Calculations.moveText(e.path[0].points, textArr, Calculations.calcLineLengths(e.path[0].points));
             // redraw the block name inside the block
             blockNameText.move(polygon.bbox().cx - 20, polygon.bbox().cy - 20);
         });

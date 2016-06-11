@@ -44,6 +44,8 @@
                         blocks.forEach(function(block) {
                             if (block.type != 'polygon' && block.type != 'beacon') {
                                 Interactivy.normal(block);
+                            } else if (block.type == 'polygon') {
+                                Interactivy.polygon(block);
                             }
                         });
                     });
