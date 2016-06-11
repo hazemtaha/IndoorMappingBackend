@@ -7,6 +7,8 @@ function($state, Auth){
     Auth.login(this.user).then(function(){
       //console.log(data);
       $state.go('home');
+    }, function(err){
+      alert(JSON.stringify(err));
     });
   };
 
