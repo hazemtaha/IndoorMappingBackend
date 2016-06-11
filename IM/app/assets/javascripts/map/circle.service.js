@@ -75,7 +75,8 @@
                         text.text(blockName + "\n" + "R= " + Math.round(circle.bbox().w / (mapStorage.scale(mapStorage.width, mapStorage.height) * 2))).move(circle.bbox().cx, circle.bbox().cy);
                     });
                     $(document).on('keydown', function(e) {
-                        if (e.keyCode == 46 && circle._memory._selectHandler.rectSelection.isSelected) {
+                        if (e.keyCode == 46 && mapStorage.blocks[index - 1].isSelected) {
+                          Interactivy.deleteBlock(circle, mapCtrl);
                             circle.selectize(false);
                             ev.target.remove();
                             text.clear();

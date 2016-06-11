@@ -43,11 +43,11 @@
                         console.log(blocks);
                         blocks.forEach(function(block) {
                           if (block.attr('name') == 'beacon') {
-                            Interactivy.beacon(block);
+                            Interactivy.beacon(block, self);
                           } else if (block.type == 'polygon') {
-                            Interactivy.polygon(block);
+                            Interactivy.polygon(block, self);
                           } else {
-                            Interactivy.normal(block);
+                            Interactivy.normal(block, self);
                           }
                         });
                     });

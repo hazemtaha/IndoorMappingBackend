@@ -13,6 +13,7 @@
             getBlocks: getBlocks,
             saveBeacon: saveBeacon,
             saveBlock: saveBlock,
+            deleteBlock: deleteBlock,
             exportMap: exportMap,
             importMap: importMap
         };
@@ -31,6 +32,10 @@
             return $http.post('/buildings/' + $stateParams.building_id + '/floors/' + $stateParams.floor_id + '/blocks.json', {
                 block: dbBlock
             });
+        }
+
+        function deleteBlock(blockId) {
+            return $http.delete('/buildings/' + $stateParams.building_id + '/floors/' + $stateParams.floor_id + '/blocks/' + blockId + '.json');
         }
 
         function saveBeacon(mapBeacon) {

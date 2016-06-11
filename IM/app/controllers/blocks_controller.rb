@@ -17,7 +17,9 @@ class BlocksController < ApplicationController
         if @block.update(block_params)
             render json: Block.where(floor_id: @block.floor_id)
         end
-
+	end
+	def destroy
+		respond_with Block.destroy(params[:id])
 	end
 	private
         def block_params

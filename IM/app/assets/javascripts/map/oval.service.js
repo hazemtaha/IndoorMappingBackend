@@ -66,7 +66,8 @@
                         text.text(blockName + "\n" + oval.bbox().w / (mapStorage.scale(mapStorage.width, mapStorage.height) * 2) + "X" + oval.bbox().h / (mapStorage.scale(mapStorage.width, mapStorage.height) * 2)).move(oval.bbox().cx, oval.bbox().cy);
                     });
                     $(document).on('keydown', function(e) {
-                        if (e.keyCode == 46 && oval._memory._selectHandler.rectSelection.isSelected) {
+                        if (e.keyCode == 46 && mapStorage.blocks[index - 1].isSelected) {
+                            Interactivy.deleteBlock(oval, mapCtrl);
                             oval.selectize(false);
                             ev.target.remove();
                             text.clear();

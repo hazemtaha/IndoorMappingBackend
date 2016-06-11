@@ -5,10 +5,10 @@
         .module('IM_module')
         .service('Rect', rect);
 
-    rect.$inject = ['mapStorage', 'Db', '$timeout'];
+    rect.$inject = ['mapStorage', 'Db', '$timeout', 'Interactivy'];
 
     /* @ngInject */
-    function rect(mapStorage, Db, $timeout) {
+    function rect(mapStorage, Db, $timeout, Interactivy) {
         this.init = init;
 
         function init(blockName, mapCtrl) {
@@ -73,7 +73,8 @@
                         text.text(blockName + "\n" + rect.bbox().w / mapStorage.scale(mapStorage.width, mapStorage.height) + "X" + rect.bbox().h / mapStorage.scale(mapStorage.width, mapStorage.height)).move(rect.bbox().cx, rect.bbox().cy);
                     });
                     $(document).on('keydown', function(e) {
-                        if (e.keyCode == 46 && rect._memory._selectHandler.rectSelection.isSelected) {
+                        if (e.keyCode == 46 && mapStorage.blocks[index - 1].isSelected) {
+                            Interactivy.deleteBlock(rect, mapCtrl);
                             rect.selectize(false);
                             rect.remove();
                             text.clear();

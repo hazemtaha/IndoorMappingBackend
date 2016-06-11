@@ -5,19 +5,19 @@
         .module('IM_module')
         .service('Polygon', polygon);
 
-    polygon.$inject = ['mapStorage', 'Calculations', 'Db', '$timeout'];
+    polygon.$inject = ['mapStorage', 'Calculations', 'Db', '$timeout', 'Interactivy'];
 
     /* @ngInject */
-    function polygon(mapStorage, Calculations, Db, $timeout) {
+    function polygon(mapStorage, Calculations, Db, $timeout, Interactivy) {
         this.init = init;
 
         function init(blockName, mapCtrl) {
             // start drawing
-            drawPolygon(blockName, mapStorage, Calculations, Db, mapCtrl, $timeout);
+            drawPolygon(blockName, mapStorage, Calculations, Db, mapCtrl, $timeout, Interactivy);
         }
     }
 })();
-var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $timeout) {
+var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $timeout, Interactivy) {
     // points we use to measure line length and contain it's text
     var pointOfLine, newPoint, dimText, textArr = [],
         // tmp variables and some utils variables
@@ -168,6 +168,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $ti
                 }
                 // listen for 'delete' key for removing the element
                 if (e.keyCode == 46) {
+                    Interactivy.deleteBlock(polygon, mapCtrl);
                     // deselect
                     polygon.selectize(false);
                     // remove the element
