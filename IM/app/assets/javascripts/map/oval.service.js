@@ -19,7 +19,7 @@
                 fill: '#1ABC9C',
                 stroke: "black",
                 'stroke-width': 4
-            });
+            }).addClass('map-element');
             oval.on('drawstart', function(e) {
                 text = mapStorage.svg.text('').font({
                     family: 'verdana',
@@ -39,12 +39,14 @@
                     shape: oval,
                     name: blockName,
                     pathArray: ovalPath.array().value,
-                    type: 'oval'
+                    type: 'oval',
+                    color: oval.attr('fill')
                 });
                 oval = ovalPath.original;
                 ovalPath.remove();
                 Db.saveBlock(mapStorage.blocks[index-1]).then(function(block){
                   mapStorage.blocks[index-1].id = block.data.block_id;
+                  mapStorage.blocks[index-1].shape.id(block.data.block_id);
                   mapStorage.blocks[index-1].isSaved = true;
                   $timeout(function() {
                     mapCtrl.isDrawing = false;

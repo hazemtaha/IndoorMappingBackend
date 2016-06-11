@@ -5,20 +5,20 @@
         .module('IM_module')
         .service('Beacon', beacon);
 
-    beacon.$inject = ['mapStorage', 'Calculations', 'Db'];
+    beacon.$inject = ['mapStorage', 'Calculations', 'Db', '$timeout'];
 
     /* @ngInject */
-    function beacon(mapStorage, Calculations, Db) {
+    function beacon(mapStorage, Calculations, Db, $timeout) {
         this.init = init;
 
-        function init(beaconInfo) {
+        function init(beaconInfo, mapCtrl) {
             // start drawing
-            drawBeacon(beaconInfo, mapStorage, Calculations, Db);
+            drawBeacon(beaconInfo, mapStorage, Calculations, Db, mapCtrl, $timeout);
         }
     }
 })();
 
-var drawBeacon = function(beaconInfo, mapStorage, Calculations, Db) {
+var drawBeacon = function(beaconInfo, mapStorage, Calculations, Db, mapCtrl, $timeout) {
         var beacon, index;
         mapStorage.svg.on('mousemove', function(e) {
             var x = e.pageX - $('#' + mapStorage.svg.id()).offset().left;
@@ -31,6 +31,8 @@ var drawBeacon = function(beaconInfo, mapStorage, Calculations, Db) {
                     color: '#747cf4'
                 }).attr('fill', 'none').move(x - 50, y - 50);
             }
+            mapCtrl.isDrawing = true;
+            mapCtrl.saveStatus = "Save Pending . . . ";
         }); // end of mousemove
         mapStorage.svg.on('click', function(e) {
             var x = e.pageX - $('#' + mapStorage.svg.id()).offset().left;
@@ -38,7 +40,7 @@ var drawBeacon = function(beaconInfo, mapStorage, Calculations, Db) {
             beacon.stroke({
                 width: 2,
                 color: '#eeeeee'
-            }).attr('fill', '#aaaaaa').move(x - 20, y - 22);
+            }).attr('fill', '#aaaaaa').addClass('map-element').move(x - 20, y - 22);
             mapStorage.svg.off('mousemove');
             mapStorage.svg.off('click');
             var block = Calculations.isInAny({
@@ -49,10 +51,16 @@ var drawBeacon = function(beaconInfo, mapStorage, Calculations, Db) {
             beaconInfo.x = beacon.cx();
             beaconInfo.y = beacon.cy();
             beaconInfo.block = block.id;
+            beaconInfo.beacon = beacon;
             index = mapStorage.beacons.push(beaconInfo);
-            Db.saveBeacon(mapStorage.beacons[index-1]).then(function(beacon){
-              mapStorage.beacons[index-1].id = beacon.data.beacon_id;
-              mapStorage.beacons[index-1].isSaved = true;
+            Db.saveBeacon(mapStorage.beacons[index - 1]).then(function(beacon) {
+                mapStorage.beacons[index - 1].id = beacon.data.beacon_id;
+                mapStorage.beacons[index - 1].beacon.id(beacon.data.beacon_id);
+                mapStorage.beacons[index - 1].isSaved = true;
+                $timeout(function() {
+                  mapCtrl.isDrawing = false;
+                  mapCtrl.saveStatus = "Saved :)";
+                },1000);
             });
             console.log(beaconInfo)
             beacon.draggable();

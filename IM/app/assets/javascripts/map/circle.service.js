@@ -19,7 +19,7 @@
                 fill: '#1ABC9C',
                 stroke: "black",
                 'stroke-width': 4
-            });
+            }).addClass('map-element');
             circle.on('drawstart', function(e) {
                 x1 = e.detail.p.x;
                 y1 = e.detail.p.y;
@@ -46,12 +46,14 @@
                     shape: circle,
                     name: blockName,
                     pathArray: circlePath.array().value,
-                    type: 'circle'
+                    type: 'circle',
+                    color: circle.attr('fill')
                 });
                 circle = circlePath.original;
                 circlePath.remove();
                 Db.saveBlock(mapStorage.blocks[index-1]).then(function(block){
                   mapStorage.blocks[index-1].id = block.data.block_id;
+                  mapStorage.blocks[index-1].shape.id(block.data.block_id);
                   mapStorage.blocks[index-1].isSaved = true;
                   $timeout(function() {
                     mapCtrl.isDrawing = false;

@@ -6,11 +6,11 @@
         .controller('MapEditorController', mapEditorController)
         .controller('BlockInfoModalInstance', blockInfoModalInstance);
 
-    mapEditorController.$inject = ['mapStorage', 'Rect', 'Circle', 'Oval', 'Polygon', 'Beacon', '$uibModal', '$stateParams', 'Db'];
+    mapEditorController.$inject = ['mapStorage', 'Rect', 'Circle', 'Oval', 'Polygon', 'Beacon', '$uibModal', '$stateParams', 'Db', '$rootScope'];
     blockInfoModalInstance.$inject = ['$uibModalInstance', 'type'];
 
     /* @ngInject */
-    function mapEditorController(mapStorage, Rect, Circle, Oval, Polygon, Beacon, $uibModal, $stateParams, Db) {
+    function mapEditorController(mapStorage, Rect, Circle, Oval, Polygon, Beacon, $uibModal, $stateParams, Db, $rootScope) {
         var self = this;
         self.isInRoomTypes = false;
         self.isPending = true;
@@ -27,11 +27,26 @@
             reception: '#778899',
             other: '#BA55D3'
         };
+        $rootScope.$on("$stateChangeStart",
+            function(event, toState, toParams, fromState, fromParams) {
+                if (fromState.name == 'map_editor') {
+                    Db.exportMap();
+                }
+            });
         self.init = function() {
-            // draw the floor
-            mapStorage.svg = SVG('drawing').size(mapStorage.width, mapStorage.height);
-            $('#gridRect').attr('width', mapStorage.width);
-            $('#gridRect').attr('height', mapStorage.height);
+            Db.getBlocks().then(function(response) {
+                mapStorage.svg = SVG('drawing').size(mapStorage.width, mapStorage.height);
+                if (response.data.length > 0) {
+                    Db.importMap().then(function(response) {
+                        mapStorage.svg.svg(response.data.svg_code);
+                    });
+                } else {
+                    // draw the floor
+                    $('#gridRect').attr('width', mapStorage.width);
+                    $('#gridRect').attr('height', mapStorage.height);
+                    //  reDrawMap(mapStorage, response.data);
+                }
+            });
         };
         self.open = function(type) {
             var templateUrl;
@@ -54,19 +69,19 @@
             self.blockInfoModal.result.then(function(info) {
                 switch (type) {
                     case 'rect':
-                        Rect.init(info,self);
+                        Rect.init(info, self);
                         break;
                     case 'circle':
-                        Circle.init(info,self);
+                        Circle.init(info, self);
                         break;
                     case 'oval':
-                        Oval.init(info,self);
+                        Oval.init(info, self);
                         break;
                     case 'polygon':
-                        Polygon.init(info,self);
+                        Polygon.init(info, self);
                         break;
                     case 'beacon':
-                        Beacon.init(info,self);
+                        Beacon.init(info, self);
                         break;
                 }
                 self.isPending = true
@@ -97,6 +112,13 @@
     //     });
     //     return isObjPending;
     // }
+
+    function reDrawMap(mapStorage, dbBlocks) {
+        dbBlocks.forEach(function(dbBlock) {
+            mapStorage.blocks.push(dbBlock);
+            mapStorage.svg.path(dbBlock.path);
+        });
+    }
 
     function getSelectedBlocks(mapStorage) {
         var selectedBlocks = [];

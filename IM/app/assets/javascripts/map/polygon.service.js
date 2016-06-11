@@ -35,7 +35,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $ti
             }).attr({
                 'stroke-width': 4,
                 stroke: 'black'
-            }).attr('fill', 'none');
+            }).attr('fill', 'none').addClass('map-element');
         }
     });
 
@@ -93,12 +93,14 @@ var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $ti
             shape: polygon,
             name: blockName,
             pathArray: polyPath.array().value,
-            type: 'polygon'
+            type: 'polygon',
+            color: polygon.attr('fill')
         });
         polygon = polyPath.original;
         polyPath.remove();
         Db.saveBlock(mapStorage.blocks[index - 1]).then(function(block) {
             mapStorage.blocks[index - 1].id = block.data.block_id;
+            mapStorage.blocks[index-1].shape.id(block.data.block_id);
             mapStorage.blocks[index - 1].isSaved = true;
             $timeout(function() {
                 mapCtrl.isDrawing = false;

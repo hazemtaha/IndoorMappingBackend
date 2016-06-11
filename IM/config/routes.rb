@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     end
   end
   post 'block/:block_id/beacon' => 'beacon#create'
+  post 'floor/:floor_id/svg' => 'svg#create'
+  get 'floor/:floor_id/svg' => 'svg#show'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

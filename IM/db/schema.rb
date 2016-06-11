@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160609211910) do
+ActiveRecord::Schema.define(version: 20160610213730) do
 
   create_table "beacons", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 20160609211910) do
   create_table "blocks", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "path",       limit: 255
+    t.string   "color",      limit: 255
     t.integer  "floor_id",   limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
   add_index "blocks", ["floor_id"], name: "index_blocks_on_floor_id", using: :btree
-  add_index "blocks", ["name"], name: "index_blocks_on_name", unique: true, using: :btree
 
   create_table "buildings", force: :cascade do |t|
     t.string   "address",    limit: 255
@@ -80,6 +80,15 @@ ActiveRecord::Schema.define(version: 20160609211910) do
   add_index "owners", ["email"], name: "index_owners_on_email", unique: true, using: :btree
   add_index "owners", ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true, using: :btree
 
+  create_table "svgs", force: :cascade do |t|
+    t.integer  "floor_id",   limit: 4
+    t.text     "svg_code",   limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "svgs", ["floor_id"], name: "index_svgs_on_floor_id", using: :btree
+
   create_table "visitors", force: :cascade do |t|
     t.string   "username",   limit: 255
     t.string   "email",      limit: 255
@@ -104,6 +113,7 @@ ActiveRecord::Schema.define(version: 20160609211910) do
   add_foreign_key "blocks", "floors"
   add_foreign_key "buildings", "owners"
   add_foreign_key "floors", "buildings"
+  add_foreign_key "svgs", "floors"
   add_foreign_key "visits", "beacons"
   add_foreign_key "visits", "visitors"
 end

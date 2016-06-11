@@ -4,7 +4,7 @@ class BlocksController < ApplicationController
     	respond_with Block.find(params[:id])
     end
 
-	def index
+		def index
 		respond_with Block.all
 	end
 	def create
