@@ -5,25 +5,26 @@
         .module('IM_module')
         .service('Rect', rect);
 
-    rect.$inject = ['mapStorage','Db', '$timeout'];
+    rect.$inject = ['mapStorage', 'Db', '$timeout'];
 
     /* @ngInject */
     function rect(mapStorage, Db, $timeout) {
         this.init = init;
 
-        function init(blockName,mapCtrl) {
+        function init(blockName, mapCtrl) {
             var rect = mapStorage.svg.rect().draw({
                 snapToGrid: 10
             }).attr({
                 fill: '#1ABC9C',
                 stroke: "black",
-                'stroke-width': 4
+                'stroke-width': 4,
+                name: blockName
             }).addClass('map-element');
             var x1, y1, x2, y2, width, height, path, text, drag_rect, index;
             rect.on('drawstart', function(e) {
-              mapCtrl.isDrawing = true;
-              mapCtrl.saveStatus = "Save Pending . . . ";
-              console.log(mapCtrl.isDrawing);
+                mapCtrl.isDrawing = true;
+                mapCtrl.saveStatus = "Save Pending . . . ";
+                console.log(mapCtrl.isDrawing);
                 x1 = e.detail.p.x;
                 y1 = e.detail.p.y;
                 text = mapStorage.svg.text('').font({
@@ -41,7 +42,7 @@
                 text.text(blockName + "\n" + rect.bbox().w / mapStorage.scale(mapStorage.width, mapStorage.height) + "X" + rect.bbox().h / mapStorage.scale(mapStorage.width, mapStorage.height)).move(rect.bbox().cx, rect.bbox().cy);
             });
             rect.on('drawstop', function(e) {
-              var rectPath = rect.toPath();
+                var rectPath = rect.toPath();
                 index = mapStorage.blocks.push({
                     shape: rect,
                     name: blockName,
@@ -51,22 +52,23 @@
                 });
                 rect = rectPath.original;
                 rectPath.remove();
-                rect.draggable();
-                Db.saveBlock(mapStorage.blocks[index-1]).then(function(block){
-                  mapStorage.blocks[index-1].id = block.data.block_id;
-                  mapStorage.blocks[index-1].shape.id(block.data.block_id);
-                  mapStorage.blocks[index-1].isSaved = true;
-                  $timeout(function() {
-                    mapCtrl.isDrawing = false;
-                    mapCtrl.saveStatus = "Saved :)";
-                  },1000);
+                Db.saveBlock(mapStorage.blocks[index - 1]).then(function(block) {
+                    mapStorage.blocks[index - 1].id = block.data.block_id;
+                    mapStorage.blocks[index - 1].shape.id(block.data.block_id);
+                    text.id('text' + rect.id());
+                    mapStorage.blocks[index - 1].isSaved = true;
+                    $timeout(function() {
+                        mapCtrl.isDrawing = false;
+                        mapCtrl.saveStatus = "Saved :)";
+                    }, 1000);
                 });
+                rect.draggable();
                 rect.on('dragend', function(e) {
                     text.move(rect.bbox().cx, rect.bbox().cy);
                 });
                 rect.on('dblclick', function(ev) {
                     rect.selectize().resize();
-                    mapStorage.blocks[index-1].isSelected = true;
+                    mapStorage.blocks[index - 1].isSelected = true;
                     rect.on('resizedone', function(e) {
                         text.text(blockName + "\n" + rect.bbox().w / mapStorage.scale(mapStorage.width, mapStorage.height) + "X" + rect.bbox().h / mapStorage.scale(mapStorage.width, mapStorage.height)).move(rect.bbox().cx, rect.bbox().cy);
                     });
@@ -76,13 +78,13 @@
                             rect.remove();
                             text.clear();
                             $(document).off('keydown');
-                            mapStorage.blocks[index-1].isSelected = false;
+                            mapStorage.blocks[index - 1].isSelected = false;
 
                         }
                         if (e.keyCode == 13) {
                             rect.selectize(false);
                             $(document).off('keydown');
-                            mapStorage.blocks[index-1].isSelected = false;
+                            mapStorage.blocks[index - 1].isSelected = false;
                         }
                     });
                 });

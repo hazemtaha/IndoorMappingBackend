@@ -6,11 +6,11 @@
         .controller('MapEditorController', mapEditorController)
         .controller('BlockInfoModalInstance', blockInfoModalInstance);
 
-    mapEditorController.$inject = ['mapStorage', 'Rect', 'Circle', 'Oval', 'Polygon', 'Beacon', '$uibModal', '$stateParams', 'Db', '$rootScope'];
+    mapEditorController.$inject = ['mapStorage', 'Rect', 'Circle', 'Oval', 'Polygon', 'Beacon', '$uibModal', '$stateParams', 'Db', '$rootScope', 'Interactivy'];
     blockInfoModalInstance.$inject = ['$uibModalInstance', 'type'];
 
     /* @ngInject */
-    function mapEditorController(mapStorage, Rect, Circle, Oval, Polygon, Beacon, $uibModal, $stateParams, Db, $rootScope) {
+    function mapEditorController(mapStorage, Rect, Circle, Oval, Polygon, Beacon, $uibModal, $stateParams, Db, $rootScope, Interactivy) {
         var self = this;
         self.isInRoomTypes = false;
         self.isPending = true;
@@ -39,6 +39,13 @@
                 if (response.data.length > 0) {
                     Db.importMap().then(function(response) {
                         mapStorage.svg.svg(response.data.svg_code);
+                        var blocks = mapStorage.svg.select('.map-element').members;
+                        console.log(blocks);
+                        blocks.forEach(function(block) {
+                            if (block.type != 'polygon' && block.type != 'beacon') {
+                                Interactivy.normal(block);
+                            }
+                        });
                     });
                 } else {
                     // draw the floor

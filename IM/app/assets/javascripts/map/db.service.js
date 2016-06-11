@@ -20,8 +20,9 @@
         return dbServices;
 
         function getBlocks() {
-          return $http.get('/buildings/'+$stateParams.building_id+'/floors/'+$stateParams.floor_id+'/blocks.json');
+            return $http.get('/buildings/' + $stateParams.building_id + '/floors/' + $stateParams.floor_id + '/blocks.json');
         }
+
         function saveBlock(mapBlock) {
             var dbBlock = $.extend(true, {}, mapBlock);
             dbBlock.path = path2String(dbBlock.pathArray);
@@ -39,12 +40,16 @@
                 beacon: dbBeacon
             });
         }
+
         function exportMap() {
-          console.log(mapStorage.svg.select('.map-element'));
-          return $http.post('/floor/'+$stateParams.floor_id+'/svg.json', { svg: mapStorage.svg.svg() });
+            // console.log(mapStorage.svg.select('.map-element'));
+            return $http.post('/floor/' + $stateParams.floor_id + '/svg.json', {
+                svg: mapStorage.svg.svg()
+            });
         }
+
         function importMap() {
-          return $http.get('/floor/'+$stateParams.floor_id+'/svg.json');
+            return $http.get('/floor/' + $stateParams.floor_id + '/svg.json');
         }
     }
 })();

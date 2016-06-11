@@ -18,7 +18,8 @@
             }).attr({
                 fill: '#1ABC9C',
                 stroke: "black",
-                'stroke-width': 4
+                'stroke-width': 4,
+                name: blockName
             }).addClass('map-element');
             circle.on('drawstart', function(e) {
                 x1 = e.detail.p.x;
@@ -41,7 +42,7 @@
                 text.text(blockName + "\n" + "R= " + Math.round(circle.bbox().w / (mapStorage.scale(mapStorage.width, mapStorage.height) * 2))).move(circle.bbox().cx, circle.bbox().cy);
             });
             circle.on('drawstop', function(e) {
-              var circlePath = circle.toPath();
+                var circlePath = circle.toPath();
                 index = mapStorage.blocks.push({
                     shape: circle,
                     name: blockName,
@@ -51,14 +52,17 @@
                 });
                 circle = circlePath.original;
                 circlePath.remove();
-                Db.saveBlock(mapStorage.blocks[index-1]).then(function(block){
-                  mapStorage.blocks[index-1].id = block.data.block_id;
-                  mapStorage.blocks[index-1].shape.id(block.data.block_id);
-                  mapStorage.blocks[index-1].isSaved = true;
-                  $timeout(function() {
-                    mapCtrl.isDrawing = false;
-                    mapCtrl.saveStatus = "Saved :)";
-                  },1000);
+                circle.text = text;
+                circle.name = blockName;
+                Db.saveBlock(mapStorage.blocks[index - 1]).then(function(block) {
+                    mapStorage.blocks[index - 1].id = block.data.block_id;
+                    mapStorage.blocks[index - 1].shape.id(block.data.block_id);
+                    text.id('text' + circle.id());
+                    mapStorage.blocks[index - 1].isSaved = true;
+                    $timeout(function() {
+                        mapCtrl.isDrawing = false;
+                        mapCtrl.saveStatus = "Saved :)";
+                    }, 1000);
                 });
                 circle.draggable();
                 circle.on('dragend', function(e) {
@@ -66,7 +70,7 @@
                 });
                 circle.on('dblclick', function(ev) {
                     circle.selectize().resize();
-                    mapStorage.blocks[index-1].isSelected = true;
+                    mapStorage.blocks[index - 1].isSelected = true;
                     circle.on('resizedone', function(e) {
                         text.text(blockName + "\n" + "R= " + Math.round(circle.bbox().w / (mapStorage.scale(mapStorage.width, mapStorage.height) * 2))).move(circle.bbox().cx, circle.bbox().cy);
                     });
@@ -76,12 +80,12 @@
                             ev.target.remove();
                             text.clear();
                             $(document).off('keydown');
-                            mapStorage.blocks[index-1].isSelected = false;
+                            mapStorage.blocks[index - 1].isSelected = false;
                         }
                         if (e.keyCode == 13) {
                             circle.selectize(false);
                             $(document).off('keydown');
-                            mapStorage.blocks[index-1].isSelected = false;
+                            mapStorage.blocks[index - 1].isSelected = false;
                         }
                     });
                 });

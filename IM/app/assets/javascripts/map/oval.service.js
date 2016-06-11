@@ -18,7 +18,8 @@
             }).attr({
                 fill: '#1ABC9C',
                 stroke: "black",
-                'stroke-width': 4
+                'stroke-width': 4,
+                name: blockName
             }).addClass('map-element');
             oval.on('drawstart', function(e) {
                 text = mapStorage.svg.text('').font({
@@ -34,7 +35,7 @@
                 text.text(blockName + "\n" + oval.bbox().w / (2 * mapStorage.scale(mapStorage.width, mapStorage.height)) + "X" + oval.bbox().h / (2 * mapStorage.scale(mapStorage.width, mapStorage.height))).move(oval.bbox().cx, oval.bbox().cy);
             });
             oval.on('drawstop', function(e) {
-              var ovalPath = oval.toPath()
+                var ovalPath = oval.toPath()
                 index = mapStorage.blocks.push({
                     shape: oval,
                     name: blockName,
@@ -44,14 +45,15 @@
                 });
                 oval = ovalPath.original;
                 ovalPath.remove();
-                Db.saveBlock(mapStorage.blocks[index-1]).then(function(block){
-                  mapStorage.blocks[index-1].id = block.data.block_id;
-                  mapStorage.blocks[index-1].shape.id(block.data.block_id);
-                  mapStorage.blocks[index-1].isSaved = true;
-                  $timeout(function() {
-                    mapCtrl.isDrawing = false;
-                    mapCtrl.saveStatus = "Saved :)";
-                  },1000);
+                Db.saveBlock(mapStorage.blocks[index - 1]).then(function(block) {
+                    mapStorage.blocks[index - 1].id = block.data.block_id;
+                    mapStorage.blocks[index - 1].shape.id(block.data.block_id);
+                    text.id('text' + oval.id());
+                    mapStorage.blocks[index - 1].isSaved = true;
+                    $timeout(function() {
+                        mapCtrl.isDrawing = false;
+                        mapCtrl.saveStatus = "Saved :)";
+                    }, 1000);
                 });
                 oval.draggable();
                 oval.on('dragend', function(e) {
