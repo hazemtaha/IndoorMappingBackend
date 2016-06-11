@@ -18,13 +18,13 @@
     <br>
   </div>
 
-  <!--<div flow-init flow-name="authCtrl.user.picture"
+  <div flow-init flow-name="authCtrl.user.picture"
      flow-files-submitted="$flow.upload()"
      flow-file-success="$file.msg = $message"
-     flow-files-added="authCtrl.$on( $files, $event, $flow )">-->
+     flow-files-added="authCtrl.$on( $files, $event, $flow )">
 
-  <input type="file" nv-file-select uploader="authCtrl.uploader"/>
-<!--</div>-->
+  <input type="file" />
+</div>
   <input type="submit" class="btn btn-success col-sm-offset-3 col-sm-6" ng-disabled="ownerForm.$invalid" value="Register">
 </form>
 </div>
