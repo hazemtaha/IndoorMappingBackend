@@ -11,7 +11,8 @@
     function interactivy(mapStorage, Calculations) {
         var interactivy = {
             normal: normal,
-            polygon: polygon
+            polygon: polygon,
+            beacon: beacon
         };
 
         return interactivy;
@@ -23,6 +24,7 @@
             var index = mapStorage.blocks.push({
                 shape: block,
                 name: blockName,
+                id: block.id(),
                 // pathArray: rectPath.array().value,
                 type: block.type,
                 color: block.attr('fill')
@@ -63,6 +65,7 @@
             var index = mapStorage.blocks.push({
                 shape: polygon,
                 name: blockName,
+                id: polygon.id(),
                 // pathArray: polyPath.array().value,
                 type: 'polygon',
                 color: polygon.attr('fill')
@@ -125,6 +128,47 @@
                     }
                 });
             });
+        }
+
+        function beacon(beacon) {
+          var beaconInfo = {};
+          var block = Calculations.isInAny({
+              x: beacon.bbox().cx,
+              y: beacon.bbox().cy
+          }, mapStorage.blocks);
+          // console.log(log);
+          beaconInfo.x = beacon.cx();
+          beaconInfo.y = beacon.cy();
+          beaconInfo.block = block.id;
+          beaconInfo.beacon = beacon;
+          beaconInfo.id = beacon.id();
+          var index = mapStorage.beacons.push(beaconInfo);
+          beacon.draggable();
+          // double click to select an element
+          beacon.on('dblclick', function(ev) {
+              // enable selecting
+              beacon.selectize();
+              mapStorage.beacons[index - 1].isSelected = true;
+              // add keydown event to the document to unselect the shape
+              $(document).on('keydown', function(e) {
+                  // listen to the 'enter' or 'esc' keys for deselect
+                  if (e.keyCode == 27 || e.keyCode == 13) {
+                      // deselect
+                      beacon.selectize(false);
+                      $(document).off('keydown');
+                      mapStorage.beacons[index - 1].isSelected = false;
+                  }
+                  // listen for 'delete' key for removing the element
+                  if (e.keyCode == 46) {
+                      // deselect
+                      beacon.selectize(false);
+                      // remove the element
+                      beacon.remove();
+                      $(document).off('keydown');
+                      mapStorage.beacons[index - 1].isSelected = false;
+                  }
+              });
+          });
         }
     }
 })();

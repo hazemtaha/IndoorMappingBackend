@@ -41,7 +41,7 @@ var drawBeacon = function(beaconInfo, mapStorage, Calculations, Db, mapCtrl, $ti
                 width: 2,
                 color: '#eeeeee'
             }).attr('fill', '#aaaaaa').addClass('map-element').move(x - 20, y - 22);
-            beacon.type = 'beacon'
+            beacon.attr('name','beacon');
             mapStorage.svg.off('mousemove');
             mapStorage.svg.off('click');
             var block = Calculations.isInAny({
@@ -63,7 +63,6 @@ var drawBeacon = function(beaconInfo, mapStorage, Calculations, Db, mapCtrl, $ti
                     mapCtrl.saveStatus = "Saved :)";
                 }, 1000);
             });
-            console.log(beaconInfo)
             beacon.draggable();
         }); // end of click
     } // end of drawBeacon

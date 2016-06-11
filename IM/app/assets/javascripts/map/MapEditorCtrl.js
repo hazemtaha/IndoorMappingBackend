@@ -42,11 +42,13 @@
                         var blocks = mapStorage.svg.select('.map-element').members;
                         console.log(blocks);
                         blocks.forEach(function(block) {
-                            if (block.type != 'polygon' && block.type != 'beacon') {
-                                Interactivy.normal(block);
-                            } else if (block.type == 'polygon') {
-                                Interactivy.polygon(block);
-                            }
+                          if (block.attr('name') == 'beacon') {
+                            Interactivy.beacon(block);
+                          } else if (block.type == 'polygon') {
+                            Interactivy.polygon(block);
+                          } else {
+                            Interactivy.normal(block);
+                          }
                         });
                     });
                 } else {
