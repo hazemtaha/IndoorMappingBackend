@@ -14,7 +14,7 @@
             polygon: polygon,
             beacon: beacon,
             updateObj: updateObj,
-            deleteBlock: deleteBlock
+            deleteShape: deleteShape
         };
 
         return interactivy;
@@ -46,7 +46,7 @@
                 });
                 $(document).on('keydown', function(e) {
                     if (e.keyCode == 46 && mapStorage.blocks[index - 1].isSelected) {
-                        interactivy.deleteBlock(block, mapCtrl);
+                        interactivy.deleteShape(mapStorage.blocks, block, mapCtrl);
                         block.selectize(false);
                         block.remove();
                         text.clear();
@@ -126,7 +126,7 @@
                     if (e.keyCode == 46) {
                         // deselect
                         polygon.selectize(false);
-                        interactivy.deleteBlock(polygon, mapCtrl);
+                        interactivy.deleteShape(mapStorage.blocks,polygon, mapCtrl);
                         // remove the element
                         polygon.remove();
                         // remove the text
@@ -173,7 +173,7 @@
                     if (e.keyCode == 46) {
                         // deselect
                         beacon.selectize(false);
-                        // deleteBlock(mapStorage.blocks, beacon, Db, mapCtrl);
+                        deleteShape(mapStorage.beacons, beacon, mapCtrl);
                         // remove the element
                         beacon.remove();
                         $(document).off('keydown');
@@ -194,17 +194,17 @@
         }
 
 
-        function deleteBlock(toDelBlock, mapCtrl) {
-            for (var i = 0; i < mapStorage.blocks.length; i++) {
-                if (mapStorage.blocks[i].id == toDelBlock.id()) {
-                    Db.deleteBlock(mapStorage.blocks[i].id).then(function() {
+        function deleteShape(shapes,toDelBlock, mapCtrl) {
+            for (var i = 0; i < shapes.length; i++) {
+                if (shapes[i].id == toDelBlock.id()) {
+                    Db.deleteBlock(shapes[i].id).then(function() {
                         mapCtrl.isDrawing = true;
                         mapCtrl.saveStatus = "Saving . . . . ";
                         $timeout(function() {
                             mapCtrl.isDrawing = false;
                             mapCtrl.saveStatus = "Saved :)";
                         }, 1000);
-                        delete mapStorage.blocks[i];
+                        delete shapes[i];
                     });
                 }
             }

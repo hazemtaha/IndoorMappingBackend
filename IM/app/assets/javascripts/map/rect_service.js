@@ -74,7 +74,7 @@
                     });
                     $(document).on('keydown', function(e) {
                         if (e.keyCode == 46 && mapStorage.blocks[index - 1].isSelected) {
-                            Interactivy.deleteBlock(rect, mapCtrl);
+                            Interactivy.deleteShape(mapStorage.blocks, rect, mapCtrl);
                             rect.selectize(false);
                             rect.remove();
                             text.clear();

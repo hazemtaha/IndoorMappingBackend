@@ -168,7 +168,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $ti
                 }
                 // listen for 'delete' key for removing the element
                 if (e.keyCode == 46) {
-                    Interactivy.deleteBlock(polygon, mapCtrl);
+                    Interactivy.deleteShape(mapStorage.blocks, polygon, mapCtrl);
                     // deselect
                     polygon.selectize(false);
                     // remove the element

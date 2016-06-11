@@ -5,10 +5,10 @@
         .module('IM_module')
         .service('Circle', circle);
 
-    circle.$inject = ['mapStorage', 'Db', '$timeout'];
+    circle.$inject = ['mapStorage', 'Db', '$timeout', 'Interactivy'];
 
     /* @ngInject */
-    function circle(mapStorage, Db, $timeout) {
+    function circle(mapStorage, Db, $timeout, Interactivy) {
         this.init = init;
 
         function init(blockName, mapCtrl) {
@@ -76,7 +76,7 @@
                     });
                     $(document).on('keydown', function(e) {
                         if (e.keyCode == 46 && mapStorage.blocks[index - 1].isSelected) {
-                          Interactivy.deleteBlock(circle, mapCtrl);
+                          Interactivy.deleteShape(mapStorage.blocks, circle, mapCtrl);
                             circle.selectize(false);
                             ev.target.remove();
                             text.clear();

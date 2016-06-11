@@ -5,10 +5,10 @@
         .module('IM_module')
         .service('Oval', oval);
 
-    oval.$inject = ['mapStorage', 'Db', '$timeout'];
+    oval.$inject = ['mapStorage', 'Db', '$timeout', 'Interactivy'];
 
     /* @ngInject */
-    function oval(mapStorage, Db, $timeout) {
+    function oval(mapStorage, Db, $timeout, Interactivy) {
         this.init = init;
 
         function init(blockName, mapCtrl) {
@@ -67,7 +67,7 @@
                     });
                     $(document).on('keydown', function(e) {
                         if (e.keyCode == 46 && mapStorage.blocks[index - 1].isSelected) {
-                            Interactivy.deleteBlock(oval, mapCtrl);
+                            Interactivy.deleteShape(mapStorage.blocks, oval, mapCtrl);
                             oval.selectize(false);
                             ev.target.remove();
                             text.clear();
