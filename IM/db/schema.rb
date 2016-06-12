@@ -90,25 +90,14 @@ ActiveRecord::Schema.define(version: 20160610213730) do
   add_index "svgs", ["floor_id"], name: "index_svgs_on_floor_id", using: :btree
 
   create_table "visitors", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.string   "username",               limit: 255
+    t.string   "encrypted_password", limit: 255, default: "", null: false
+    t.string   "email",              limit: 255, default: "", null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.string   "username",           limit: 255
     t.date     "dob"
-    t.string   "phone_type",             limit: 255
+    t.string   "phone_type",         limit: 255
   end
-
-  add_index "visitors", ["email"], name: "index_visitors_on_email", unique: true, using: :btree
-  add_index "visitors", ["reset_password_token"], name: "index_visitors_on_reset_password_token", unique: true, using: :btree
 
   create_table "visits", force: :cascade do |t|
     t.integer  "visitor_id", limit: 4
