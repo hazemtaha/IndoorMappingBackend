@@ -13,4 +13,8 @@ class SvgController < ApplicationController
     @svg = Svg.find_by(floor_id: params[:floor_id])
     respond_with @svg
   end
+  def import
+    @floor_id = Beacon.find_by(uuid: params[:uuid]).block.floor.id
+    respond_with Svg.find_by(floor_id: @floor_id)
+  end
 end
