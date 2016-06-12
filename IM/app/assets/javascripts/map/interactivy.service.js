@@ -153,7 +153,7 @@
             beaconInfo.block = block.id;
             beaconInfo.beacon = beacon;
             beaconInfo.id = beacon.id();
-            var index = interactivy.updateObj(beaconInfo, mapCtrl, mapStorage.);
+            var index = interactivy.updateObj(beaconInfo, mapCtrl, mapStorage.beacons);
 
             // var index = mapStorage.beacons.push(beaconInfo);
             beacon.draggable();
