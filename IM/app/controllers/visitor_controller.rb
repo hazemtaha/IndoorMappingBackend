@@ -4,7 +4,7 @@ class VisitorController < ApplicationController
 
         @visitor = Visitor.create(visitor_params)
 
-        respond_with @visitor
+        render :json {visitor: @visitor}
     end
 
     private
