@@ -31,7 +31,7 @@
                 type: block.type,
                 color: block.attr('fill')
             };
-            var index = interactivy.updateObj(blockObj, mapCtrl, mapStorage.blocks);
+            var index = interactivy.updateObj(blockObj, mapCtrl);
             block = blockPath.original;
             blockPath.remove();
             block.draggable();
@@ -77,7 +77,7 @@
                 type: 'polygon',
                 color: polygon.attr('fill')
             }
-            var index = interactivy.updateObj(polyObj, mapCtrl, mapStorage.blocks);
+            var index = interactivy.updateObj(polyObj, mapCtrl);
             polygon = polyPath.original;
             polyPath.remove();
             // enable the shape to be draggable
@@ -153,7 +153,7 @@
             beaconInfo.block = block.id;
             beaconInfo.beacon = beacon;
             beaconInfo.id = beacon.id();
-            var index = interactivy.updateObj(beaconInfo, mapCtrl, mapStorage.beacons);
+            var index = interactivy.updateObj(beaconInfo, mapCtrl, mapStorage.);
 
             // var index = mapStorage.beacons.push(beaconInfo);
             beacon.draggable();

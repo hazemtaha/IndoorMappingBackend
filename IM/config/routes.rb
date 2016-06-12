@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   delete 'beacon/:id' => 'beacon#destroy'
   post 'floor/:floor_id/svg' => 'svg#create'
   get 'floor/:floor_id/svg' => 'svg#show'
+  get 'svg/beacon/:uuid' => 'svg#import'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

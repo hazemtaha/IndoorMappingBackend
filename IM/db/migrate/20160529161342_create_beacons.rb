@@ -2,7 +2,7 @@ class CreateBeacons < ActiveRecord::Migration
   def change
     create_table :beacons do |t|
       t.string :name
-      t.integer :uuid
+      t.string :uuid
       t.integer :major
       t.integer :minor
       t.integer :x
