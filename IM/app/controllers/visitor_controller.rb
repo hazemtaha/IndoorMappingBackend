@@ -1,20 +1,10 @@
 class VisitorController < ApplicationController
 
-	def index
-        respond_with Visitor.where(:id => current.id)
-    end
-
-
     def create 
 
-        @visit = Visitor.create(visit_params)
-        @visit.id = current.id 
+        @visitor = Visitor.create(visitor_params)
 
-        if @visit.save  
-             render json: Visitor.where(:id => current.id)
-        else 
-             render json: {:errorMsg => @visit.errors[:name][0]}
-        end     
+        respond_with @visitor
     end
 
     private

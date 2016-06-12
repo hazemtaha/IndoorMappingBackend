@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20160610213730) do
 
   create_table "beacons", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.integer  "uuid",       limit: 4
+    t.string   "uuid",       limit: 255
     t.integer  "major",      limit: 4
     t.integer  "minor",      limit: 4
     t.integer  "x",          limit: 4
@@ -98,6 +98,9 @@ ActiveRecord::Schema.define(version: 20160610213730) do
     t.date     "dob"
     t.string   "phone_type",         limit: 255
   end
+
+  add_index "visitors", ["email"], name: "index_visitors_on_email", unique: true, using: :btree
+  add_index "visitors", ["username"], name: "index_visitors_on_username", unique: true, using: :btree
 
   create_table "visits", force: :cascade do |t|
     t.integer  "visitor_id", limit: 4
