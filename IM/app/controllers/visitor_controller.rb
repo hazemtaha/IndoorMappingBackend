@@ -2,8 +2,8 @@ class VisitorController < ApplicationController
 
     def create 
 
-        @visitor = Visitor.create(visitor_params)
-        if @visitor.save
+         if Visitor.create(visitor_params)
+        	@visitor = Visitor.create(visitor_params)
         	render json: {visitor: @visitor}
         else
         	render json: {:errorMsg => @visitor.errors}
