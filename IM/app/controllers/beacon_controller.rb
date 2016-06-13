@@ -8,4 +8,8 @@ class BeaconController < ApplicationController
   def destroy
     respond_with Beacon.destroy(params[:id])
   end
+
+  def all
+    render json: { beacons: Beacon.all }
+  end
 end
