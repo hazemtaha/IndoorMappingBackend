@@ -12,9 +12,8 @@ class BeaconController < ApplicationController
   def all
     @beacons = Beacon.all
     beacons = []
-    Beacon.all.each { |bcn|
-      bcn.id = bcn.id.to_s
-      beacons.push(bcn)
+    @beacons.each { |bcn|
+      beacons.push({id: bcn.id.to_s, uuid: bcn.uuid, major: bcn.major, minor: bcn.minor})
     }
     @beacons = beacons
     render json: { beacons: @beacons }
