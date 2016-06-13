@@ -12,7 +12,7 @@ class BeaconController < ApplicationController
   def all
     # beacons = []
     # Beacon.all.each { |bcn| beacons.push(bcn.to_json) }
-    @beacons = Beacon.all
+    @beacons = Beacon.all.map(&:to_s)
     render json: { beacons: @beacons }
   end
 end
