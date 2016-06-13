@@ -2,11 +2,12 @@ class VisitorController < ApplicationController
 
     def create 
 
-         if Visitor.create(visitor_params)
-        	@visitor = Visitor.create(visitor_params)
+        @visitor = Visitor.new(visitor_params)
+        if Visitor.exists?(:email => @visitor.email , :username => @visitor.username)
+        	render json: {:errorMsg => "Email or Username already exists"}
+        else      	
+        	@visitor.save
         	render json: {visitor: @visitor}
-        else
-        	render json: {:errorMsg => @visitor.errors}
         end
     end
 
