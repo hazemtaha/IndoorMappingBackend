@@ -3,9 +3,9 @@ class Visitor < ActiveRecord::Base
 before_save :encrypt_password
 
 def encrypt_password
-	if password.present?
+	if encrypted_password.present?
     	self.salt = BCrypt::Engine.generate_salt
-    	self.encrypted_password= BCrypt::Engine.hash_secret(password, salt)
+    	self.encrypted_password= BCrypt::Engine.hash_secret(encrypted_password, salt)
   	end
 end 
 end
