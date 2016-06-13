@@ -10,6 +10,6 @@ class BeaconController < ApplicationController
   end
 
   def all
-    render json: { beacons: Beacon.all }
+    render json: { beacons: Beacon.all.map { |e| e.id.to_s } }
   end
 end
