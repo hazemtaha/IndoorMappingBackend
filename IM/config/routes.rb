@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :visitors
   devise_for :owners
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -20,7 +19,8 @@ Rails.application.routes.draw do
   post 'floor/:floor_id/svg' => 'svg#create'
   get 'floor/:floor_id/svg' => 'svg#show'
   get 'svg/beacon/:uuid' => 'svg#import'
-  get '/beacons' => 'beacons#index'
+  get 'beacons/' => 'beacons#index'
+  post 'visitors/' => 'visitor#create'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

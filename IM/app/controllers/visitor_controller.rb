@@ -1,10 +1,17 @@
-class VisitorController < Devise::RegistrationsController
-  def sign_up_params
-	#aaa    
-	params.require(:visitor).permit(:email, :password, :username, :dob , :created_at)
-  end
+class VisitorController < ApplicationController
 
-  def account_update_params
-    params.require(:visitor).permit(:email, :password,:current_password, :username)
-  end
+    def create 
+
+        @visitor = Visitor.create(visitor_params)
+
+        render json: {visitor: @visitor}
+    end
+
+    private
+        def visitor_params
+            params.require(:visitor).permit(:email, :username, :encrypted_password, :dob)
+        end
+
+        
+
 end
