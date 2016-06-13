@@ -79,13 +79,20 @@ angular.module('IM_module')
 		    	self.addBuildForm.$setPristine();
 		    }
 
-				self.openMap = function(floorWidth, floorHeight, floorId) {
-					console.log("");
-					mapStorage.width = floorWidth * mapStorage.scale(floorWidth, floorHeight);
-					mapStorage.height = floorHeight * mapStorage.scale(floorWidth, floorHeight);
-					$state.go('map_editor', {
-							building_id: $stateParams.id,
-							floor_id: floorId
-					});
-				}
+			self.openMap = function(floorWidth, floorHeight, floorId) {
+				console.log("");
+				mapStorage.width = floorWidth * mapStorage.scale(floorWidth, floorHeight);
+				mapStorage.height = floorHeight * mapStorage.scale(floorWidth, floorHeight);
+				$state.go('map_editor', {
+						building_id: $stateParams.id,
+						floor_id: floorId
+				});
+			}
+
+			self.showFloorStatFunc = function(buildId, floorId){
+				console.log("inside showFloorStatFunc");
+				
+				
+			}
+
 	}]);
