@@ -10,6 +10,6 @@ class BeaconController < ApplicationController
   end
 
   def all
-    respond_with Beacon.all
+    render json: { beacons: Beacon.all }
   end
 end
