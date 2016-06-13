@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post 'floor/:floor_id/svg' => 'svg#create'
   get 'floor/:floor_id/svg' => 'svg#show'
   get 'svg/beacon/:uuid' => 'svg#import'
+  get '/beacons' => 'beacons#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
