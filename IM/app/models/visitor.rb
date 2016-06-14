@@ -1,6 +1,6 @@
 class Visitor < ActiveRecord::Base
   has_many :beacons, through: :visits
-#before_save :encrypt_password
+  before_save :encrypt_password
 
 def encrypt_password
 	if encrypted_password.present?
@@ -11,12 +11,14 @@ end
 
 def self.authenticate(email, password)
   @visitor = Visitor.find_by_email(email)
+  hashedPassword = Digest::SHA1.hexdigest(password)
   if @visitor 
   	puts @visitor.encrypted_password
-  	 if @visitor.encrypted_password == password
+  	 if @visitor.encrypted_password == hashedPassword
+  	 	puts @visitor
     return @visitor
   else
-  	#puts Digest::SHA1.hexdigest(password)
+  	puts Digest::SHA1.hexdigest(password)
     return nil
   end
 end
