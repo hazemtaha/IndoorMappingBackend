@@ -45,6 +45,7 @@
                           if (block.attr('name') == 'beacon') {
                             Interactivy.beacon(block, self);
                           } else if (block.type == 'polygon') {
+                            console.log(block);
                             Interactivy.polygon(block, self);
                           } else {
                             Interactivy.normal(block, self);
