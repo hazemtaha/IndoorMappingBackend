@@ -32,7 +32,7 @@
                 mapCtrl.saveStatus = "Save Pending . . . ";
             });
             oval.on('drawupdate', function(e) {
-                text.text(blockName + "\n" + oval.bbox().w / (2 * mapStorage.scale(mapStorage.width, mapStorage.height)) + "X" + oval.bbox().h / (2 * mapStorage.scale(mapStorage.width, mapStorage.height))).move(oval.bbox().cx, oval.bbox().cy);
+                text.text(blockName + "\n" + oval.bbox().w / (2 * mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight)) + "X" + oval.bbox().h / (2 * mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight))).move(oval.bbox().cx, oval.bbox().cy);
             });
             oval.on('drawstop', function(e) {
                 var ovalPath = oval.toPath()
@@ -63,7 +63,7 @@
                     oval.selectize().resize();
                     mapStorage.blocks[index - 1].isSelected = true;
                     oval.on('resizedone', function(e) {
-                        text.text(blockName + "\n" + oval.bbox().w / (mapStorage.scale(mapStorage.width, mapStorage.height) * 2) + "X" + oval.bbox().h / (mapStorage.scale(mapStorage.width, mapStorage.height) * 2)).move(oval.bbox().cx, oval.bbox().cy);
+                        text.text(blockName + "\n" + oval.bbox().w / (mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight) * 2) + "X" + oval.bbox().h / (mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight) * 2)).move(oval.bbox().cx, oval.bbox().cy);
                     });
                     $(document).on('keydown', function(e) {
                         if (e.keyCode == 46 && mapStorage.blocks[index - 1].isSelected) {

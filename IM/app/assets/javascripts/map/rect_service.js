@@ -37,9 +37,9 @@
             rect.on('drawupdate', function(e) {
                 x2 = e.detail.p.x;
                 y2 = e.detail.p.y;
-                width = Math.abs(x2 - x1) / mapStorage.scale_width;
-                height = Math.abs(y2 - y1) / mapStorage.scale_height;
-                text.text(blockName + "\n" + rect.bbox().w / mapStorage.scale(mapStorage.width, mapStorage.height) + "X" + rect.bbox().h / mapStorage.scale(mapStorage.width, mapStorage.height)).move(rect.bbox().cx, rect.bbox().cy);
+                // width = Math.abs(x2 - x1) / mapStorage.scale_width;
+                // height = Math.abs(y2 - y1) / mapStorage.scale_height;
+                text.text(blockName + "\n" + rect.bbox().w / mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight) + "X" + rect.bbox().h / mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight)).move(rect.bbox().cx, rect.bbox().cy);
             });
             rect.on('drawstop', function(e) {
                 var rectPath = rect.toPath();
@@ -70,7 +70,7 @@
                     rect.selectize().resize();
                     mapStorage.blocks[index - 1].isSelected = true;
                     rect.on('resizedone', function(e) {
-                        text.text(blockName + "\n" + rect.bbox().w / mapStorage.scale(mapStorage.width, mapStorage.height) + "X" + rect.bbox().h / mapStorage.scale(mapStorage.width, mapStorage.height)).move(rect.bbox().cx, rect.bbox().cy);
+                        text.text(blockName + "\n" + rect.bbox().w / mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight) + "X" + rect.bbox().h / mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight)).move(rect.bbox().cx, rect.bbox().cy);
                     });
                     $(document).on('keydown', function(e) {
                         if (e.keyCode == 46 && mapStorage.blocks[index - 1].isSelected) {

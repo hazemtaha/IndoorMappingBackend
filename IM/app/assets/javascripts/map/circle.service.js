@@ -22,6 +22,7 @@
                 name: blockName
             }).addClass('map-element');
             circle.on('drawstart', function(e) {
+              console.log(mapStorage.realWidth);
                 x1 = e.detail.p.x;
                 y1 = e.detail.p.y;
                 text = mapStorage.svg.text('').font({
@@ -39,7 +40,7 @@
                 var x = (x2 - x1) * (x2 - x1);
                 var y = (y2 - y1) * (y2 - y1);
                 radius = Math.sqrt(x + y) / 5;
-                text.text(blockName + "\n" + "R= " + Math.round(circle.bbox().w / (mapStorage.scale(mapStorage.width, mapStorage.height) * 2))).move(circle.bbox().cx, circle.bbox().cy);
+                text.text(blockName + "\n" + "R= " + Math.round(circle.bbox().w / (mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight) * 2))).move(circle.bbox().cx, circle.bbox().cy);
             });
             circle.on('drawstop', function(e) {
                 var circlePath = circle.toPath();
@@ -72,7 +73,7 @@
                     circle.selectize().resize();
                     mapStorage.blocks[index - 1].isSelected = true;
                     circle.on('resizedone', function(e) {
-                        text.text(blockName + "\n" + "R= " + Math.round(circle.bbox().w / (mapStorage.scale(mapStorage.width, mapStorage.height) * 2))).move(circle.bbox().cx, circle.bbox().cy);
+                        text.text(blockName + "\n" + "R= " + Math.round(circle.bbox().w / (mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight) * 2))).move(circle.bbox().cx, circle.bbox().cy);
                     });
                     $(document).on('keydown', function(e) {
                         if (e.keyCode == 46 && mapStorage.blocks[index - 1].isSelected) {

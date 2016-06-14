@@ -15,8 +15,8 @@
             scale: scale
         };
         return mapStorage;
-        function scale(width, height) {
-            var scale;
+        function scale(realWidth, realHeight) {
+            var scale, width = realWidth, height = realHeight;
             if (width * height < 2500) {
                 scale = 20;
                 width = width * 20;

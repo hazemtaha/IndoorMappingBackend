@@ -81,6 +81,8 @@ angular.module('IM_module')
 
 				self.openMap = function(floorWidth, floorHeight, floorId) {
 					console.log("");
+					mapStorage.realWidth = floorWidth;
+					mapStorage.realHeight = floorHeight;
 					mapStorage.width = floorWidth * mapStorage.scale(floorWidth, floorHeight);
 					mapStorage.height = floorHeight * mapStorage.scale(floorWidth, floorHeight);
 					$state.go('map_editor', {

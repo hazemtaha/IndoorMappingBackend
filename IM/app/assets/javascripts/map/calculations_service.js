@@ -5,10 +5,10 @@
         .module('IM_module')
         .factory('Calculations', calculations);
 
-    // factory.$inject = ['dependencies'];
+    calculations.$inject = ['mapStorage'];
 
     /* @ngInject */
-    function calculations() {
+    function calculations(mapStorage) {
         var calculations = {
             isInsideRect: isInsideRect,
             isInsideCircle: isInsideCircle,
@@ -157,7 +157,7 @@
                             y: path[i + 1].y
                         };
                     }
-                    lnLengths.push((Math.round(Math.sqrt(Math.pow((newPoint.x - point.x), 2) + Math.pow(newPoint.y - point.y, 2))) / 5).toString());
+                    lnLengths.push((Math.round(Math.sqrt(Math.pow((newPoint.x - point.x), 2) + Math.pow(newPoint.y - point.y, 2))) / mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight)).toString());
                 }
                 return lnLengths;
             }
