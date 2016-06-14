@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'svg/beacon/:uuid' => 'svg#import'
   get 'beacons/' => 'beacon#all'
   post 'visitors/' => 'visitor#create'
+  post 'visitors/login' => 'visitor#login'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
