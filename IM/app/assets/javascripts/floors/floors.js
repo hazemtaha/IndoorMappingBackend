@@ -16,6 +16,11 @@ angular.module('IM_module')
 		    return $http.post('/buildings/'+bid+'/floors.json', addFloor );
 		};
 
+		obj.getvistors =function (bid){
+			// console.log("inide getvistors");
+			return $http.get('beacon/'+bid+'/visit.json');
+		};
+
 		return obj ; 
 
 	}])
