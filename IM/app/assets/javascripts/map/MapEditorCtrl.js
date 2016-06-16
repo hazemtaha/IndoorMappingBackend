@@ -11,6 +11,7 @@
 
     /* @ngInject */
     function mapEditorController(mapStorage, Rect, Circle, Oval, Polygon, Beacon, $uibModal, $stateParams, Db, $rootScope, Interactivy) {
+        this.bid = $stateParams.building_id ;
         var self = this;
         self.isInRoomTypes = false;
         self.isPending = true;

@@ -10,6 +10,8 @@
 <div>
   <div>
 
+<a href="#/"  class='btn btn-success'><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
+
   <!-- 000000000000000000 start add  modal 00000000000000000000 -->
 
         <button type="button" class="btn btn-info addbtn" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span> Add Floor</button>
@@ -109,11 +111,6 @@
         <table class="table table-hover table-striped ">
           <tr ng-repeat="floor in buildCtrl.build.floors | orderBy:'floor_num' ">
             <td><b>  Floor Num : </b>{{floor.floor_num}}  &nbsp; &nbsp; </td><td>
-
-
-       <!--      <span class="glyphicon glyphicon-zoom-in"></span>
-            <span class="glyphicon glyphicon-map-marker"></span> -->
-
             <a ng-click="buildCtrl.openMap(floor.width, floor.height, floor.id)" class='btn btn-danger'><span class="glyphicon glyphicon-globe"></span> Map</a>
             <a href="#/buildings/{{buildCtrl.build.id}}/floors/{{floor.id}}" class='btn btn-primary'>
             <span class="glyphicon glyphicon-plus-sign"></span> Details</a>
