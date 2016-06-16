@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'beacons/' => 'beacon#all'
   post 'visitors/' => 'visitor#create'
   post 'visitors/login' => 'visitor#login'
+  post 'beacon/:uuid/visit' => 'visit#create'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
