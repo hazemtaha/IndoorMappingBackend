@@ -67,7 +67,7 @@ var drawBeacon = function(beaconInfo, mapStorage, Calculations, Db, mapCtrl, $ti
             // double click to select an element
             beacon.on('dblclick', function(ev) {
                 // enable selecting
-                beacon.selectize();
+                beacon.selectize({ rotationPoint:false });
                 mapStorage.beacons[index - 1].isSelected = true;
                 // add keydown event to the document to unselect the shape
                 $(document).on('keydown', function(e) {

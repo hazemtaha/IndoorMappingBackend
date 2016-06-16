@@ -67,7 +67,7 @@
                     text.move(rect.bbox().cx, rect.bbox().cy);
                 });
                 rect.on('dblclick', function(ev) {
-                    rect.selectize().resize();
+                    rect.selectize({ rotationPoint:false }).resize();
                     mapStorage.blocks[index - 1].isSelected = true;
                     rect.on('resizedone', function(e) {
                         text.text(blockName + "\n" + rect.bbox().w / mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight) + "X" + rect.bbox().h / mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight)).move(rect.bbox().cx, rect.bbox().cy);
