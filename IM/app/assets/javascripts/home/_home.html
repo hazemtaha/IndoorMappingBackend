@@ -33,7 +33,7 @@
                           <div class="row">
                               <label for="name" class="col-sm-3">Name : </label>
                               <div class="col-sm-6">
-                                  <input type="text" name="name" min="1" class="form-control" ng-model="homeCtrl.addBuild.name" required />
+                                  <input type="text" name="name" class="form-control" ng-model="homeCtrl.addBuild.name" required />
                               </div>
                               <span ng-show="homeCtrl.addBuildForm.name.$invalid && homeCtrl.addBuildForm.name.$dirty">Build name is invalid *</span>
                               <span ng-show="homeCtrl.buildExist" class="errorMsg">{{homeCtrl.floorExist}}</span>
@@ -44,7 +44,7 @@
                           <div class="row">
                               <label for="address" class="col-sm-3">Address :</label>
                               <div class="col-sm-6">
-                                  <input type="text" name="address" min="1" class="form-control" ng-model="homeCtrl.addBuild.address"   required />
+                                  <input type="text" name="address" class="form-control" ng-model="homeCtrl.addBuild.address"   required />
                               </div>
                               <span ng-show="homeCtrl.addBuildForm.address.$invalid && homeCtrl.addBuildForm.address.$dirty">Build Address is invalid *</span>
                           </div>
@@ -53,13 +53,11 @@
                           <div class="row">
                               <label for="thumbnail" class="col-sm-3">Thumbnail : </label>
                               <div class="col-sm-6">
-                                  <input type="file" name="thumbnail" min="1" class="form-control" ng-model="homeCtrl.addBuild.thumbnail"  />
+                                <input type="file" name="thumbnail"  class="form-control" ng-model="homeCtrl.addBuild.thumbnail" />
+
                               </div>
-                              <!-- <span ng-show="buildCtrl.addBuildForm.thumbnail.$invalid && buildCtrl.addBuildForm.thumbnail.$dirty">Floor Height is invalid*</span> -->
                           </div>
                           <br/>
-                           <!-- <input type="hidden" name="building_id" ng-value="buildCtrl.build.id" 
-                           ng-model="buildCtrl.addFloor.building_id"  ng-init="buildCtrl.addFloor.building_id= buildCtrl.build.id " /> -->
                       </p>
 
                     </div>
