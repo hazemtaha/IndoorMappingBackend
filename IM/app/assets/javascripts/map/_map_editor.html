@@ -10,7 +10,16 @@
 <div>
 
 <a href="#/buildings/{{mapCtrl.bid}}"  class='btn btn-success'><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a><br><br>
-
+<div class="alert alert-info" style="font-size: 12px;">
+    <h5>Hints:</h5>
+    <hr>
+    <ul>
+        <li>Double click on block to resize or to delete it</li>
+        <li>You must put Beacons on Blocks</li>
+        <li>You can rotate block from the small white circle</li>
+        <li>In polygon drawing press "Enter" to create the shape</li>
+    </ul>
+</div>
 <div class="alert alert-info" ng-show="mapCtrl.isDrawing">{{ mapCtrl.saveStatus}}</div>
 <div class="alert alert-success" ng-hide="mapCtrl.isDrawing">{{ mapCtrl.saveStatus}}</div>
     <br><br><br>
