@@ -1,9 +1,8 @@
-angular.module('IM_module', ['ui.router','templates','Devise','flow','angularFileUpload','ui.bootstrap'])
+angular.module('IM_module', ['ui.router','templates','Devise','ui.bootstrap'])
 	.config([
 		'$stateProvider',
 		'$urlRouterProvider',
 		'AuthProvider',
-		'flowFactoryProvider',
 		function($stateProvider, $urlRouterProvider,AuthProvider,flowFactoryProvider) {
 
 			AuthProvider.registerPath('/owners.json');
