@@ -26,13 +26,13 @@ angular.module('IM_module')
                     url: '/owners.json',
                     method: 'POST',
                     fields: {
-                        'user[email]': self.user.email,
-                        'user[username]': self.user.username,
-                        'user[password]': self.user.password,
-                        'user[picture]': self.file
+                        'owner[email]': self.user.email,
+                        'owner[username]': self.user.username,
+                        'owner[password]': self.user.password,
+                        'owner[picture]': self.file
                     },
-                    file: self.file
-                    // sendFieldsAs: 'json'
+                    file: self.file,
+                    sendFieldsAs: 'json'
                 }).then(function(data, status, headers, config) {
                     // file is uploaded successfully
                     console.log(data);
