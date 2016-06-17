@@ -1,4 +1,4 @@
-angular.module('IM_module', ['ui.router','templates','Devise','ui.bootstrap'])
+angular.module('IM_module', ['ui.router','templates','Devise','ui.bootstrap', 'ngFileUpload'])
 	.config([
 		'$stateProvider',
 		'$urlRouterProvider',

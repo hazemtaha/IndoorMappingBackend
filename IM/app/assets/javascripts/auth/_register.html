@@ -18,7 +18,7 @@
     <br>
   </div>
   <div>
-  <input type="file" ng-model="authCtrl.user.picture.url" />
+  <input type="file" ng-model="authCtrl.user.picture" ngf-select="authCtrl.onFileSelect($files)"/> {{ authCtrl.user }}
 </div>
   <input type="submit" class="btn btn-success col-sm-offset-3 col-sm-6" value="Register">
 </form>
