@@ -26,11 +26,6 @@ angular.module('IM_module', ['ui.router','templates','Devise','ui.bootstrap'])
 				  templateUrl: 'buildings/_buildings.html',
 				  controller: 'buildingsCtrl' ,
 				  controllerAs: "buildCtrl" ,
-				  // onEnter: ['$state', 'Auth', function($state, Auth) {
-      //   				//Auth.currentUser().then(function (){
-      //     				$state.go('home');
-      //   				//})
-      // 				}]
 				})
 
 			   .state('floors', {
@@ -39,18 +34,13 @@ angular.module('IM_module', ['ui.router','templates','Devise','ui.bootstrap'])
 				  controller: 'floorsCtrl' ,
 				  controllerAs: "floorCtrl"
 				})
-        // .state('map_info', {
-        //     url: '/buildings/{building_id}/floors/{floor_id}/map_info',
-        //     templateUrl: 'map/_map_info.html',
-        //     controller: 'MapInfoController',
-        //     controllerAs: 'mapCtrl'
-        // })
-        .state('map_editor', {
-            url: '/buildings/{building_id}/floors/{floor_id}/map_editor',
-            templateUrl: 'map/_map_editor.html',
-            controller: 'MapEditorController',
-            controllerAs: 'mapCtrl'
-        })
+
+		        .state('map_editor', {
+		            url: '/buildings/{building_id}/floors/{floor_id}/map_editor',
+		            templateUrl: 'map/_map_editor.html',
+		            controller: 'MapEditorController',
+		            controllerAs: 'mapCtrl'
+		        })
 
 			   .state('blocks', {
 				  url: '/buildings/{building_id}/floors/{floor_id}/blocks/{id}',

@@ -60,7 +60,7 @@
                     text.move(oval.bbox().cx, oval.bbox().cy);
                 });
                 oval.on('dblclick', function(ev) {
-                    oval.selectize().resize();
+                    oval.selectize({ rotationPoint:false }).resize();
                     mapStorage.blocks[index - 1].isSelected = true;
                     oval.on('resizedone', function(e) {
                         text.text(blockName + "\n" + oval.bbox().w / (mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight) * 2) + "X" + oval.bbox().h / (mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight) * 2)).move(oval.bbox().cx, oval.bbox().cy);

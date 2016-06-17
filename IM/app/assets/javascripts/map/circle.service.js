@@ -70,7 +70,7 @@
                     text.move(circle.bbox().cx, circle.bbox().cy);
                 });
                 circle.on('dblclick', function(ev) {
-                    circle.selectize().resize();
+                    circle.selectize({ rotationPoint:false }).resize();
                     mapStorage.blocks[index - 1].isSelected = true;
                     circle.on('resizedone', function(e) {
                         text.text(blockName + "\n" + "R= " + Math.round(circle.bbox().w / (mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight) * 2))).move(circle.bbox().cx, circle.bbox().cy);

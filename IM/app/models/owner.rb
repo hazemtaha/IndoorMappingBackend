@@ -5,5 +5,5 @@ class Owner < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :buildings, :dependent => :delete_all
 
-mount_uploader :picture, ImageUploader
+  mount_uploader :picture, ImageUploader
 end

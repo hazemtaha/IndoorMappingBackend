@@ -15,10 +15,6 @@ angular.module('IM_module')
 	    	self.getBlockDetails = function(bid,fid,block_id){
 	    		console.log(bid ,fid ,block_id) ;
 	    		blocks.getOne(bid,fid,block_id).success(function(data){
-			    	console.log('floor---------- ');
-			    	console.log(self.floor);
-			    	console.log('blockes details ---------- ');
-			    	console.log(data);
 			    	self.blockDetails = data ;
 		    	});	
 	    	}

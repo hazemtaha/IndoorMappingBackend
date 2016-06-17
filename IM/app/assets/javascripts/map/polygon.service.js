@@ -150,7 +150,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $ti
         // double click to select an element
         polygon.on('dblclick', function(ev) {
             // enable resizeing
-            polygon.selectize().resize();
+            polygon.selectize({ rotationPoint:false }).resize();
             mapStorage.blocks[index - 1].isSelected = true;
             polygon.on('resizedone', function(ev) {
                 var pathObj = Interactivy.convert2PathObj(polygon.array().value);

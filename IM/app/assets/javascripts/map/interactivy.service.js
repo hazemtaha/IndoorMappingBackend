@@ -40,7 +40,7 @@
                 text.move(block.bbox().cx, block.bbox().cy);
             });
             block.on('dblclick', function(ev) {
-                block.selectize().resize();
+                block.selectize({ rotationPoint:false }).resize();
                 mapStorage.blocks[index - 1].isSelected = true;
                 block.on('resizedone', function(e) {
                     text.text(blockName + "\n" + block.bbox().w / mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight) + "X" + block.bbox().h / mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight)).move(block.bbox().cx, block.bbox().cy);
@@ -107,7 +107,7 @@
             // double click to select an element
             polygon.on('dblclick', function(ev) {
                 // enable resizeing
-                polygon.selectize().resize();
+                polygon.selectize({ rotationPoint:false }).resize();
                 mapStorage.blocks[index - 1].isSelected = true;
                 polygon.on('resizedone', function(ev) {
                     var pathObj = convert2PathObj(polygon.array().value);
@@ -163,7 +163,7 @@
             // double click to select an element
             beacon.on('dblclick', function(ev) {
                 // enable selecting
-                beacon.selectize();
+                beacon.selectize({ rotationPoint:false });
                 mapStorage.beacons[index - 1].isSelected = true;
                 // add keydown event to the document to unselect the shape
                 $(document).on('keydown', function(e) {
