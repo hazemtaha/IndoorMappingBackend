@@ -20,7 +20,7 @@ class BeaconController < ApplicationController
   end
 
   def callibrate
-    @beacon = Bacon.find_by(uuid: params[:uuid])
+    @beacon = Beacon.find_by(uuid: params[:uuid])
     @beacon.update_attributes ({ lat: params[:lat], lon: params[:lon] })
   end
 end
