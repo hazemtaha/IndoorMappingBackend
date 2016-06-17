@@ -18,4 +18,9 @@ class BeaconController < ApplicationController
     @beacons = beacons
     render json: { beacons: @beacons }
   end
+
+  def callibrate
+    @beacon = Bacon.find_by(uuid: params[:uuid])
+    @beacon.update_attributes (lat: params[:lat], lon: params[:lon])
+  end
 end
