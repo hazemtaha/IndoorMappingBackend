@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get 'floor/:floor_id/svg' => 'svg#show'
   get 'svg/beacon/:uuid' => 'svg#import'
   get 'beacons/' => 'beacon#all'
-  put 'beacon/:uuid/callibrate' => 'beacon#callibrate'
+  post 'beacon/:uuid/callibrate' => 'beacon#callibrate'
   post 'visitors/' => 'visitor#create'
   post 'visitors/login' => 'visitor#login'
   post 'beacon/:uuid/visit' => 'visit#create'
