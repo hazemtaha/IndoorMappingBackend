@@ -93,48 +93,53 @@ angular.module('IM_module')
 			self.showFloorStatFunc = function(buildId, floorId){
 				console.log("inside showFloorStatFunc");
 				buildings.getBlocks(buildId , floorId).success(function(data){
-					// console.log(data);
+					console.log(data);
 					self.Fblocks = data;
-					for (var i = 0; i < data.length; i++) {
 
-						// console.log(data[i].beacons.length);
-						if (data[i].beacons.length == 0 ){
-					    	// console.log('inside condtion');
-					    	data[i].BeaconsStat = "/images/ch/0.png";
-					    }
-					    if (data[i].beacons.length == 1 ){
-					    	// console.log('inside condtion');
-					    	data[i].BeaconsStat = "/images/ch/1.png";
-					    }
-					    if (data[i].beacons.length == 2 ){
-					    	// console.log('inside condtion');
-					    	data[i].BeaconsStat = "/images/ch/2.png";
-					    }
-					    
-					}
+					////// loop to set pictures 
+					// for (var i = 0; i < data.length; i++) {
 
+					// 	// console.log(data[i].beacons.length);
+					// 	if (data[i].beacons.length == 0 ){
+					//     	// console.log('inside condtion');
+					//     	data[i].BeaconsStat = "/images/ch/0.png";
+					//     }
+					//     if (data[i].beacons.length == 1 ){
+					//     	// console.log('inside condtion');
+					//     	data[i].BeaconsStat = "/images/ch/1.png";
+					//     }
+					//     if (data[i].beacons.length == 2 ){
+					//     	// console.log('inside condtion');
+					//     	data[i].BeaconsStat = "/images/ch/2.png";
+					//     }
+					// }
+					////// End of Loop
 
+					var blockVisitors = 0;
 					for (var x = 0; x < data.length; x++) {
-						var blockVisitors = 0;
+
+						console.log('inside loop');
 						for (var y=0 ; y< data[x].beacons.length ; y++){
 							var bId = data[x].beacons[y].id ;
 							// console.log(data[x].beacons[y].id);
+							
 							floors.getvistors(bId).success(function(vData){
-								// console.log(vData); //wslt eny bageb le kol beacon el vistors bto3haaaa
-								// console.log(vData.length);
-								blockVisitors += vData.length ;
-
+								 console.log("Visitor Data", vData); //wslt eny bageb le kol beacon el vistors bto3haaaa
+								 console.log("Visitor Data Length", vData.length);
+								 
+								 blockVisitors += vData.length ;
+								 if((data.length-x)==1 && (data[x].beacons.length-y) == 1){
+								 	console.log("Total Visitors inside", 	blockVisitors);
+								 }
+								 console.log("inside callback");
 								// msh 3ayz y3ml increament 
 								// el mafrood b7ot el total fe key gdeda fel data el kbera 
 								//b3d kda aroo7 a5ls el HTML
 							});
 
 						}
-						console.log(blockVisitors);
+						
 					}
-
-
-					// console.log(data);		
 				});
 
 			}

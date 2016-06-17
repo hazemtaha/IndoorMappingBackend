@@ -149,22 +149,40 @@
             <!-- Tab panes -->
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="home">
-              <table class="table table-bordered table-hover table-responsive">
-                <thead>
-                  <th>Block name </th>
-                  <th>Stat</th>
-                  <th>no. of beacons</th>
-                </thead>
-                <tbody ng-repeat="block in buildCtrl.Fblocks" >
-                  <tr>
-                    <td>{{block.name}}</td>
-                    <td width="100px" >
-                        <img src="{{block.BeaconsStat}}" width="100%" height="100">
-                    </td>
-                    <td>{{block.beacons.length}}</td>
-                  </tr>
-                </tbody>
-              </table>
+
+
+
+                <!-- <table class="table table-bordered table-hover table-responsive">
+                  <thead>
+                    <th>Block name </th>
+                    <th>no. of beacons</th>
+                  </thead>
+                  <tbody ng-repeat="block in buildCtrl.Fblocks" >
+                    <tr>
+                      <td>{{block.name}}</td>
+                      
+                      <td>{{block.beacons.length}}</td>
+                    </tr>
+                  </tbody>
+                </table> -->
+
+                <table class="table table-bordered table-hover table-responsive">
+                  <thead>
+                    <th>Block name </th>
+                    <th>no. of beacons</th>
+                  </thead>
+                  <tbody ng-repeat="block in buildCtrl.Fblocks" >
+                    <tr>
+                      <td>{{block.name}}</td>
+                      
+                      <td>{{block.beacons.length}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                  
+            
+
+
               
               </div>
               <div role="tabpanel" class="tab-pane" id="profile">...</div>
@@ -181,8 +199,7 @@
 
 
 
-
-         <!--  <div id="statmodal" class="modal fade" role="dialog" >
+      <!--  <div id="statmodal" class="modal fade" role="dialog" >
             <div class="modal-dialog">
               
                 <div class="modal-content">
