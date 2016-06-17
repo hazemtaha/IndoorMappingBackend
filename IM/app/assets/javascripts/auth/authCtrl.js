@@ -16,13 +16,10 @@ function($state, Auth){
     return Auth.isAuthenticated();
   }
 
-    //this.$on('flow::fileAdded', function(event, $flow, flowFile) {
-     //this.user.picture = $flow.files.flowRelativePath;
-  //});
-
-
   this.register = function() {
+
     Auth.register(this.user).then(function(){
+      console.log(this.user)
       $state.go('home');
     });
   };
