@@ -20,9 +20,11 @@ ActiveRecord::Schema.define(version: 20160610213730) do
     t.integer  "minor",      limit: 4
     t.integer  "x",          limit: 4
     t.integer  "y",          limit: 4
+    t.decimal  "lat",                    precision: 10, scale: 6
+    t.decimal  "lon",                    precision: 10, scale: 6
     t.integer  "block_id",   limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   add_index "beacons", ["block_id"], name: "index_beacons_on_block_id", using: :btree
@@ -90,13 +92,14 @@ ActiveRecord::Schema.define(version: 20160610213730) do
   add_index "svgs", ["floor_id"], name: "index_svgs_on_floor_id", using: :btree
 
   create_table "visitors", force: :cascade do |t|
-    t.string   "encrypted_password", limit: 255, default: "", null: false
-    t.string   "email",              limit: 255, default: "", null: false
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.string   "username",           limit: 255
+    t.string   "encrypted_password",    limit: 255, default: "", null: false
+    t.string   "password_confirmation", limit: 255, default: "", null: false
+    t.string   "email",                 limit: 255, default: "", null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.string   "username",              limit: 255
     t.date     "dob"
-    t.string   "phone_type",         limit: 255
+    t.string   "phone_type",            limit: 255
   end
 
   add_index "visitors", ["email"], name: "index_visitors_on_email", unique: true, using: :btree
