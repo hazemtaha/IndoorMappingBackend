@@ -15,6 +15,7 @@ angular.module('IM_module')
             };
 
             self.isAuthenticated = function() {
+                
                 return Auth.isAuthenticated();
             }
             self.onFileSelect = function($files) {
