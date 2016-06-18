@@ -102,15 +102,19 @@ angular.module('IM_module')
 						}
 						// console.log(blocksBeacons);
 						floors.getvistors(blocksBeacons).success(function(vData){
-							console.log(vData.visits);
-							console.log("Inside callback");
+							console.log(vData);
+
+							for (var x = 0; x < data.length; x++) {
+								if (vData.visits[data[x].id]) {
+								data[x].Tvisitors = vData.visits[data[x].id].visits;
+									
+								}
+							}
 						});
 
-					// for (var x = 0; x < data.length; x++) {
-					// 	vData
+					
 
-					// }	
-
+					console.log(data);
 				});
 			}
 	}]);
