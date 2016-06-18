@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get 'beacons/' => 'beacon#all'
   post 'visitors/' => 'visitor#create'
   get 'floor/:floor_id/blocks' => 'floors#getBlockByFloor'
-  get 'beacon/:beacon_id/visit' => 'visits#getVistors'
+  post 'beacons/visits' => 'visits#getVistors'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

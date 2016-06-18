@@ -1,8 +1,16 @@
 class VisitsController < ApplicationController
 
 	def getVistors
-		respond_with Visit.where(:beacon_id => params[:beacon_id] )
-		puts @a.inspect
+		@blocks = params[:blocks]
+		@blockVisits = {}
+		@blocks.each { |key, block|
+			@blockVisits[key] = { visits: 0 }
+			block.each { |beaconId|
+				@visits = Visit.where(beacon_id: beaconId).count
+				@blockVisits[key][:visits] += @visits
+			} 
+		}
+		render json: { visits: @blockVisits }
 	end
 
 end
