@@ -18,8 +18,9 @@
     <br>
   </div>
   <div>
-  <input type="file" ng-model="authCtrl.user.picture" ngf-select="authCtrl.onFileSelect($files)"/> {{ authCtrl.user }}
+  <input type="file" ng-model="authCtrl.user.picture" ngf-select="authCtrl.onFileSelect($files)"/> 
 </div>
-  <input type="submit" class="btn btn-success col-sm-offset-3 col-sm-6" value="Register">
+<div><span>{{authCtrl.errorMessage}}</span></div>
+  <input type="submit" class="btn btn-success col-sm-offset-3 col-sm-6" value="Register" ng-disabled="ownerForm.$invalid">
 </form>
 </div>

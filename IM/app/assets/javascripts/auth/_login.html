@@ -15,6 +15,7 @@
     <span ng-show="loginForm.password.$invalid && loginForm.password.$dirty">Password is required and more than 8 characters *</span>
   <br>
   </div>
+<span>{{authCtrl.errorMessage}}</span>
   <div class="field col-sm-offset-1 col-sm-12">
   	<input value="1" name="user[remember_me]" id="user_remember_me" type="checkbox">
   	<label for="user_remember_me">Remember me</label>

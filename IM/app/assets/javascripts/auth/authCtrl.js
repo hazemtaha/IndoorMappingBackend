@@ -10,11 +10,12 @@ angular.module('IM_module')
                     //console.log(data);
                     $state.go('home');
                 }, function(err) {
-                    alert(JSON.stringify(err));
+                    self.errorMessage = err.data.error;
                 });
             };
 
             self.isAuthenticated = function() {
+                
                 return Auth.isAuthenticated();
             }
             self.onFileSelect = function($files) {
@@ -36,8 +37,10 @@ angular.module('IM_module')
                 }).then(function(response, status, headers, config) {
                     // file is uploaded successfully
                     console.log(response.data);
-										Auth._currentUser = response.data;
+					   Auth._currentUser = response.data;
                     $state.go('home');
+                }, function(err) {
+                    self.errorMessage = "email "+err.data.errors.email[0];
                 });
                 // Auth.register(self.user).then(function(){
                 //   console.log(self.user)

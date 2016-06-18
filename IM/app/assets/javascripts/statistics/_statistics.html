@@ -1,7 +1,30 @@
+<a href="#/buildings/{{statisticCtrl.buildId}}"  class='btn btn-success'><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
+
 <div style="text-align: center;">
 	<!-- <h4 style="text-align: center;">Number of Visitors per Block</h4> -->
 	<h4>Statistics per Floor</h4>
 	<hr>
 	<br><br>
-    <bar-chart floorId="344" ></bar-chart>
+	<div ng-show="statisticCtrl.Fblocks[0]" >
+		<table class="table table-bordered table-hover table-responsive">
+	      <thead>
+	        <th>Block name </th>
+	        <th>Total Visitors</th>
+	        <th>no. of beacons</th>
+	      </thead>
+	      <tbody ng-repeat="block in statisticCtrl.Fblocks" >
+	        <tr>
+	          <td>{{block.name}}</td>
+	          
+	          <td>{{block.Tvisitors}}</td>
+	          <td>{{block.beacons.length}}</td>
+	        </tr>
+	      </tbody>
+	    </table>
+	</div>
+	<div ng-hide="statisticCtrl.Fblocks[0]" >
+		<h3>There is no Statistics to show for this floor</h3>	  
+	</div>
+
+    <bar-chart floorId="{{statisticCtrl.floorId}}" buildId="{{statisticCtrl.buildId}}" ></bar-chart>
 </div>

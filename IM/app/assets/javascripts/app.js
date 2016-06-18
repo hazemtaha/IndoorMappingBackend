@@ -49,9 +49,8 @@ angular.module('IM_module', ['ui.router','templates','Devise','ui.bootstrap', 'n
 				  controllerAs: "blockCtrl"
 				})
 
-			   	.state('statistics', {
-				  url: '/statistics/{floor_id}',
-				  // template: '<bar-chart></bar-chart>',
+				.state('statistics', {
+				  url: '/buildings/{building_id}/statistics/{floor_id}',
 				  templateUrl: 'statistics/_statistics.html',
 				  controller: 'statisticsCtrl' ,
 				  controllerAs: "statisticCtrl"

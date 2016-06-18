@@ -83,47 +83,4 @@ angular.module('IM_module')
 				});
 			}
 
-			self.showFloorStatFunc = function(buildId, floorId){
-				console.log("inside showFloorStatFunc");
-				buildings.getBlocks(buildId , floorId).success(function(data){
-					console.log(data);
-					self.Fblocks = data;
-
-					////// loop to set pictures 
-					// for (var i = 0; i < data.length; i++) {
-
-					// 	// console.log(data[i].beacons.length);
-					// 	if (data[i].beacons.length == 0 ){
-					//     	// console.log('inside condtion');
-					//     	data[i].BeaconsStat = "/images/ch/0.png";
-					//     }
-					//     if (data[i].beacons.length == 1 ){
-					//     	// console.log('inside condtion');
-					//     	data[i].BeaconsStat = "/images/ch/1.png";
-					//     }
-					//     if (data[i].beacons.length == 2 ){
-					//     	// console.log('inside condtion');
-					//     	data[i].BeaconsStat = "/images/ch/2.png";
-					//     }
-					// }
-					////// End of Loop
-
-					var blocksBeacons = {};
-					for (var x = 0; x < data.length; x++) {
-						blocksBeacons[data[x].id] = [];
-						console.log('inside blocks loop');
-						for (var y=0 ; y< data[x].beacons.length ; y++){
-							console.log('inside beacon loop');
-							var beaconId = data[x].beacons[y].id;
-							blocksBeacons[data[x].id].push(beaconId);
-						}
-					}
-					console.log(blocksBeacons);
-					floors.getvistors(blocksBeacons).success(function(vData){
-						console.log(vData);
-						console.log("inside callback");
-					});
-				});
-
-			}
 	}]);
