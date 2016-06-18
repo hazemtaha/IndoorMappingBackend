@@ -50,6 +50,14 @@ angular.module('IM_module', ['ui.router','templates','Devise','flow','angularFil
 				  controllerAs: "blockCtrl"
 				})
 
+			   	.state('statistics', {
+				  url: '/statistics',
+				  // template: '<bar-chart></bar-chart>',
+				  templateUrl: 'statistics/_statistics.html',
+				  controller: 'statisticsCtrl' ,
+				  controllerAs: "statisticCtrl"
+				})
+
 			   .state('login', {
 			      url: '/login',
 			      templateUrl: 'auth/_login.html',

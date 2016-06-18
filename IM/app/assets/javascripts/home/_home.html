@@ -9,7 +9,7 @@
 </div>
 <div ng-show="authCtrl.isAuthenticated()">
   <div class="page-header">
-      <h2>{{user.name(option)}} Buildings</h2>
+      <h2>Buildings</h2>
        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" 
        style="float:right">
        <span class="glyphicon glyphicon-plus"></span> Add Buliding</button><br><br>
@@ -26,7 +26,7 @@
                       <h4 class="modal-title">Add Buliding</h4>
                     </div>
 
-                    <form method="poshomeCtrl.addBuildForm" ng-submit="homeCtrl.submitaddBuildForm()" >
+                    <form name="homeCtrl.addBuildForm" ng-submit="homeCtrl.submitaddBuildForm()" >
                     <div class="modal-body">
 
                       <p>     
