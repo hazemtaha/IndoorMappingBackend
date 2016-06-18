@@ -5,6 +5,7 @@ angular.module('IM_module')
 			self.addFloor = {} ;
 			self.editBuild = {} ;
 			self.addBuild = {} ;
+			
 
 			buildings.getOne($stateParams.id).success(function(data){
 		    	console.log(data);
@@ -50,6 +51,26 @@ angular.module('IM_module')
 
 		    }
 
+		    self.submitaddBuildForm = function(){
+		    	//self.addBuild.building_id = self.build.id ;
+		    	//console.log(self.addFloor) ;
+		    	buildings.addOne(self.addBuild).success(function(data){
+		    		if (data.errorMsg !== undefined ){
+		    			self.buildExist = data.errorMsg ;
+		    			console.log(data.errorMsg);
+		    			console.log('errrrrrrrrrrrr');
+		    		}else{
+		    			console.log('no errrrrrrrrrrrr');
+		    			console.log(data);
+		    			self.buildings = data ;
+					    $('.modal').modal('hide');
+		    		}
+		    	});
+
+		    	self.addBuild = {} ;
+		    	self.addBuildForm.$setPristine();
+		    }
+
 			self.openMap = function(floorWidth, floorHeight, floorId) {
 				console.log("");
 				mapStorage.realWidth = floorWidth;
@@ -60,5 +81,31 @@ angular.module('IM_module')
 						building_id: $stateParams.id,
 						floor_id: floorId
 				});
+			}
+
+			self.showFloorStatFunc = function(buildId, floorId){
+				console.log("inside showFloorStatFunc");
+				buildings.getBlocks(buildId , floorId).success(function(data){
+					console.log(data);
+					self.Fblocks = data;
+
+
+					var blocksBeacons = {};
+					for (var x = 0; x < data.length; x++) {
+						blocksBeacons[data[x].id] = [];
+						console.log('inside blocks loop');
+						for (var y=0 ; y< data[x].beacons.length ; y++){
+							console.log('inside beacon loop');
+							var beaconId = data[x].beacons[y].id;
+							blocksBeacons[data[x].id].push(beaconId);
+						}
+					}
+					console.log(blocksBeacons);
+					floors.getvistors(blocksBeacons).success(function(vData){
+						console.log(vData);
+						console.log("inside callback");
+					});
+				});
+
 			}
 	}]);
