@@ -11,6 +11,7 @@
 
     /* @ngInject */
     function mapEditorController(mapStorage, Rect, Circle, Oval, Polygon, Beacon, $uibModal, $stateParams, Db, $rootScope, Interactivy) {
+        this.bid = $stateParams.building_id ;
         var self = this;
         self.isInRoomTypes = false;
         self.isPending = true;
@@ -45,6 +46,7 @@
                           if (block.attr('name') == 'beacon') {
                             Interactivy.beacon(block, self);
                           } else if (block.type == 'polygon') {
+                            console.log(block);
                             Interactivy.polygon(block, self);
                           } else {
                             Interactivy.normal(block, self);

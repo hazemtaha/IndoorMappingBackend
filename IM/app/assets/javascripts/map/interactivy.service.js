@@ -14,7 +14,8 @@
             polygon: polygon,
             beacon: beacon,
             updateObj: updateObj,
-            deleteShape: deleteShape
+            deleteShape: deleteShape,
+            convert2PathObj: convert2PathObj
         };
 
         return interactivy;
@@ -31,7 +32,7 @@
                 type: block.type,
                 color: block.attr('fill')
             };
-            var index = interactivy.updateObj(blockObj, mapCtrl);
+            var index = interactivy.updateObj(blockObj, mapCtrl, mapStorage.blocks);
             block = blockPath.original;
             blockPath.remove();
             block.draggable();
@@ -39,10 +40,10 @@
                 text.move(block.bbox().cx, block.bbox().cy);
             });
             block.on('dblclick', function(ev) {
-                block.selectize().resize();
+                block.selectize({ rotationPoint:false }).resize();
                 mapStorage.blocks[index - 1].isSelected = true;
                 block.on('resizedone', function(e) {
-                    text.text(blockName + "\n" + block.bbox().w / mapStorage.scale(mapStorage.width, mapStorage.height) + "X" + block.bbox().h / mapStorage.scale(mapStorage.width, mapStorage.height)).move(block.bbox().cx, block.bbox().cy);
+                    text.text(blockName + "\n" + block.bbox().w / mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight) + "X" + block.bbox().h / mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight)).move(block.bbox().cx, block.bbox().cy);
                 });
                 $(document).on('keydown', function(e) {
                     if (e.keyCode == 46 && mapStorage.blocks[index - 1].isSelected) {
@@ -64,6 +65,7 @@
         }
 
         function polygon(polygon, mapCtrl) {
+          console.log(polygon);
             var tmpPoly;
             var textArr = mapStorage.svg.select('[ name = polyDim' + polygon.id() + ']').members;
             var blockName = polygon.attr('name');
@@ -77,7 +79,8 @@
                 type: 'polygon',
                 color: polygon.attr('fill')
             }
-            var index = interactivy.updateObj(polyObj, mapCtrl);
+            var index = interactivy.updateObj(polyObj, mapCtrl, mapStorage.blocks);
+            console.log(index);
             polygon = polyPath.original;
             polyPath.remove();
             // enable the shape to be draggable
@@ -104,7 +107,7 @@
             // double click to select an element
             polygon.on('dblclick', function(ev) {
                 // enable resizeing
-                polygon.selectize().resize();
+                polygon.selectize({ rotationPoint:false }).resize();
                 mapStorage.blocks[index - 1].isSelected = true;
                 polygon.on('resizedone', function(ev) {
                     var pathObj = convert2PathObj(polygon.array().value);
@@ -160,7 +163,7 @@
             // double click to select an element
             beacon.on('dblclick', function(ev) {
                 // enable selecting
-                beacon.selectize();
+                beacon.selectize({ rotationPoint:false });
                 mapStorage.beacons[index - 1].isSelected = true;
                 // add keydown event to the document to unselect the shape
                 $(document).on('keydown', function(e) {
@@ -195,6 +198,16 @@
             return objects.push(obj);
         }
 
+        function convert2PathObj(pathArr) {
+            var pathObj = [];
+            pathArr.forEach(function(path) {
+                pathObj.push({
+                    x: path[0],
+                    y: path[1]
+                });
+            });
+            return pathObj;
+        }
 
         function deleteShape(shapes,toDelShape, mapCtrl) {
             for (var i = 0; i < shapes.length; i++) {
@@ -220,14 +233,3 @@
 
     }
 })();
-
-function convert2PathObj(pathArr) {
-    var pathObj = [];
-    pathArr.forEach(function(path) {
-        pathObj.push({
-            x: path[0],
-            y: path[1]
-        });
-    });
-    return pathObj;
-}

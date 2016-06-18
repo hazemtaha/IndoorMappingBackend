@@ -17,8 +17,6 @@ angular.module('IM_module')
 		};
 
 		obj.addOne = function(addBuild) {
-			console.log('inside add') ;
-			console.log(addBuild) ;
 		    return $http.post('/buildings.json', addBuild);
 		};
 

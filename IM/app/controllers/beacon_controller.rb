@@ -1,4 +1,5 @@
 class BeaconController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def create
     beacon = params[:beacon]
@@ -13,9 +14,15 @@ class BeaconController < ApplicationController
     @beacons = Beacon.all
     beacons = []
     @beacons.each { |bcn|
-      beacons.push({id: bcn.name, uuid: bcn.uuid, major: bcn.major, minor: bcn.minor})
+      beacons.push({id: bcn.name, uuid: bcn.uuid, major: bcn.major, minor: bcn.minor, x: bcn.x, y: bcn.y, lon: bcn.lon, lat: bcn.lat })
     }
     @beacons = beacons
     render json: { beacons: @beacons }
+  end
+
+  def callibrate
+    @beacon = Beacon.find_by(uuid: params[:uuid])
+    @beacon.update_attributes ({ lat: params[:lat], lon: params[:lon] })
+    render json: { beacon: @beacon }
   end
 end

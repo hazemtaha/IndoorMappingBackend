@@ -1,9 +1,6 @@
 angular.module('IM_module')
 	.controller('buildingsCtrl', ['$stateParams','buildings','floors','$state','mapStorage',
 		function( $stateParams, buildings, floors, $state, mapStorage){
-			console.log($stateParams.id);
-			//this.build = buildings.buildings[$stateParams.id];
-			console.log(this.build);
 			var self = this;
 			self.addFloor = {} ;
 			self.editBuild = {} ;
@@ -18,7 +15,7 @@ angular.module('IM_module')
 		    self.delFloorFunc = function (bid,fid){
 			    	console.log(bid,fid);
 		    	floors.delOne(bid,fid).success(function(data){
-		    			console.log(data);
+		    		console.log(data);
 		    		self.build.floors = data ;
 		    	});
 		    }
@@ -29,12 +26,7 @@ angular.module('IM_module')
 		    	floors.addOne(self.build.id,self.addFloor).success(function(data){
 		    		if (data.errorMsg !== undefined ){
 		    			self.floorExist = data.errorMsg ;
-		    			// self.addFloorForm.$invalid = true ;
-		    			console.log(data.errorMsg);
-		    			console.log('errrrrrrrrrrrr');
 		    		}else{
-		    			console.log('no errrrrrrrrrrrr');
-		    			console.log(data);
 		    			self.build.floors = data ;
 					    $('.modal').modal('hide');
 		    		}
@@ -59,7 +51,6 @@ angular.module('IM_module')
 
 		    }
 
-
 		    self.submitaddBuildForm = function(){
 		    	//self.addBuild.building_id = self.build.id ;
 		    	//console.log(self.addFloor) ;
@@ -82,6 +73,8 @@ angular.module('IM_module')
 
 			self.openMap = function(floorWidth, floorHeight, floorId) {
 				console.log("");
+				mapStorage.realWidth = floorWidth;
+				mapStorage.realHeight = floorHeight;
 				mapStorage.width = floorWidth * mapStorage.scale(floorWidth, floorHeight);
 				mapStorage.height = floorHeight * mapStorage.scale(floorWidth, floorHeight);
 				$state.go('map_editor', {
@@ -133,5 +126,4 @@ angular.module('IM_module')
 				});
 
 			}
-
 	}]);

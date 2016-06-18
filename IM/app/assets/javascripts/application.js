@@ -21,6 +21,7 @@
 //= require ./lib/svg.js
 //= require angularjs-file-upload
 //= require ng-flow
+//= require ng-file-upload
 // require flow.js
 //= require_tree .
 

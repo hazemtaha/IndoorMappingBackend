@@ -29,7 +29,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $ti
     // draw a point on mouse down
     mapStorage.svg.on('mousedown', function(ev) {
         // place a new point only if the point will exist out of any shapes on the svg
-        if (!isInBlock) {
+        // if (!isInBlock) {
             polygon.draw(ev, {
                 snapToGrid: 10
             }).attr({
@@ -37,7 +37,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $ti
                 stroke: 'black',
                 name: blockName
             }).attr('fill', 'none').addClass('map-element');
-        }
+        // }
     });
 
     // when user initiate the first point
@@ -71,20 +71,20 @@ var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $ti
         // store the new point to use it in line length measurement
         newPoint = e.path[0].points[e.path[0].points.length - 1];
         // check if the current point is inside any shape in the svg
-        if (Calculations.isInAny(newPoint, mapStorage.blocks)) {
-            isInBlock = true;
-            // change the cursor PS: not working well
-            polygon.style('cursor', 'not-allowed');
-        } else {
-            isInBlock = false;
-            // get cursor to the default
-            polygon.style('cursor', 'auto');
-        }
+        // if (Calculations.isInAny(newPoint, mapStorage.blocks)) {
+        //     isInBlock = true;
+        //     // change the cursor PS: not working well
+        //     polygon.style('cursor', 'not-allowed');
+        // } else {
+        //     isInBlock = false;
+        //     // get cursor to the default
+        //     polygon.style('cursor', 'auto');
+        // }
         // get the center point on the line to put the text on it
         var cx = pointOfLine.x + ((newPoint.x - pointOfLine.x) / 2);
         var cy = pointOfLine.y + ((newPoint.y - pointOfLine.y) / 2);
         // print the line length as a text on the line
-        dimText.text((Math.round(Math.sqrt(Math.pow((newPoint.x - pointOfLine.x), 2) + Math.pow(newPoint.y - pointOfLine.y, 2))) / 5).toString()).move(cx, cy);
+        dimText.text((Math.round(Math.sqrt(Math.pow((newPoint.x - pointOfLine.x), 2) + Math.pow(newPoint.y - pointOfLine.y, 2))) / mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight)).toString()).move(cx, cy);
     }); // end of drawupdate
     // fired when the user stop drawing
     polygon.on('drawstop', function(e) {
@@ -123,7 +123,7 @@ var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $ti
         var cx = pointOfLine.x + ((newPoint.x - pointOfLine.x) / 2);
         var cy = pointOfLine.y + ((newPoint.y - pointOfLine.y) / 2);
         // draw the text on the line
-        dimText = mapStorage.svg.text((Math.round(Math.sqrt(Math.pow((newPoint.x - pointOfLine.x), 2) + Math.pow(newPoint.y - pointOfLine.y, 2))) / 5).toString()).move(cx, cy);
+        dimText = mapStorage.svg.text((Math.round(Math.sqrt(Math.pow((newPoint.x - pointOfLine.x), 2) + Math.pow(newPoint.y - pointOfLine.y, 2))) / mapStorage.scale(mapStorage.realWidth, mapStorage.realHeight)).toString()).move(cx, cy);
         // add the text object in the text array
         textArr.push(dimText);
         // delete the keydown event
@@ -141,19 +141,21 @@ var drawPolygon = function(blockName, mapStorage, Calculations, Db, mapCtrl, $ti
         polygon.on('dragend', function(ev) {
             // remove the tmp poly
             tmpPoly.remove();
+            var pathObj = Interactivy.convert2PathObj(polygon.array().value);
             // move the texts to the new positions
-            Calculations.moveText(e.path[0].points, textArr, Calculations.calcLineLengths(e.path[0].points));
+            Calculations.moveText(pathObj, textArr, Calculations.calcLineLengths(pathObj));
             // redraw the block name inside the block
             blockNameText.move(polygon.bbox().cx - 20, polygon.bbox().cy - 20);
         });
         // double click to select an element
         polygon.on('dblclick', function(ev) {
             // enable resizeing
-            polygon.selectize().resize();
+            polygon.selectize({ rotationPoint:false }).resize();
             mapStorage.blocks[index - 1].isSelected = true;
             polygon.on('resizedone', function(ev) {
+                var pathObj = Interactivy.convert2PathObj(polygon.array().value);
                 // move text to their new position after resize is ended
-                Calculations.moveText(e, textArr, Calculations.calcLineLengths(e.path[0].points));
+                Calculations.moveText(pathObj, textArr, Calculations.calcLineLengths(pathObj));
                 // redraw the block name inside the block
                 blockNameText.move(polygon.bbox().cx - 20, polygon.bbox().cy - 20);
             });
