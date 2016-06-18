@@ -3,6 +3,7 @@ angular.module('IM_module')
 		function(buildings){
 			var self = this;
 			self.addBuild = {};
+			self.file = {};
 			buildings.getAll().success(function(data){
 				self.buildings = data ;
 		    })
@@ -12,9 +13,14 @@ angular.module('IM_module')
 	    		})
 		    }
 
+		    self.onFileSelect = function($files) {
+                self.file = $files[0];
+                console.log($files);
+            }
 
 		    self.submitaddBuildForm = function(){
-		    	buildings.addOne(self.addBuild).success(function(data){
+		    	buildings.addOne(self.addBuild,self.file).success(function(data){
+		    		console.log(self.addBuild);
 		    		if (data.errorMsg !== undefined ){
 		    			self.buildExist = data.errorMsg ;	
 		    		}else{
