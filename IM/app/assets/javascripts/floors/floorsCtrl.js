@@ -1,11 +1,15 @@
 angular.module('IM_module')
-	.controller('floorsCtrl', ['$stateParams','floors','blocks' ,
-		function( $stateParams,floors ,blocks){
+	.controller('floorsCtrl', ['$stateParams','floors','blocks' ,'buildings' ,
+		function( $stateParams,floors ,blocks,buildings){
 			console.log('id = '+$stateParams.id);
 			console.log('bid = '+$stateParams.building_id);
 			var self = this;
 			self.editBlock = {};
 			self.isEdit = false;
+
+			buildings.getOne($stateParams.building_id).success(function(data){
+				self.currentBuild = data ;
+			});
 			
 			floors.getOne($stateParams.building_id,$stateParams.id).success(function(data){
 		    	console.log(data);

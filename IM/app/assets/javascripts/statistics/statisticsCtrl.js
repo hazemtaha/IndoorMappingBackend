@@ -6,6 +6,12 @@ angular.module('IM_module')
 			console.log($stateParams.floor_id);
 			self.buildId =  $stateParams.building_id;
 			self.floorId =  $stateParams.floor_id ;
+			buildings.getOne(self.buildId).success(function(data){
+				self.currentBuild = data ;
+			});
+			floors.getOne(self.buildId ,self.floorId).success(function(data){
+				self.currentFloor = data ;
+			});
 			// self.showFloorStatFunc = function(buildId, floorId){
 			console.log("Inside showFloorStatFunc");
 			buildings.getBlocks(self.buildId , self.floorId).success(function(data){
@@ -25,13 +31,11 @@ angular.module('IM_module')
 					}
 					floors.getvistors(blocksBeacons).success(function(vData){
 						// console.log(vData);
-
 						for (var x = 0; x < data.length; x++) {
 							if (vData.visits[data[x].id]) {
 							data[x].Tvisitors = vData.visits[data[x].id].visits;
 								self.Fblocks = data;
 								// console.log(data);
-
 							}
 						}
 					});
