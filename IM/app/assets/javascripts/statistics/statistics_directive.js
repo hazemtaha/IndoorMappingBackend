@@ -10,14 +10,16 @@
     function barChart(statisticsData) {
         var barChart = {
             restrict: 'E',
-            scope: {},
+            scope: {floorId: '='},
             link: linkFunc,
         };
 
         return barChart;
 
         function linkFunc(scope, el, attr, ctrl) {
-          var data = d3.values(statisticsData.PerBlock());
+          // console.log($stateParams.floor_id) ;
+          console.log(attr.floorid) ;
+          var data = d3.values(statisticsData.PerBlock(attr.floorid));
           var margin = {
                   top: 20,
                   right: 30,

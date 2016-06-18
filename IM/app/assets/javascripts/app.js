@@ -50,7 +50,7 @@ angular.module('IM_module', ['ui.router','templates','Devise','ui.bootstrap', 'n
 				})
 
 			   	.state('statistics', {
-				  url: '/statistics',
+				  url: '/statistics/{floor_id}',
 				  // template: '<bar-chart></bar-chart>',
 				  templateUrl: 'statistics/_statistics.html',
 				  controller: 'statisticsCtrl' ,
