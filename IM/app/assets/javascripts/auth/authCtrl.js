@@ -3,7 +3,8 @@ angular.module('IM_module')
         '$state',
         'Auth',
         'Upload',
-        function($state, Auth, Upload) {
+        '$rootScope',
+        function($state, Auth, Upload, $rootScope) {
             var self = this;
             self.login = function() {
                 Auth.login(self.user).then(function() {
@@ -15,7 +16,7 @@ angular.module('IM_module')
             };
 
             self.isAuthenticated = function() {
-                
+
                 return Auth.isAuthenticated();
             }
             self.onFileSelect = function($files) {
@@ -37,9 +38,11 @@ angular.module('IM_module')
                 }).then(function(response, status, headers, config) {
                     // file is uploaded successfully
                     console.log(response.data);
-					   Auth._currentUser = response.data;
+                    Auth._currentUser = response.data;
+                    $rootScope.$broadcast('devise:new-registration', response.data);
                     $state.go('home');
                 }, function(err) {
+                    console.log(err);
                     self.errorMessage = "email "+err.data.errors.email[0];
                 });
                 // Auth.register(self.user).then(function(){

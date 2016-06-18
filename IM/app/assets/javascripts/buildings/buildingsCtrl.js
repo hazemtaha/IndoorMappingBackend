@@ -84,28 +84,37 @@ angular.module('IM_module')
 			}
 
 			self.showFloorStatFunc = function(buildId, floorId){
-				console.log("inside showFloorStatFunc");
+				console.log("Inside showFloorStatFunc");
 				buildings.getBlocks(buildId , floorId).success(function(data){
-					console.log(data);
-					self.Fblocks = data;
-
-
-					var blocksBeacons = {};
-					for (var x = 0; x < data.length; x++) {
-						blocksBeacons[data[x].id] = [];
-						console.log('inside blocks loop');
-						for (var y=0 ; y< data[x].beacons.length ; y++){
-							console.log('inside beacon loop');
-							var beaconId = data[x].beacons[y].id;
-							blocksBeacons[data[x].id].push(beaconId);
+						console.log(data);
+						self.Fblocks = data;
+						var blocksBeacons = {};
+						
+						for (var x = 0; x < data.length; x++) {
+							blocksBeacons[data[x].id] = [];
+							for (var y=0 ; y< data[x].beacons.length ; y++){
+								var beaconId = data[x].beacons[y].id;
+								blocksBeacons[data[x].id].push(beaconId);
+							}
+							if (!blocksBeacons[data[x].id].length) {
+								delete blocksBeacons[data[x].id];
+							}
 						}
-					}
-					console.log(blocksBeacons);
-					floors.getvistors(blocksBeacons).success(function(vData){
-						console.log(vData);
-						console.log("inside callback");
-					});
-				});
+						// console.log(blocksBeacons);
+						floors.getvistors(blocksBeacons).success(function(vData){
+							console.log(vData);
 
+							for (var x = 0; x < data.length; x++) {
+								if (vData.visits[data[x].id]) {
+								data[x].Tvisitors = vData.visits[data[x].id].visits;
+									
+								}
+							}
+						});
+
+					
+
+					console.log(data);
+				});
 			}
 	}]);
