@@ -70,7 +70,7 @@
 <br>
 <div>
     <div  class="oneDetails" >
-        <img ng-src="images/{{buildCtrl.build.thumbnail}}" /><br><br>
+        <img ng-src="{{buildCtrl.build.thumbnail.url}}" /><br><br>
         <div ng-init="buildCtrl.isEdit = false">
             <a href="" class="btn btn-link" ng-click="buildCtrl.editFunc()" ><span class="glyphicon glyphicon-pencil"></span> Edit building</a><br>
             <div ng-show="buildCtrl.isEdit == true" >
