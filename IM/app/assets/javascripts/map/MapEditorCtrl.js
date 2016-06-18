@@ -6,13 +6,20 @@
         .controller('MapEditorController', mapEditorController)
         .controller('BlockInfoModalInstance', blockInfoModalInstance);
 
-    mapEditorController.$inject = ['mapStorage', 'Rect', 'Circle', 'Oval', 'Polygon', 'Beacon', '$uibModal', '$stateParams', 'Db', '$rootScope', 'Interactivy'];
+    mapEditorController.$inject = ['buildings','floors','mapStorage', 'Rect', 'Circle', 'Oval', 'Polygon', 'Beacon', '$uibModal', '$stateParams', 'Db', '$rootScope', 'Interactivy'];
     blockInfoModalInstance.$inject = ['$uibModalInstance', 'type'];
 
     /* @ngInject */
-    function mapEditorController(mapStorage, Rect, Circle, Oval, Polygon, Beacon, $uibModal, $stateParams, Db, $rootScope, Interactivy) {
+    function mapEditorController(buildings, floors ,mapStorage, Rect, Circle, Oval, Polygon, Beacon, $uibModal, $stateParams, Db, $rootScope, Interactivy) {
         this.bid = $stateParams.building_id ;
+        this.fid = $stateParams.floor_id ;
         var self = this;
+        buildings.getOne(this.bid).success(function(data){
+            self.currentBuild = data ;
+        });
+        floors.getOne(this.bid ,this.fid).success(function(data){
+            self.currentFloor = data ;
+        });
         self.isInRoomTypes = false;
         self.isPending = true;
         self.isDrawing = false;
