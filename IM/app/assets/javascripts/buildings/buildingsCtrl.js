@@ -89,24 +89,6 @@ angular.module('IM_module')
 					console.log(data);
 					self.Fblocks = data;
 
-					////// loop to set pictures 
-					// for (var i = 0; i < data.length; i++) {
-
-					// 	// console.log(data[i].beacons.length);
-					// 	if (data[i].beacons.length == 0 ){
-					//     	// console.log('inside condtion');
-					//     	data[i].BeaconsStat = "/images/ch/0.png";
-					//     }
-					//     if (data[i].beacons.length == 1 ){
-					//     	// console.log('inside condtion');
-					//     	data[i].BeaconsStat = "/images/ch/1.png";
-					//     }
-					//     if (data[i].beacons.length == 2 ){
-					//     	// console.log('inside condtion');
-					//     	data[i].BeaconsStat = "/images/ch/2.png";
-					//     }
-					// }
-					////// End of Loop
 
 					var blocksBeacons = {};
 					for (var x = 0; x < data.length; x++) {
