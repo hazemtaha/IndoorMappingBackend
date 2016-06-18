@@ -20,6 +20,12 @@ angular.module('IM_module')
 		    return $http.post('/buildings.json', addBuild);
 		};
 
+
+		obj.getBlocks = function(bId, fId){
+			return $http.get('floor/'+fId+'/blocks.json');
+		}; //start from hereeeeeeeeeeeeeeeeeee
+
+
 		return obj ; 
 	}])
 

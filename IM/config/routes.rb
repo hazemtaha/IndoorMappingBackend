@@ -20,7 +20,10 @@ Rails.application.routes.draw do
   get 'floor/:floor_id/svg' => 'svg#show'
   get 'svg/beacon/:uuid' => 'svg#import'
   get 'beacons/' => 'beacon#all'
+  post 'beacon/:uuid/callibrate' => 'beacon#callibrate'
   post 'visitors/' => 'visitor#create'
+  get 'floor/:floor_id/blocks' => 'floors#getBlockByFloor'
+  post 'beacons/visits' => 'visits#getVistors'
   post 'visitors/login' => 'visitor#login'
   post 'beacon/:uuid/visit' => 'visit#create'
   # Example of regular route:

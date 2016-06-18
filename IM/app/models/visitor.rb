@@ -6,6 +6,7 @@ def encrypt_password
 	if encrypted_password.present?
 		puts encrypted_password
     	self.encrypted_password= Digest::SHA1.hexdigest(encrypted_password)
+      self.password_confirmation= Digest::SHA1.hexdigest(password_confirmation)
   	end
 end 
 

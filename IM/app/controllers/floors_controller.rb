@@ -22,6 +22,15 @@ class FloorsController < ApplicationController
 	end 
 
 
+	def getBlockByFloor
+
+		# puts 'inside new deffffffffffffffffffffffffffffffffffffffffffffffff'
+		respond_with Block.where(:floor_id => params[:floor_id] )
+		# puts @blocl.inspect
+	end
+
+
+
 	private
 	  def floor_params
 	    params.require(:floor).permit(:floor_num, :width , :height , :building_id)

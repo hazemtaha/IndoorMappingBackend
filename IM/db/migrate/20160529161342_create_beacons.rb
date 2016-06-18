@@ -7,6 +7,8 @@ class CreateBeacons < ActiveRecord::Migration
       t.integer :minor
       t.integer :x
       t.integer :y
+      t.decimal :lat, {:precision=>10, :scale=>6}
+      t.decimal :lon, {:precision=>10, :scale=>6} 
       t.references :block, index: true, foreign_key: true
 
       t.timestamps null: false

@@ -13,6 +13,11 @@ angular.module('IM_module')
 		    return $http.post('/buildings/'+bid+'/floors.json', addFloor );
 		};
 
-		return obj ;
+		obj.getvistors =function (blocksBeacons){
+			console.log(blocksBeacons);
+			return $http.post('beacons/visits.json', { blocks: blocksBeacons });
+		};
+
+		return obj ; 
 
 	}])

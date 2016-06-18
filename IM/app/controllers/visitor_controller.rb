@@ -5,9 +5,13 @@ class VisitorController < ApplicationController
         @visitor = Visitor.new(visitor_params)
         if Visitor.exists?(:email => @visitor.email , :username => @visitor.username)
         	render json: {:errorMsg => "Email or Username already exists"}
-        else      	
-        	@visitor.save
-        	render json: {visitor: @visitor}
+        else 
+            if @visitor.encrypted_password == @visitor.password_confirmation     	
+        	   @visitor.save
+        	   render json: {visitor: @visitor}
+            else
+               render json: {:errorMsg => "Password not match with the confirmation"} 
+            end    
         end
     end
 
@@ -25,7 +29,7 @@ class VisitorController < ApplicationController
     end
     private
         def visitor_params
-            params.require(:visitor).permit(:email, :username, :encrypted_password, :dob)
+            params.require(:visitor).permit(:email, :username, :encrypted_password, :password_confirmation, :dob)
         end
 
         def login_params

@@ -3,6 +3,7 @@ class CreateVisitors < ActiveRecord::Migration
     create_table(:visitors) do |t|
 
       t.string :encrypted_password, null: false, default: ""
+      t.string :password_confirmation, null: false, default: ""
 	    t.string :email,              null: false, default: ""
       t.timestamps null: false
       t.string :username
