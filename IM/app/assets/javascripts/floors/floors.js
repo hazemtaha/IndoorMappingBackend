@@ -14,7 +14,7 @@ angular.module('IM_module')
 		};
 
 		obj.getvistors =function (blocksBeacons){
-			console.log(blocksBeacons);
+			// console.log(blocksBeacons);
 			return $http.post('beacons/visits.json', { blocks: blocksBeacons });
 		};
 
