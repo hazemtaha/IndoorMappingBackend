@@ -33,9 +33,10 @@ angular.module('IM_module')
                     },
                     file: self.file,
                     sendFieldsAs: 'json'
-                }).then(function(data, status, headers, config) {
+                }).then(function(response, status, headers, config) {
                     // file is uploaded successfully
-                    console.log(data);
+                    console.log(response.data);
+										Auth._currentUser = response.data;
                     $state.go('home');
                 });
                 // Auth.register(self.user).then(function(){
