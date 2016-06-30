@@ -6,7 +6,6 @@ body {
 	background: url('images/bg.jpg');
 }
 
-
 .logoDiv h2{
 	/*color:  #8BC34C;
 	 green 
@@ -95,4 +94,32 @@ body {
 .oneHas_head{
 	background: rgba(203, 223, 170, 0.54) ;
 	height: 30px ;
+}
+.goal,.help{
+	font-size: 18px ;
+	text-align: center;
+}
+
+.help div{
+	width: 30% ;
+	float: left; 
+	margin-left: 150px;
+}
+.help h2 {
+	margin: -1px -20px;
+	background: rgb(240, 237, 230);
+	padding: 10px ;
+}
+.help p{
+	/*margin: 45px;*/
+	border-radius:50%;
+    overflow:hidden;
+    width: 100% ;
+    height: 300px ;
+    padding: 60px 50px ;
+    background: rgb(240, 237, 230);
+    justify-content:center;
+}
+.help p:hover{
+    background: rgba(155, 189, 246, 0.37) ;
 }

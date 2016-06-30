@@ -14,13 +14,20 @@ angular.module('IM_module', ['ui.router','templates','Devise','ui.bootstrap', 'n
             AuthProvider.sendResetPasswordInstructionsMethod('POST');
 
 		    $stateProvider
+		    	.state('mainPage', {
+			      url: '/mainPage',
+			      templateUrl: 'mainPage/_mainPage.html',
+			      controller: 'mainPageCtrl',
+			      controllerAs: "mainPageCtrl"
+			    })
+
 			    .state('home', {
 			      url: '/home',
 			      templateUrl: 'home/_home.html',
 			      controller: 'MainCtrl',
 			      controllerAs: "homeCtrl"
-
 			    })
+
 			   .state('buildings', {
 				  url: '/buildings/{id}',
 				  templateUrl: 'buildings/_buildings.html',
@@ -91,5 +98,5 @@ angular.module('IM_module', ['ui.router','templates','Devise','ui.bootstrap', 'n
         				})
       				}]
 			    });
-		    $urlRouterProvider.otherwise('home');
+		    $urlRouterProvider.otherwise('mainPage');
 	}])
